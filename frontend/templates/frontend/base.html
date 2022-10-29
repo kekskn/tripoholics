@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Tripoholics</title>
+    {% load static %}
+    <link rel="icon" href="{% static 'Tripoholics-icon.png' %}" type="image/png">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            position: relative;
+        }
+    </style>
+</head>
+
+<!-- Navbar -->
+
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="50">
+
+
+<nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top">
+    <div class="container-fluid">
+        <img src="{% static 'Tripoholics.png' %}" height="50" width="50">
+        <a class="navbar-brand font-monospace fs-3">Tripoholics.com</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mynavbar">
+
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link fs-5" href='/static'>Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fs-5" href='/static'>About Us</a>
+                </li>
+
+            </ul>
+
+            <form class="d-flex ms-auto">
+
+                {% if user.is_authenticated %}
+                    <a class="btn btn-danger m-lg-1" href="{% url 'logout' %}" type="button">Logout</a>
+
+                {% else %}
+                <a class="btn btn-danger m-lg-1" href="{% url 'login' %}" type="button">Login</a>
+                <a class="btn btn-danger m-lg-1" href="{% url 'register' %}" type="button">Register</a>
+
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</nav>
+<br/><br/><br/>
+{% if messages %}
+    {% for message in messages %}
+
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+    {% endfor %}
+
+{% endif %}
+
+
+{% block content %}
+
+{% endblock %}
+
+
+<!-- Footer -->
+
+<footer class="bg-light text-center text-lg-start">
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2022 Copyright:
+        <a class="text-dark" href="/static">Tripoholics.com</a>
+    </div>
+    <!-- Copyright -->
+</footer>
+
+<script src="{% static "frontend/index.js" %}"></script>
+</body>
+
+</html>
