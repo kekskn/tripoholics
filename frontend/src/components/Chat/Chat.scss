@@ -1,0 +1,15 @@
+.chat {
+  background-color: aqua;
+  display: flex;
+
+  &__dialogs-list {
+    max-width: 250px;
+    width: 100%;
+    background-color: #c95d60;
+  }
+
+  &__messages-block {
+    min-height: 300px;
+    height: 100%;
+  }
+}

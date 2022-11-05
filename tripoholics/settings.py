@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'mysite.apps.MysiteConfig',
     'django_countries',
     'rest_framework',
-    'frontend.apps.FrontendConfig',
+    # 'frontend.apps.FrontendConfig',
+    'frontend',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -64,7 +65,7 @@ ROOT_URLCONF = 'tripoholics.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["templates"],
+        'DIRS': [os.path.join(BASE_DIR, 'frontend/templates/frontend')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -126,7 +127,10 @@ STATIC_ROOT = ''
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = (os.path.join('static'),)
+# STATICFILES_DIRS = (os.path.join('static'),)
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'frontend/static')
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-fieldcdd

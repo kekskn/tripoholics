@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import index
+from . import views
 
 urlpatterns = [
-    path('', index),
+    path('', views.index, name="index"),
+    path('my_messages', views.my_messages, name="messages"),
 ]

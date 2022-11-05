@@ -1,32 +1,37 @@
 const path = require("path");
-const webpack = require("webpack");
+const miniCss = require("mini-css-extract-plugin");
 
 module.exports = {
-    entry: "./src/index.js",
-    output: {
-        path: path.resolve(__dirname, "./static/ frontend"),
-        filename: "[name].js",
-    },
-    module: {
-        rules: [
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: "babel-loader",
-                },
-            },
-        ],
-    },
-    optimization: {
-        minimize: true,
-    },
-    plugins: [
-        new webpack.DefinePlugin({
-            "process.env": {
-                // This has effect on the react lib size
-                NODE_ENV: JSON.stringify("production"),
-            },
-        }),
+  entry: {
+    main: path.resolve(__dirname, "./src/index.js"),
+  },
+
+  output: {
+    path: path.resolve(__dirname, "./static"),
+    filename: "[name].bundle.js",
+  },
+  resolve: {
+    extensions: [".ts", ".tsx", ".js", ".json"],
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(s*)css$/,
+        use: [miniCss.loader, "css-loader", "sass-loader"],
+      },
+      { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+        },
+      },
     ],
+  },
+  plugins: [
+    new miniCss({
+      filename: "style.css",
+    }),
+  ],
 };
