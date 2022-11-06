@@ -1,6 +1,8 @@
 import React from "react";
 import cn from "classnames";
 
+import "./Avatar.scss";
+
 type Props = {
   height: number;
   width: number;
@@ -10,7 +12,7 @@ type Props = {
 export default function Avatar({ height, width, isOnline }: Props) {
   return (
     // <div className="dialog-item__avatar">
-    <div className={cn("dialog-item__avatar", { online: isOnline })}>
+    <div className={cn("avatar", { online: isOnline })}>
       <img
         src="https://demiart.ru/forum/uploads17/post-608432-1462818506.jpg"
         alt="avatar"

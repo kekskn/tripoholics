@@ -1,18 +1,21 @@
 import React from "react";
 import { formatDistance, subDays } from "date-fns";
-import Avatar from "../Avatar/Avatar";
+import ru from "date-fns/esm/locale/ru/index.js";
 
+import Avatar from "../Avatar/Avatar";
 import maxMessageLengthCalc from "../../../utils/maxMessageLengthCalc";
 
 import "./DialogItem.scss";
-import ru from "date-fns/esm/locale/ru/index.js";
 
-export default function DialogItem() {
-  const date = new Date(2022, 10, 5);
+export default function DialogItem({ date }) {
+  //   const date = new Date(2022, 10, 5);
+  //   const date = new Date(Date.now() - 100000);
   return (
     <div className="dialog-item">
-      <Avatar height={40} width={40} isOnline />
-      <div>
+      <div className="dialog-item__avatar">
+        <Avatar height={40} width={40} isOnline />
+      </div>
+      <div className="dialog-item__info">
         <div className="dialog-item__fullname">Тест Тестов</div>
         <div className="dialog-item__last-message">
           {maxMessageLengthCalc(

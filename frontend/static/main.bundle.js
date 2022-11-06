@@ -27,7 +27,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nvar __importDefault = (this && this.__importDefault) || function (mod) {\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nvar react_1 = __importDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\nvar classnames_1 = __importDefault(__webpack_require__(/*! classnames */ \"./node_modules/classnames/index.js\"));\nfunction Avatar(_a) {\n    var height = _a.height, width = _a.width, isOnline = _a.isOnline;\n    return (\n    // <div className=\"dialog-item__avatar\">\n    react_1.default.createElement(\"div\", { className: (0, classnames_1.default)(\"dialog-item__avatar\", { online: isOnline }) },\n        react_1.default.createElement(\"img\", { src: \"https://demiart.ru/forum/uploads17/post-608432-1462818506.jpg\", alt: \"avatar\", style: {\n                height: \"\".concat(height, \"px\"),\n                width: \"\".concat(width, \"px\"),\n                borderRadius: \"50%\",\n            } })));\n}\nexports[\"default\"] = Avatar;\n\n\n//# sourceURL=webpack://testfront/./src/components/Chat/Avatar/Avatar.tsx?");
+eval("\nvar __importDefault = (this && this.__importDefault) || function (mod) {\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nvar react_1 = __importDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\nvar classnames_1 = __importDefault(__webpack_require__(/*! classnames */ \"./node_modules/classnames/index.js\"));\n__webpack_require__(/*! ./Avatar.scss */ \"./src/components/Chat/Avatar/Avatar.scss\");\nfunction Avatar(_a) {\n    var height = _a.height, width = _a.width, isOnline = _a.isOnline;\n    return (\n    // <div className=\"dialog-item__avatar\">\n    react_1.default.createElement(\"div\", { className: (0, classnames_1.default)(\"avatar\", { online: isOnline }) },\n        react_1.default.createElement(\"img\", { src: \"https://demiart.ru/forum/uploads17/post-608432-1462818506.jpg\", alt: \"avatar\", style: {\n                height: \"\".concat(height, \"px\"),\n                width: \"\".concat(width, \"px\"),\n                borderRadius: \"50%\",\n            } })));\n}\nexports[\"default\"] = Avatar;\n\n\n//# sourceURL=webpack://testfront/./src/components/Chat/Avatar/Avatar.tsx?");
 
 /***/ }),
 
@@ -49,7 +49,7 @@ eval("\nvar __importDefault = (this && this.__importDefault) || function (mod) {
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nvar __importDefault = (this && this.__importDefault) || function (mod) {\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nvar react_1 = __importDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\nvar date_fns_1 = __webpack_require__(/*! date-fns */ \"./node_modules/date-fns/esm/index.js\");\nvar Avatar_1 = __importDefault(__webpack_require__(/*! ../Avatar/Avatar */ \"./src/components/Chat/Avatar/Avatar.tsx\"));\nvar maxMessageLengthCalc_1 = __importDefault(__webpack_require__(/*! ../../../utils/maxMessageLengthCalc */ \"./src/utils/maxMessageLengthCalc.ts\"));\n__webpack_require__(/*! ./DialogItem.scss */ \"./src/components/Chat/DialogItem/DialogItem.scss\");\nvar index_js_1 = __importDefault(__webpack_require__(/*! date-fns/esm/locale/ru/index.js */ \"./node_modules/date-fns/esm/locale/ru/index.js\"));\nfunction DialogItem() {\n    var date = new Date(2022, 10, 5);\n    return (react_1.default.createElement(\"div\", { className: \"dialog-item\" },\n        react_1.default.createElement(Avatar_1.default, { height: 40, width: 40, isOnline: true }),\n        react_1.default.createElement(\"div\", null,\n            react_1.default.createElement(\"div\", { className: \"dialog-item__fullname\" }, \"\\u0422\\u0435\\u0441\\u0442 \\u0422\\u0435\\u0441\\u0442\\u043E\\u0432\"),\n            react_1.default.createElement(\"div\", { className: \"dialog-item__last-message\" }, (0, maxMessageLengthCalc_1.default)(\"Lorem ipsum dolor sit amet, consectetur frhicsnjks\"))),\n        react_1.default.createElement(\"div\", { className: \"dialog-item__date\" }, (0, date_fns_1.formatDistance)(date, new Date(), { addSuffix: true, locale: index_js_1.default }))));\n}\nexports[\"default\"] = DialogItem;\n\n\n//# sourceURL=webpack://testfront/./src/components/Chat/DialogItem/DialogItem.tsx?");
+eval("\nvar __importDefault = (this && this.__importDefault) || function (mod) {\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nvar react_1 = __importDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\nvar date_fns_1 = __webpack_require__(/*! date-fns */ \"./node_modules/date-fns/esm/index.js\");\nvar index_js_1 = __importDefault(__webpack_require__(/*! date-fns/esm/locale/ru/index.js */ \"./node_modules/date-fns/esm/locale/ru/index.js\"));\nvar Avatar_1 = __importDefault(__webpack_require__(/*! ../Avatar/Avatar */ \"./src/components/Chat/Avatar/Avatar.tsx\"));\nvar maxMessageLengthCalc_1 = __importDefault(__webpack_require__(/*! ../../../utils/maxMessageLengthCalc */ \"./src/utils/maxMessageLengthCalc.ts\"));\n__webpack_require__(/*! ./DialogItem.scss */ \"./src/components/Chat/DialogItem/DialogItem.scss\");\nfunction DialogItem(_a) {\n    var date = _a.date;\n    //   const date = new Date(2022, 10, 5);\n    //   const date = new Date(Date.now() - 100000);\n    return (react_1.default.createElement(\"div\", { className: \"dialog-item\" },\n        react_1.default.createElement(\"div\", { className: \"dialog-item__avatar\" },\n            react_1.default.createElement(Avatar_1.default, { height: 40, width: 40, isOnline: true })),\n        react_1.default.createElement(\"div\", { className: \"dialog-item__info\" },\n            react_1.default.createElement(\"div\", { className: \"dialog-item__fullname\" }, \"\\u0422\\u0435\\u0441\\u0442 \\u0422\\u0435\\u0441\\u0442\\u043E\\u0432\"),\n            react_1.default.createElement(\"div\", { className: \"dialog-item__last-message\" }, (0, maxMessageLengthCalc_1.default)(\"Lorem ipsum dolor sit amet, consectetur frhicsnjks\"))),\n        react_1.default.createElement(\"div\", { className: \"dialog-item__date\" }, (0, date_fns_1.formatDistance)(date, new Date(), { addSuffix: true, locale: index_js_1.default }))));\n}\nexports[\"default\"] = DialogItem;\n\n\n//# sourceURL=webpack://testfront/./src/components/Chat/DialogItem/DialogItem.tsx?");
 
 /***/ }),
 
@@ -60,7 +60,18 @@ eval("\nvar __importDefault = (this && this.__importDefault) || function (mod) {
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nvar __importDefault = (this && this.__importDefault) || function (mod) {\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nvar react_1 = __importDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\nvar DialogItem_1 = __importDefault(__webpack_require__(/*! ../DialogItem/DialogItem */ \"./src/components/Chat/DialogItem/DialogItem.tsx\"));\n__webpack_require__(/*! ./DialogsList.scss */ \"./src/components/Chat/DialogsList/DialogsList.scss\");\nfunction DialogsList() {\n    return (react_1.default.createElement(\"div\", { className: \"chat__dialogs-list\" },\n        react_1.default.createElement(DialogItem_1.default, null),\n        react_1.default.createElement(DialogItem_1.default, null),\n        react_1.default.createElement(DialogItem_1.default, null)));\n}\nexports[\"default\"] = DialogsList;\n\n\n//# sourceURL=webpack://testfront/./src/components/Chat/DialogsList/DialogsList.tsx?");
+eval("\nvar __importDefault = (this && this.__importDefault) || function (mod) {\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nvar react_1 = __importDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\nvar DialogItem_1 = __importDefault(__webpack_require__(/*! ../DialogItem/DialogItem */ \"./src/components/Chat/DialogItem/DialogItem.tsx\"));\n__webpack_require__(/*! ./DialogsList.scss */ \"./src/components/Chat/DialogsList/DialogsList.scss\");\nfunction DialogsList() {\n    return (react_1.default.createElement(\"div\", { className: \"chat__dialogs-list\" },\n        react_1.default.createElement(DialogItem_1.default, { date: new Date(Date.now() - 500000) }),\n        react_1.default.createElement(DialogItem_1.default, { date: new Date(Date.now() - 9000000) }),\n        react_1.default.createElement(DialogItem_1.default, { date: new Date(Date.now() - 10000) }),\n        react_1.default.createElement(DialogItem_1.default, { date: new Date(Date.now() - 10000) }),\n        react_1.default.createElement(DialogItem_1.default, { date: new Date(Date.now() - 10000) }),\n        react_1.default.createElement(DialogItem_1.default, { date: new Date(Date.now() - 10000) }),\n        react_1.default.createElement(DialogItem_1.default, { date: new Date(Date.now() - 10000) })));\n}\nexports[\"default\"] = DialogsList;\n\n\n//# sourceURL=webpack://testfront/./src/components/Chat/DialogsList/DialogsList.tsx?");
+
+/***/ }),
+
+/***/ "./src/components/Chat/MessageItem/MessageItem.tsx":
+/*!*********************************************************!*\
+  !*** ./src/components/Chat/MessageItem/MessageItem.tsx ***!
+  \*********************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+eval("\nvar __importDefault = (this && this.__importDefault) || function (mod) {\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nvar react_1 = __importDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\nvar classnames_1 = __importDefault(__webpack_require__(/*! classnames */ \"./node_modules/classnames/index.js\"));\nvar Avatar_1 = __importDefault(__webpack_require__(/*! ../Avatar/Avatar */ \"./src/components/Chat/Avatar/Avatar.tsx\"));\n__webpack_require__(/*! ./MessageItem.scss */ \"./src/components/Chat/MessageItem/MessageItem.scss\");\nfunction MessageItem(_a) {\n    var isMy = _a.isMy, isOnline = _a.isOnline, isRead = _a.isRead;\n    return (react_1.default.createElement(\"div\", { className: (0, classnames_1.default)(\"message-item\", { my: isMy }) },\n        react_1.default.createElement(\"div\", { className: \"message-item__avatar\" },\n            react_1.default.createElement(Avatar_1.default, { height: 40, width: 40, isOnline: isOnline })),\n        react_1.default.createElement(\"div\", { className: (0, classnames_1.default)(\"message-item__text\", { read: isRead }) }, \"Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae, suscipit perferendis dolor recusandae\")));\n}\nexports[\"default\"] = MessageItem;\n\n\n//# sourceURL=webpack://testfront/./src/components/Chat/MessageItem/MessageItem.tsx?");
 
 /***/ }),
 
@@ -71,7 +82,7 @@ eval("\nvar __importDefault = (this && this.__importDefault) || function (mod) {
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nvar __importDefault = (this && this.__importDefault) || function (mod) {\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nvar react_1 = __importDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\n__webpack_require__(/*! ./MessagesBlock.scss */ \"./src/components/Chat/MessagesBlock/MessagesBlock.scss\");\nfunction MessagesBlock() {\n    return react_1.default.createElement(\"div\", { className: \"chat__messages-block\" }, \"MessagesBlock\");\n}\nexports[\"default\"] = MessagesBlock;\n\n\n//# sourceURL=webpack://testfront/./src/components/Chat/MessagesBlock/MessagesBlock.tsx?");
+eval("\nvar __importDefault = (this && this.__importDefault) || function (mod) {\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nvar react_1 = __importDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\nvar MessageItem_1 = __importDefault(__webpack_require__(/*! ../MessageItem/MessageItem */ \"./src/components/Chat/MessageItem/MessageItem.tsx\"));\n__webpack_require__(/*! ./MessagesBlock.scss */ \"./src/components/Chat/MessagesBlock/MessagesBlock.scss\");\nfunction MessagesBlock() {\n    return (react_1.default.createElement(\"div\", { className: \"chat__messages-block\" },\n        react_1.default.createElement(MessageItem_1.default, { isMy: false, isOnline: true, isRead: true }),\n        react_1.default.createElement(MessageItem_1.default, { isMy: true, isOnline: false, isRead: true }),\n        react_1.default.createElement(MessageItem_1.default, { isMy: false, isOnline: true, isRead: true }),\n        react_1.default.createElement(MessageItem_1.default, { isMy: true, isOnline: false, isRead: true }),\n        react_1.default.createElement(MessageItem_1.default, { isMy: false, isOnline: true, isRead: true })));\n}\nexports[\"default\"] = MessagesBlock;\n\n\n//# sourceURL=webpack://testfront/./src/components/Chat/MessagesBlock/MessagesBlock.tsx?");
 
 /***/ }),
 
@@ -3671,6 +3682,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
+/***/ "./src/components/Chat/Avatar/Avatar.scss":
+/*!************************************************!*\
+  !*** ./src/components/Chat/Avatar/Avatar.scss ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n\n//# sourceURL=webpack://testfront/./src/components/Chat/Avatar/Avatar.scss?");
+
+/***/ }),
+
 /***/ "./src/components/Chat/Chat.scss":
 /*!***************************************!*\
   !*** ./src/components/Chat/Chat.scss ***!
@@ -3701,6 +3723,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extr
 
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n\n//# sourceURL=webpack://testfront/./src/components/Chat/DialogsList/DialogsList.scss?");
+
+/***/ }),
+
+/***/ "./src/components/Chat/MessageItem/MessageItem.scss":
+/*!**********************************************************!*\
+  !*** ./src/components/Chat/MessageItem/MessageItem.scss ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n\n//# sourceURL=webpack://testfront/./src/components/Chat/MessageItem/MessageItem.scss?");
 
 /***/ }),
 
