@@ -1,1 +1,2 @@
-export { default as headerHeightCalc } from "./headerHeightCalc";
+export { default as blockHeightCalc } from "./blockHeightCalc";
+export { default as maxMessageLengthCalc } from "./maxMessageLengthCalc";

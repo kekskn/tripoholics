@@ -4,6 +4,7 @@ import cn from "classnames";
 import Avatar from "../Avatar/Avatar";
 
 import "./MessageItem.scss";
+import MessageText from "./MessageText";
 
 export default function MessageItem({ isMy, isOnline, isRead }) {
   return (
@@ -11,9 +12,13 @@ export default function MessageItem({ isMy, isOnline, isRead }) {
       <div className="message-item__avatar">
         <Avatar height={40} width={40} isOnline={isOnline} />
       </div>
-      <div className={cn("message-item__text", { read: isRead })}>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae,
-        suscipit perferendis dolor recusandae
+      <div className="message-item__info">
+        {/* <div className={cn("message-item__text", { read: isRead })}>
+          Привет, как дела? Что делаешь?
+        </div> */}
+        <MessageText isRead={isRead} />
+        <MessageText isRead={isRead} />
+        <div className="message-item__date">12:37</div>
       </div>
     </div>
   );

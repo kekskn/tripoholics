@@ -2,16 +2,33 @@
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/components/Chat/Chat.scss ***!
   \************************************************************************************************************************/
 .chat {
-  background-color: aqua;
+  background-color: #f6f7f9;
   display: flex; }
+  .chat__main-block {
+    position: relative;
+    width: 100%; }
+    .chat__main-block-wrapper {
+      margin: 0 auto;
+      max-width: calc(100% - 30px);
+      width: 100%;
+      height: 100%;
+      position: relative; }
   .chat__dialogs-list {
     max-width: 250px;
     width: 100%;
     background-color: #c95d60; }
   .chat__messages-block {
+    max-height: 500px;
+    overflow: auto;
+    position: absolute;
+    bottom: 60px;
+    width: 100%; }
+  .chat__input-block {
+    position: absolute;
     width: 100%;
-    min-height: 300px;
-    height: 100%; }
+    bottom: 0;
+    padding: 0 15px;
+    background-color: #e5e3e3; }
 
 /*!*********************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/components/Chat/Avatar/Avatar.scss ***!
@@ -68,6 +85,54 @@
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/components/Chat/DialogsList/DialogsList.scss ***!
   \*******************************************************************************************************************************************/
 
+/*!*******************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/components/Chat/MessageInputBlock/MessageInputBlock.scss ***!
+  \*******************************************************************************************************************************************************/
+.message-input-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0; }
+  .message-input-block__left-icons {
+    display: flex; }
+    .message-input-block__left-icons > div {
+      display: inline-block;
+      width: 25px;
+      height: 25px;
+      margin: 0 10px;
+      cursor: pointer; }
+  .message-input-block__field {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 40px;
+    height: 100%;
+    margin-right: 15px;
+    border-radius: 20px;
+    background-color: white; }
+    .message-input-block__field input {
+      width: 100%;
+      min-height: 40px;
+      height: 100%;
+      border: none;
+      border-radius: 20px;
+      font-family: Nunito Light;
+      padding-left: 30px; }
+  .message-input-block__icon {
+    margin-left: 20px;
+    cursor: pointer; }
+    .message-input-block__icon:last-child {
+      margin-right: 15px; }
+  .message-input-block__send {
+    background-color: #c86e71;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer; }
+
 /*!*******************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/components/Chat/MessageItem/MessageItem.scss ***!
   \*******************************************************************************************************************************************/
@@ -76,18 +141,45 @@
   align-items: end;
   margin-top: 20px; }
   .message-item__avatar {
-    padding: 0 15px; }
+    padding: 0 15px 0 0;
+    display: flex;
+    align-items: end; }
   .message-item__text {
+    align-self: flex-start;
     position: relative;
-    background-color: aliceblue;
+    background-color: #c95d60;
+    color: white;
+    border: 1px solid gainsboro;
     max-width: 400px;
-    padding: 20px;
-    border-radius: 20px 20px 20px 0; }
+    padding: 10px 20px;
+    border-radius: 15px 15px 15px 0;
+    font-family: Nunito Light;
+    line-height: 16px;
+    font-size: 14px; }
+    .message-item__text:not(:first-child) {
+      margin-top: 8px; }
+  .message-item__info {
+    display: flex;
+    flex-direction: column; }
+  .message-item__date {
+    display: flex;
+    justify-content: start;
+    font-size: 10px;
+    color: #979797;
+    font-family: Nunito Light;
+    margin-top: 4px;
+    line-height: 10px; }
   .message-item.my {
     justify-content: end;
     flex-direction: row-reverse; }
+    .message-item.my .message-item__avatar {
+      padding: 0 0 0 15px; }
     .message-item.my .message-item__text {
-      border-radius: 20px 20px 0 20px; }
+      align-self: flex-end;
+      border-radius: 15px 15px 0 15px;
+      background-color: white;
+      color: black;
+      border: 1px solid gainsboro; }
       .message-item.my .message-item__text.read::before {
         content: "";
         background-image: url(372cae62a20e4c6d01cb.png);
@@ -98,15 +190,53 @@
         position: absolute;
         bottom: 0;
         left: -20px; }
+    .message-item.my .message-item__date {
+      justify-content: end; }
 
 /*!***********************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/components/Chat/MessagesBlock/MessagesBlock.scss ***!
   \***********************************************************************************************************************************************/
 
-/*!*********************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/style.scss ***!
-  \*********************************************************************************************************/
+/*!****************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/styles/style.scss ***!
+  \****************************************************************************************************************/
 @charset "UTF-8";
+/* Generated by Fontie <http://fontie.pixelsvsbytes.com> */
+@font-face {
+  font-family: "Monospace";
+  src: url(6b55351c1ff23ab23c77.eot);
+  src: url(6b55351c1ff23ab23c77.eot?#iefix) format("embedded-opentype"), url(0bf70a6bde937a6defc7.woff2) format("woff2"), url(0211601fd8961b52ff9f.woff) format("woff"), url(d890c64423d8e66f460e.ttf) format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-stretch: normal;
+  unicode-range: U+0020-02DC; }
+
+@font-face {
+  font-family: "Monospace";
+  src: url(79eb5f2c85a3625a3d3d.eot);
+  src: url(79eb5f2c85a3625a3d3d.eot?#iefix) format("embedded-opentype"), url(48156bf0f162d7294c71.woff2) format("woff2"), url(54cb61505501e360a1eb.woff) format("woff"), url(95d2212dc5d9ccc7b22e.ttf) format("truetype");
+  font-weight: 500;
+  font-style: oblique;
+  font-stretch: normal;
+  unicode-range: U+0020-F6BE; }
+
+@font-face {
+  font-family: "Monospace";
+  src: url(2a9775ffcd5793a96f61.eot);
+  src: url(2a9775ffcd5793a96f61.eot?#iefix) format("embedded-opentype"), url(347971d129792fc29dcf.woff2) format("woff2"), url(f3b113606b80671c5610.woff) format("woff"), url(3ef883e26cb480e86683.ttf) format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  unicode-range: U+0020-F6BE; }
+
+@font-face {
+  font-family: "Nunito Light";
+  src: url(effec7cd6b38cd8af17f.ttf) format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  unicode-range: U+0020-2044; }
+
 /* Указываем box sizing */
 *,
 *::before,
