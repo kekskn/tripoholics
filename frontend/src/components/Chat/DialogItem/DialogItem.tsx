@@ -4,6 +4,7 @@ import ru from "date-fns/esm/locale/ru/index.js";
 
 import Avatar from "../Avatar/Avatar";
 import maxMessageLengthCalc from "../../../utils/maxMessageLengthCalc";
+// import maxMessageLengthCalc from "src/utils/maxMessageLengthCalc";
 
 import "./DialogItem.scss";
 

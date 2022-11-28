@@ -1,0 +1,59 @@
+.message-input-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+
+  &__left-icons {
+    display: flex;
+
+    & > div {
+      display: inline-block;
+      width: 25px;
+      height: 25px;
+      margin: 0 10px;
+      cursor: pointer;
+    }
+  }
+
+  &__field {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 40px;
+    height: 100%;
+    margin-right: 15px;
+    border-radius: 20px;
+    background-color: white;
+
+    & input {
+      width: 100%;
+      min-height: 40px;
+      height: 100%;
+      border: none;
+      border-radius: 20px;
+      font-family: Nunito Light;
+      padding-left: 30px;
+    }
+  }
+
+  &__icon {
+    margin-left: 20px;
+
+    cursor: pointer;
+    &:last-child {
+      margin-right: 15px;
+    }
+  }
+
+  &__send {
+    background-color: #c86e71;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+}

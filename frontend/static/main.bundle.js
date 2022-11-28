@@ -49,7 +49,11 @@ eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod)
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
+<<<<<<< HEAD
 eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nvar react_1 = __importDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\r\nvar date_fns_1 = __webpack_require__(/*! date-fns */ \"./node_modules/date-fns/esm/index.js\");\r\nvar index_js_1 = __importDefault(__webpack_require__(/*! date-fns/esm/locale/ru/index.js */ \"./node_modules/date-fns/esm/locale/ru/index.js\"));\r\nvar Avatar_1 = __importDefault(__webpack_require__(/*! ../Avatar/Avatar */ \"./src/components/Chat/Avatar/Avatar.tsx\"));\r\nvar maxMessageLengthCalc_1 = __importDefault(__webpack_require__(/*! ../../../utils/maxMessageLengthCalc */ \"./src/utils/maxMessageLengthCalc.ts\"));\r\n__webpack_require__(/*! ./DialogItem.scss */ \"./src/components/Chat/DialogItem/DialogItem.scss\");\r\nfunction DialogItem(_a) {\r\n    var date = _a.date;\r\n    //   const date = new Date(2022, 10, 5);\r\n    //   const date = new Date(Date.now() - 100000);\r\n    return (react_1.default.createElement(\"div\", { className: \"dialog-item\" },\r\n        react_1.default.createElement(\"div\", { className: \"dialog-item__avatar\" },\r\n            react_1.default.createElement(Avatar_1.default, { height: 40, width: 40, isOnline: true })),\r\n        react_1.default.createElement(\"div\", { className: \"dialog-item__info\" },\r\n            react_1.default.createElement(\"div\", { className: \"dialog-item__fullname\" }, \"\\u0422\\u0435\\u0441\\u0442 \\u0422\\u0435\\u0441\\u0442\\u043E\\u0432\"),\r\n            react_1.default.createElement(\"div\", { className: \"dialog-item__last-message\" }, (0, maxMessageLengthCalc_1.default)(\"Lorem ipsum dolor sit amet, consectetur frhicsnjks\"))),\r\n        react_1.default.createElement(\"div\", { className: \"dialog-item__date\" }, (0, date_fns_1.formatDistance)(date, new Date(), { addSuffix: true, locale: index_js_1.default }))));\r\n}\r\nexports[\"default\"] = DialogItem;\r\n\n\n//# sourceURL=webpack://testfront/./src/components/Chat/DialogItem/DialogItem.tsx?");
+=======
+eval("\nvar __importDefault = (this && this.__importDefault) || function (mod) {\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nvar react_1 = __importDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\nvar date_fns_1 = __webpack_require__(/*! date-fns */ \"./node_modules/date-fns/esm/index.js\");\nvar index_js_1 = __importDefault(__webpack_require__(/*! date-fns/esm/locale/ru/index.js */ \"./node_modules/date-fns/esm/locale/ru/index.js\"));\nvar Avatar_1 = __importDefault(__webpack_require__(/*! ../Avatar/Avatar */ \"./src/components/Chat/Avatar/Avatar.tsx\"));\nvar maxMessageLengthCalc_1 = __importDefault(__webpack_require__(/*! ../../../utils/maxMessageLengthCalc */ \"./src/utils/maxMessageLengthCalc.ts\"));\n// import maxMessageLengthCalc from \"src/utils/maxMessageLengthCalc\";\n__webpack_require__(/*! ./DialogItem.scss */ \"./src/components/Chat/DialogItem/DialogItem.scss\");\nfunction DialogItem(_a) {\n    var date = _a.date;\n    //   const date = new Date(2022, 10, 5);\n    //   const date = new Date(Date.now() - 100000);\n    return (react_1.default.createElement(\"div\", { className: \"dialog-item\" },\n        react_1.default.createElement(\"div\", { className: \"dialog-item__avatar\" },\n            react_1.default.createElement(Avatar_1.default, { height: 40, width: 40, isOnline: true })),\n        react_1.default.createElement(\"div\", { className: \"dialog-item__info\" },\n            react_1.default.createElement(\"div\", { className: \"dialog-item__fullname\" }, \"\\u0422\\u0435\\u0441\\u0442 \\u0422\\u0435\\u0441\\u0442\\u043E\\u0432\"),\n            react_1.default.createElement(\"div\", { className: \"dialog-item__last-message\" }, (0, maxMessageLengthCalc_1.default)(\"Lorem ipsum dolor sit amet, consectetur frhicsnjks\"))),\n        react_1.default.createElement(\"div\", { className: \"dialog-item__date\" }, (0, date_fns_1.formatDistance)(date, new Date(), { addSuffix: true, locale: index_js_1.default }))));\n}\nexports[\"default\"] = DialogItem;\n\n\n//# sourceURL=webpack://testfront/./src/components/Chat/DialogItem/DialogItem.tsx?");
+>>>>>>> 9a83b4783251cd00b0947c4818dc5891abc15c39
 
 /***/ }),
 
@@ -64,6 +68,17 @@ eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod)
 
 /***/ }),
 
+/***/ "./src/components/Chat/MessageInputBlock/MessageInputBlock.tsx":
+/*!*********************************************************************!*\
+  !*** ./src/components/Chat/MessageInputBlock/MessageInputBlock.tsx ***!
+  \*********************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+eval("\nvar __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {\n    if (k2 === undefined) k2 = k;\n    var desc = Object.getOwnPropertyDescriptor(m, k);\n    if (!desc || (\"get\" in desc ? !m.__esModule : desc.writable || desc.configurable)) {\n      desc = { enumerable: true, get: function() { return m[k]; } };\n    }\n    Object.defineProperty(o, k2, desc);\n}) : (function(o, m, k, k2) {\n    if (k2 === undefined) k2 = k;\n    o[k2] = m[k];\n}));\nvar __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {\n    Object.defineProperty(o, \"default\", { enumerable: true, value: v });\n}) : function(o, v) {\n    o[\"default\"] = v;\n});\nvar __importStar = (this && this.__importStar) || function (mod) {\n    if (mod && mod.__esModule) return mod;\n    var result = {};\n    if (mod != null) for (var k in mod) if (k !== \"default\" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);\n    __setModuleDefault(result, mod);\n    return result;\n};\nvar __importDefault = (this && this.__importDefault) || function (mod) {\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nvar react_1 = __importStar(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\nvar smile_png_1 = __importDefault(__webpack_require__(/*! ../../../../static/photos/icons/smile.png */ \"./static/photos/icons/smile.png\"));\nvar paper_clip_png_1 = __importDefault(__webpack_require__(/*! ../../../../static/photos/icons/paper-clip.png */ \"./static/photos/icons/paper-clip.png\"));\nvar send_png_1 = __importDefault(__webpack_require__(/*! ../../../../static/photos/icons/send.png */ \"./static/photos/icons/send.png\"));\nvar microphone_png_1 = __importDefault(__webpack_require__(/*! ../../../../static/photos/icons/microphone.png */ \"./static/photos/icons/microphone.png\"));\n__webpack_require__(/*! ./MessageInputBlock.scss */ \"./src/components/Chat/MessageInputBlock/MessageInputBlock.scss\");\n// import blockHeightCalc from \"src/utils/blockHeightCalc\";\nvar blockHeightCalc_1 = __importDefault(__webpack_require__(Object(function webpackMissingModule() { var e = new Error(\"Cannot find module '../../../utils/blockHeightCalc'\"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));\nfunction MessageInputBlock(_a) {\n    var onChangeHeight = _a.onChangeHeight;\n    var _b = (0, react_1.useState)(\"\"), inputValue = _b[0], setInputValue = _b[1];\n    var onInputChange = function (e) {\n        setInputValue(e.target.value);\n    };\n    (0, react_1.useEffect)(function () {\n        onChangeHeight((0, blockHeightCalc_1.default)(\".chat__input-block\"));\n    }, []);\n    return (react_1.default.createElement(\"div\", { className: \"message-input-block\" },\n        react_1.default.createElement(\"div\", { className: \"message-input-block__field\" },\n            react_1.default.createElement(\"input\", { type: \"text\", placeholder: \"\\u041D\\u0430\\u043F\\u0438\\u0448\\u0438\\u0442\\u0435 \\u0441\\u043E\\u043E\\u0431\\u0449\\u0435\\u043D\\u0438\\u0435...\", value: inputValue, onChange: onInputChange }),\n            react_1.default.createElement(\"div\", { className: \"message-input-block__icon\" },\n                react_1.default.createElement(\"img\", { src: smile_png_1.default, style: { width: \"20px\", height: \"20px\" }, alt: \"\" })),\n            react_1.default.createElement(\"div\", { className: \"message-input-block__icon\" },\n                react_1.default.createElement(\"img\", { src: paper_clip_png_1.default, style: { width: \"20px\", height: \"20px\" }, alt: \"\" })),\n            react_1.default.createElement(\"div\", { className: \"message-input-block__icon\" },\n                react_1.default.createElement(\"img\", { src: microphone_png_1.default, style: { width: \"20px\", height: \"20px\" }, alt: \"\" }))),\n        react_1.default.createElement(\"div\", { className: \"message-input-block__send\" },\n            react_1.default.createElement(\"img\", { src: send_png_1.default, style: { width: \"16px\", height: \"16px\" }, alt: \"send text message\" }))));\n}\nexports[\"default\"] = MessageInputBlock;\n\n\n//# sourceURL=webpack://testfront/./src/components/Chat/MessageInputBlock/MessageInputBlock.tsx?");
+
+/***/ }),
+
 /***/ "./src/components/Chat/MessageItem/MessageItem.tsx":
 /*!*********************************************************!*\
   !*** ./src/components/Chat/MessageItem/MessageItem.tsx ***!
@@ -71,7 +86,22 @@ eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod)
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
+<<<<<<< HEAD
 eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nvar react_1 = __importDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\r\nvar classnames_1 = __importDefault(__webpack_require__(/*! classnames */ \"./node_modules/classnames/index.js\"));\r\nvar Avatar_1 = __importDefault(__webpack_require__(/*! ../Avatar/Avatar */ \"./src/components/Chat/Avatar/Avatar.tsx\"));\r\n__webpack_require__(/*! ./MessageItem.scss */ \"./src/components/Chat/MessageItem/MessageItem.scss\");\r\nfunction MessageItem(_a) {\r\n    var isMy = _a.isMy, isOnline = _a.isOnline, isRead = _a.isRead;\r\n    return (react_1.default.createElement(\"div\", { className: (0, classnames_1.default)(\"message-item\", { my: isMy }) },\r\n        react_1.default.createElement(\"div\", { className: \"message-item__avatar\" },\r\n            react_1.default.createElement(Avatar_1.default, { height: 40, width: 40, isOnline: isOnline })),\r\n        react_1.default.createElement(\"div\", { className: (0, classnames_1.default)(\"message-item__text\", { read: isRead }) }, \"Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae, suscipit perferendis dolor recusandae\")));\r\n}\r\nexports[\"default\"] = MessageItem;\r\n\n\n//# sourceURL=webpack://testfront/./src/components/Chat/MessageItem/MessageItem.tsx?");
+=======
+eval("\nvar __importDefault = (this && this.__importDefault) || function (mod) {\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nvar react_1 = __importDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\nvar classnames_1 = __importDefault(__webpack_require__(/*! classnames */ \"./node_modules/classnames/index.js\"));\nvar Avatar_1 = __importDefault(__webpack_require__(/*! ../Avatar/Avatar */ \"./src/components/Chat/Avatar/Avatar.tsx\"));\n__webpack_require__(/*! ./MessageItem.scss */ \"./src/components/Chat/MessageItem/MessageItem.scss\");\nvar MessageText_1 = __importDefault(__webpack_require__(/*! ./MessageText */ \"./src/components/Chat/MessageItem/MessageText.tsx\"));\nfunction MessageItem(_a) {\n    var isMy = _a.isMy, isOnline = _a.isOnline, isRead = _a.isRead;\n    return (react_1.default.createElement(\"div\", { className: (0, classnames_1.default)(\"message-item\", { my: isMy }) },\n        react_1.default.createElement(\"div\", { className: \"message-item__avatar\" },\n            react_1.default.createElement(Avatar_1.default, { height: 40, width: 40, isOnline: isOnline })),\n        react_1.default.createElement(\"div\", { className: \"message-item__info\" },\n            react_1.default.createElement(MessageText_1.default, { isRead: isRead }),\n            react_1.default.createElement(MessageText_1.default, { isRead: isRead }),\n            react_1.default.createElement(\"div\", { className: \"message-item__date\" }, \"12:37\"))));\n}\nexports[\"default\"] = MessageItem;\n\n\n//# sourceURL=webpack://testfront/./src/components/Chat/MessageItem/MessageItem.tsx?");
+
+/***/ }),
+
+/***/ "./src/components/Chat/MessageItem/MessageText.tsx":
+/*!*********************************************************!*\
+  !*** ./src/components/Chat/MessageItem/MessageText.tsx ***!
+  \*********************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+eval("\nvar __importDefault = (this && this.__importDefault) || function (mod) {\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nvar react_1 = __importDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\nvar classnames_1 = __importDefault(__webpack_require__(/*! classnames */ \"./node_modules/classnames/index.js\"));\nfunction MessageText(_a) {\n    var isRead = _a.isRead;\n    return (react_1.default.createElement(\"div\", { className: (0, classnames_1.default)(\"message-item__text\", { read: isRead }) }, \"\\u041F\\u0440\\u0438\\u0432\\u0435\\u0442, \\u043A\\u0430\\u043A \\u0434\\u0435\\u043B\\u0430? \\u0427\\u0442\\u043E \\u0434\\u0435\\u043B\\u0430\\u0435\\u0448\\u044C?\"));\n}\nexports[\"default\"] = MessageText;\n\n\n//# sourceURL=webpack://testfront/./src/components/Chat/MessageItem/MessageText.tsx?");
+>>>>>>> 9a83b4783251cd00b0947c4818dc5891abc15c39
 
 /***/ }),
 
@@ -82,7 +112,11 @@ eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod)
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
+<<<<<<< HEAD
 eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nvar react_1 = __importDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\r\nvar MessageItem_1 = __importDefault(__webpack_require__(/*! ../MessageItem/MessageItem */ \"./src/components/Chat/MessageItem/MessageItem.tsx\"));\r\n__webpack_require__(/*! ./MessagesBlock.scss */ \"./src/components/Chat/MessagesBlock/MessagesBlock.scss\");\r\nfunction MessagesBlock() {\r\n    return (react_1.default.createElement(\"div\", { className: \"chat__messages-block\" },\r\n        react_1.default.createElement(MessageItem_1.default, { isMy: false, isOnline: true, isRead: true }),\r\n        react_1.default.createElement(MessageItem_1.default, { isMy: true, isOnline: false, isRead: true }),\r\n        react_1.default.createElement(MessageItem_1.default, { isMy: false, isOnline: true, isRead: true }),\r\n        react_1.default.createElement(MessageItem_1.default, { isMy: true, isOnline: false, isRead: true }),\r\n        react_1.default.createElement(MessageItem_1.default, { isMy: false, isOnline: true, isRead: true })));\r\n}\r\nexports[\"default\"] = MessagesBlock;\r\n\n\n//# sourceURL=webpack://testfront/./src/components/Chat/MessagesBlock/MessagesBlock.tsx?");
+=======
+eval("\nvar __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {\n    if (k2 === undefined) k2 = k;\n    var desc = Object.getOwnPropertyDescriptor(m, k);\n    if (!desc || (\"get\" in desc ? !m.__esModule : desc.writable || desc.configurable)) {\n      desc = { enumerable: true, get: function() { return m[k]; } };\n    }\n    Object.defineProperty(o, k2, desc);\n}) : (function(o, m, k, k2) {\n    if (k2 === undefined) k2 = k;\n    o[k2] = m[k];\n}));\nvar __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {\n    Object.defineProperty(o, \"default\", { enumerable: true, value: v });\n}) : function(o, v) {\n    o[\"default\"] = v;\n});\nvar __importStar = (this && this.__importStar) || function (mod) {\n    if (mod && mod.__esModule) return mod;\n    var result = {};\n    if (mod != null) for (var k in mod) if (k !== \"default\" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);\n    __setModuleDefault(result, mod);\n    return result;\n};\nvar __importDefault = (this && this.__importDefault) || function (mod) {\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nvar react_1 = __importStar(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\nvar MessageInputBlock_1 = __importDefault(__webpack_require__(/*! ../MessageInputBlock/MessageInputBlock */ \"./src/components/Chat/MessageInputBlock/MessageInputBlock.tsx\"));\nvar MessageItem_1 = __importDefault(__webpack_require__(/*! ../MessageItem/MessageItem */ \"./src/components/Chat/MessageItem/MessageItem.tsx\"));\n__webpack_require__(/*! ./MessagesBlock.scss */ \"./src/components/Chat/MessagesBlock/MessagesBlock.scss\");\nfunction MessagesBlock() {\n    var _a = (0, react_1.useState)(\"\"), inputBlockHeight = _a[0], setInputBlockHeight = _a[1];\n    var messagesBlockRef = (0, react_1.useRef)();\n    var onChangeHeight = function (height) {\n        setInputBlockHeight(\"\".concat(height, \"px\"));\n    };\n    (0, react_1.useEffect)(function () {\n        if (messagesBlockRef.current) {\n            messagesBlockRef.current.scrollTo(0, messagesBlockRef.current.scrollHeight);\n        }\n    }, []);\n    return (react_1.default.createElement(\"div\", { className: \"chat__main-block\" },\n        react_1.default.createElement(\"div\", { className: \"chat__main-block-wrapper\" },\n            react_1.default.createElement(\"div\", { className: \"chat__messages-block\", style: { bottom: inputBlockHeight }, ref: messagesBlockRef },\n                react_1.default.createElement(MessageItem_1.default, { isMy: false, isOnline: true, isRead: true }),\n                react_1.default.createElement(MessageItem_1.default, { isMy: true, isOnline: false, isRead: true }),\n                react_1.default.createElement(MessageItem_1.default, { isMy: false, isOnline: true, isRead: true }),\n                react_1.default.createElement(MessageItem_1.default, { isMy: true, isOnline: false, isRead: true }),\n                react_1.default.createElement(MessageItem_1.default, { isMy: false, isOnline: true, isRead: true }),\n                react_1.default.createElement(MessageItem_1.default, { isMy: true, isOnline: false, isRead: true }),\n                react_1.default.createElement(MessageItem_1.default, { isMy: false, isOnline: true, isRead: true }),\n                react_1.default.createElement(MessageItem_1.default, { isMy: true, isOnline: false, isRead: true }),\n                react_1.default.createElement(MessageItem_1.default, { isMy: false, isOnline: true, isRead: true }),\n                react_1.default.createElement(MessageItem_1.default, { isMy: true, isOnline: false, isRead: true }),\n                react_1.default.createElement(MessageItem_1.default, { isMy: false, isOnline: true, isRead: true }))),\n        react_1.default.createElement(\"div\", { className: \"chat__input-block\" },\n            react_1.default.createElement(MessageInputBlock_1.default, { onChangeHeight: onChangeHeight }))));\n}\nexports[\"default\"] = MessagesBlock;\n\n\n//# sourceURL=webpack://testfront/./src/components/Chat/MessagesBlock/MessagesBlock.tsx?");
+>>>>>>> 9a83b4783251cd00b0947c4818dc5891abc15c39
 
 /***/ }),
 
@@ -93,6 +127,7 @@ eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod)
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
+<<<<<<< HEAD
 eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nvar react_1 = __importDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\r\n// import headerHeightCalc from \"../../utils/headerHeightCalc\";\r\n// import header\r\nvar headerHeightCalc_1 = __webpack_require__(/*! ../../utils/headerHeightCalc */ \"./src/utils/headerHeightCalc.ts\");\r\nfunction Home() {\r\n    (0, headerHeightCalc_1.headerHeightCalc)();\r\n    return react_1.default.createElement(\"div\", null, \"Home\");\r\n}\r\nexports[\"default\"] = Home;\r\n\n\n//# sourceURL=webpack://testfront/./src/components/Home/Home.tsx?");
 
 /***/ }),
@@ -105,6 +140,9 @@ eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod)
 
 "use strict";
 eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.headerHeightCalc = void 0;\r\nvar headerHeightCalc = function () {\r\n    var header = document.querySelector(\"nav\");\r\n    return header.clientHeight;\r\n};\r\nexports.headerHeightCalc = headerHeightCalc;\r\n\n\n//# sourceURL=webpack://testfront/./src/utils/headerHeightCalc.ts?");
+=======
+eval("\nvar __importDefault = (this && this.__importDefault) || function (mod) {\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nvar react_1 = __importDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\n// import headerHeightCalc from \"../../utils/headerHeightCalc\";\n// import header\nfunction Home() {\n    return react_1.default.createElement(\"div\", null, \"Home\");\n}\nexports[\"default\"] = Home;\n\n\n//# sourceURL=webpack://testfront/./src/components/Home/Home.tsx?");
+>>>>>>> 9a83b4783251cd00b0947c4818dc5891abc15c39
 
 /***/ }),
 
@@ -126,7 +164,7 @@ eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\n
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ App)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ \"./node_modules/react-router/dist/index.js\");\n/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components */ \"./src/components/index.js\");\n/* harmony import */ var _utils_headerHeightCalc__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils/headerHeightCalc */ \"./src/utils/headerHeightCalc.ts\");\n\n\n\n\n\nfunction App() {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"div\", {\n    className: \"wrapper\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"div\", {\n    className: \"content\",\n    style: {\n      marginTop: `${(0,_utils_headerHeightCalc__WEBPACK_IMPORTED_MODULE_3__.headerHeightCalc)()}px`\n    }\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Routes, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Route, {\n    path: \"/\",\n    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components__WEBPACK_IMPORTED_MODULE_2__.Home, null)\n  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Route, {\n    path: \"/my_messages\",\n    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components__WEBPACK_IMPORTED_MODULE_2__.Chat, null)\n  }))));\n}\n\n//# sourceURL=webpack://testfront/./src/App.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ App)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ \"./node_modules/react-router/dist/index.js\");\n/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components */ \"./src/components/index.js\");\n/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils */ \"./src/utils/index.js\");\n\n\n\n\n\nfunction App() {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"div\", {\n    className: \"wrapper\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"div\", {\n    className: \"content\",\n    style: {\n      marginTop: `${(0,_utils__WEBPACK_IMPORTED_MODULE_3__.blockHeightCalc)(\"nav\")}px`\n    }\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Routes, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Route, {\n    path: \"/\",\n    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components__WEBPACK_IMPORTED_MODULE_2__.Home, null)\n  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Route, {\n    path: \"/my_messages\",\n    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components__WEBPACK_IMPORTED_MODULE_2__.Chat, null)\n  }))));\n}\n\n//# sourceURL=webpack://testfront/./src/App.js?");
 
 /***/ }),
 
@@ -148,7 +186,18 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n/* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./App */ \"./src/App.js\");\n/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ \"./node_modules/react-router-dom/dist/index.js\");\n/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./style.scss */ \"./src/style.scss\");\n\n\n// import \"./scss/app.scss\";\n\n\n// import store from './redux/store';\n// import { Provider } from 'react-redux';\n\n// import \"./style.scss\";\n\nreact_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().StrictMode), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.BrowserRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_App__WEBPACK_IMPORTED_MODULE_2__[\"default\"], null))), document.getElementById(\"app\"));\n\n//# sourceURL=webpack://testfront/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n/* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./App */ \"./src/App.js\");\n/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ \"./node_modules/react-router-dom/dist/index.js\");\n/* harmony import */ var _styles_style_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./styles/style.scss */ \"./src/styles/style.scss\");\n\n\n// import \"./scss/app.scss\";\n\n\n// import store from './redux/store';\n// import { Provider } from 'react-redux';\n\n// import \"./style.scss\";\n\nreact_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().StrictMode), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.BrowserRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_App__WEBPACK_IMPORTED_MODULE_2__[\"default\"], null))), document.getElementById(\"app\"));\n\n//# sourceURL=webpack://testfront/./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/utils/index.js":
+/*!****************************!*\
+  !*** ./src/utils/index.js ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* empty/unused harmony star reexport */\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"maxMessageLengthCalc\": () => (/* reexport safe */ _maxMessageLengthCalc__WEBPACK_IMPORTED_MODULE_1__[\"default\"])\n/* harmony export */ });\nObject(function webpackMissingModule() { var e = new Error(\"Cannot find module './blockHeightCalc'\"); e.code = 'MODULE_NOT_FOUND'; throw e; }());\n/* harmony import */ var _maxMessageLengthCalc__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./maxMessageLengthCalc */ \"./src/utils/maxMessageLengthCalc.ts\");\n\n\n\n//# sourceURL=webpack://testfront/./src/utils/index.js?");
 
 /***/ }),
 
@@ -3726,6 +3775,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extr
 
 /***/ }),
 
+/***/ "./src/components/Chat/MessageInputBlock/MessageInputBlock.scss":
+/*!**********************************************************************!*\
+  !*** ./src/components/Chat/MessageInputBlock/MessageInputBlock.scss ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n\n//# sourceURL=webpack://testfront/./src/components/Chat/MessageInputBlock/MessageInputBlock.scss?");
+
+/***/ }),
+
 /***/ "./src/components/Chat/MessageItem/MessageItem.scss":
 /*!**********************************************************!*\
   !*** ./src/components/Chat/MessageItem/MessageItem.scss ***!
@@ -3748,14 +3808,14 @@ eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extr
 
 /***/ }),
 
-/***/ "./src/style.scss":
-/*!************************!*\
-  !*** ./src/style.scss ***!
-  \************************/
+/***/ "./src/styles/style.scss":
+/*!*******************************!*\
+  !*** ./src/styles/style.scss ***!
+  \*******************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n\n//# sourceURL=webpack://testfront/./src/style.scss?");
+eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n\n//# sourceURL=webpack://testfront/./src/styles/style.scss?");
 
 /***/ }),
 
@@ -3845,6 +3905,50 @@ eval("/**\n * @license React\n * scheduler.development.js\n *\n * Copyright (c) 
 "use strict";
 eval("\n\nif (false) {} else {\n  module.exports = __webpack_require__(/*! ./cjs/scheduler.development.js */ \"./node_modules/scheduler/cjs/scheduler.development.js\");\n}\n\n\n//# sourceURL=webpack://testfront/./node_modules/scheduler/index.js?");
 
+/***/ }),
+
+/***/ "./static/photos/icons/microphone.png":
+/*!********************************************!*\
+  !*** ./static/photos/icons/microphone.png ***!
+  \********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+eval("module.exports = __webpack_require__.p + \"a07d714df9fc4b722918.png\";\n\n//# sourceURL=webpack://testfront/./static/photos/icons/microphone.png?");
+
+/***/ }),
+
+/***/ "./static/photos/icons/paper-clip.png":
+/*!********************************************!*\
+  !*** ./static/photos/icons/paper-clip.png ***!
+  \********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+eval("module.exports = __webpack_require__.p + \"fc942fac9c47f7f97752.png\";\n\n//# sourceURL=webpack://testfront/./static/photos/icons/paper-clip.png?");
+
+/***/ }),
+
+/***/ "./static/photos/icons/send.png":
+/*!**************************************!*\
+  !*** ./static/photos/icons/send.png ***!
+  \**************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+eval("module.exports = __webpack_require__.p + \"d64ad9210c70a10bb8fc.png\";\n\n//# sourceURL=webpack://testfront/./static/photos/icons/send.png?");
+
+/***/ }),
+
+/***/ "./static/photos/icons/smile.png":
+/*!***************************************!*\
+  !*** ./static/photos/icons/smile.png ***!
+  \***************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+eval("module.exports = __webpack_require__.p + \"98f366e3609e57d26df1.png\";\n\n//# sourceURL=webpack://testfront/./static/photos/icons/smile.png?");
+
 /***/ })
 
 /******/ 	});
@@ -3901,6 +4005,18 @@ eval("\n\nif (false) {} else {\n  module.exports = __webpack_require__(/*! ./cjs
 /******/ 		};
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/global */
+/******/ 	(() => {
+/******/ 		__webpack_require__.g = (function() {
+/******/ 			if (typeof globalThis === 'object') return globalThis;
+/******/ 			try {
+/******/ 				return this || new Function('return this')();
+/******/ 			} catch (e) {
+/******/ 				if (typeof window === 'object') return window;
+/******/ 			}
+/******/ 		})();
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
@@ -3924,6 +4040,26 @@ eval("\n\nif (false) {} else {\n  module.exports = __webpack_require__(/*! ./cjs
 /******/ 			if (!module.children) module.children = [];
 /******/ 			return module;
 /******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/publicPath */
+/******/ 	(() => {
+/******/ 		var scriptUrl;
+/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
+/******/ 		var document = __webpack_require__.g.document;
+/******/ 		if (!scriptUrl && document) {
+/******/ 			if (document.currentScript)
+/******/ 				scriptUrl = document.currentScript.src
+/******/ 			if (!scriptUrl) {
+/******/ 				var scripts = document.getElementsByTagName("script");
+/******/ 				if(scripts.length) scriptUrl = scripts[scripts.length - 1].src
+/******/ 			}
+/******/ 		}
+/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
+/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
+/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
+/******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
+/******/ 		__webpack_require__.p = scriptUrl;
 /******/ 	})();
 /******/ 	
 /************************************************************************/
