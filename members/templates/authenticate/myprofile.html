@@ -1,0 +1,16 @@
+{% extends "frontend/base.html" %}
+{% block content %}
+
+    <div class="content-section">
+        <div class="media">
+            <img src="{{ user.myprofile.image.url }}" class="avatar" style="vertical-align: middle; width: 60px; height: 60px; border-radius: 50%;">
+            <div class="media-body">
+                <b class="account-heading" style="font-size: 18px ;color:#e02c3c;text-transform: uppercase; font-family: Verdana">{{ user.last_name }} <br>{{ user.first_name }}</b>
+                <p class="text-secondary">{{ user.email }}</p>
+            </div>
+        </div>
+
+    </div>
+
+
+{% endblock %}
