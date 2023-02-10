@@ -46,9 +46,20 @@ INSTALLED_APPS = [
     'rest_framework',
     # 'frontend.apps.FrontendConfig',
     'frontend',
+    'fontawesome_5',
+    'fontawesomefree',
+    'django_google_maps',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+DJANGO_ICONS = {
+    "ICONS": {
+        "edit": {"name": "far fa-camera"},
+    },
+}
+
+GOOGLE_MAPS_API_KEY = 'AIzaSyASeX7oUtGfcpiO0Uo5qYKzJ8gzbaGdkZc'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

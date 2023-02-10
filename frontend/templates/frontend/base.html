@@ -1,4 +1,5 @@
 {% load static %}
+{% load fontawesome_5 %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,6 +22,10 @@
         }
     </style>
     <link rel="stylesheet" href="{% static 'style.css' %}" />
+
+    <!-- Maps -->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
 
 </head>
 
@@ -49,6 +54,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link fs-5" href="{% url 'myprofile' %}">My profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fs-5" href="{% url 'add_travel_page' %}">Add travel</a>
                 </li>
             </ul>
 
@@ -134,7 +142,7 @@
 
 <div id="app"></div>
 
-<footer class="bg-light text-center text-lg-start">
+<footer class="bg-light text-center text-lg-start " style="bottom: 0; width: 100%">
     <!-- Copyright -->
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
         © 2022 Copyright:
