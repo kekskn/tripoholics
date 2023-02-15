@@ -29,6 +29,10 @@
     position: absolute;
     bottom: 60px;
     width: 100%;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   &__input-block {

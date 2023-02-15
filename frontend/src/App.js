@@ -18,7 +18,8 @@ export default function App() {
           {/* <Route path="*" element={<Home items={pizzas}/>}/> */}
           {/* <Route path="*" element={<Home items={this.props.items} />} /> */}
           <Route path="/" element={<Home />} />
-          <Route path="/my_messages" element={<Chat />} />
+          {/* <Route path="/my_messages" element={<Chat />} /> */}
+          <Route path="/my_messages/*" element={<Chat />} />
         </Routes>
       </div>
     </div>

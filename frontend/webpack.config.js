@@ -24,6 +24,11 @@ module.exports = {
         use: [miniCss.loader, "css-loader", "sass-loader"],
       },
       { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
+      // {
+      //   test: /\.tsx?$/,
+      //   loader: "ts-loader",
+      //   exclude: /node_modules/,
+      // },
       {
         test: /\.js$/,
         exclude: /node_modules/,

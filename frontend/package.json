@@ -13,7 +13,7 @@
     "@babel/core": "^7.20.2",
     "@babel/preset-env": "^7.20.2",
     "@babel/preset-react": "^7.18.6",
-    "awesome-typescript-loader": "^5.2.1",
+    "@types/emoji-mart": "^3.0.9",
     "babel-loader": "^9.1.0",
     "css-loader": "^6.7.1",
     "mini-css-extract-plugin": "^2.6.1",
@@ -27,11 +27,17 @@
     "webpack-cli": "^4.10.0"
   },
   "dependencies": {
+    "@emoji-mart/data": "^1.0.6",
+    "@emoji-mart/react": "^1.0.1",
     "@types/prop-types": "^15.7.5",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.8",
+    "awesome-typescript-loader": "^5.2.1",
     "classnames": "^2.3.2",
     "date-fns": "^2.29.3",
-    "react-router-dom": "^6.4.3"
+    "emoji-mart": "^5.2.2",
+    "emoji-picker-react": "^4.4.4",
+    "react-router-dom": "^6.4.3",
+    "ts-loader": "^9.4.1"
   }
 }
