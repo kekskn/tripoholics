@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 // import { Picker } from "emoji-mart";
 
 import data from "@emoji-mart/data";
-import Picker from "@emoji-mart/react";
+// import Picker from "@emoji-mart/react";
 
 import smileIcon from "../../../../static/photos/icons/smile.png";
 import addFileIcon from "../../../../static/photos/icons/paper-clip.png";
