@@ -23,6 +23,8 @@
     position: absolute;
     bottom: 60px;
     width: 100%; }
+    .chat__messages-block::-webkit-scrollbar {
+      display: none; }
   .chat__input-block {
     position: absolute;
     width: 100%;
