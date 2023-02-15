@@ -1,132 +1,122 @@
 {% extends "./base.html" %} {% block content %} {% load static %}
 
-<!-- Background image -->
-<div id="section1" class="bg-image">
-  <div class="container mt-5">
-    <div class="row">
-      <div class="mask" style="background-color: rgba(255, 255, 255, 0.7)">
-        <div class="d-flex justify-content-center align-items-center h-100">
-          <h1 class="col-sm-4 text-secondary">
-            Make a unique travel diary and find a travel companion for your
-            craziest adventure!
-          </h1>
-          <div>
-            <a
-              type="button"
-              class="btn btn-danger btn-lg"
-              href="members/templates/authenticate/register.html"
-              data-bs-toggle="tooltip"
-              title="Make your account now!"
-              >Register Now
-            </a>
-            <link
-              rel="stylesheet"
-              href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/dist/mdb5/standard/core.min.css"
-            />
-            <div
-              class="bg-image hover-overlay ripple shadow-1-strong rounded"
-              data-mdb-ripple-color="light"
-            >
-              <script>
-                // Initialize tooltips
-                var tooltipTriggerList = [].slice.call(
-                  document.querySelectorAll('[data-bs-toggle="tooltip"]')
-                );
-                var tooltipList = tooltipTriggerList.map(function (
-                  tooltipTriggerEl
-                ) {
-                  return new bootstrap.Tooltip(tooltipTriggerEl);
-                });
-              </script>
+    <!-- Background image -->
+    
+    
+
+    <div id="section1" >
+        <div class="bg-image" style="background-image: url('static/photos/back1.jpg'); height: 65vh; background-repeat: no-repeat; background-position: center; background-size: cover ">
+                    <div class="mask" style="background-color: rgba(255, 255, 255, 0.6); height: 65vh; width: 100%">
+                        <div class="d-flex justify-content-center align-items-center h-100">
+                            <p style="font-size: 25pt; " class="col-sm-4 text-secondary" align="center"><b>
+                                Make a unique travel diary and find a travel companion for your
+                                craziest adventure!
+                            </b>
+                            </p>
+
+                            <div>
+                                <a
+                                        type="button"
+                                        class="btn btn-danger btn-lg"
+                                        href="{% url 'register' %}"
+                                        data-bs-toggle="tooltip"
+                                        title="Make your account now!"
+                                >Register Now
+                                </a>
+
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Background image -->
 
-<!--
-        <h3 class="col-sm-5 text-secondary mb-auto ">Make a unique travel diary and find a travel companion for your craziest adventure!</h3>
-    </div>
-    </div>
+    
+
+    <!-- Background image -->
 
 
--->
 
-<!-- Text -->
-<p class="h1 text-center mt-5 fw-bold text-secondary">CONNECT WITH TRAVELERS</p>
-<p class="h1 text-center fw-bold text-secondary">ALL AROUND THE WORLD!</p>
+    <!-- Text -->
+    <p class="h1 text-center mt-5 fw-bold text-secondary">CONNECT WITH TRAVELERS</p>
+    <p class="h1 text-center fw-bold text-secondary">ALL AROUND THE WORLD!</p>
 
-<!-- Second part -->
-<center><hr style="width: 70%" /></center>
+    <!-- Second part -->
 
-<div class="clearfix">
-  <img src="{% static "tablet2.png" %}" class="col-md-6 float-md-end mb-3
+
+    <div class="clearfix">
+        <img src="{% static "photos/tablet2.png" %}" class="col-md-6 float-md-end mb-3
   ms-md-3" alt="...">
-  <br />
-  <br />
+        <br />
+        <br />
 
-  <div class="text-center text-secondary offset-2">
-    <h4>FIND A TRAVEL COMPANION OR SEEK AN ADVICE</h4>
-    <br />
-    <br />
-    <h6>
-      If you want to find travelers around you while traveling or to find a
-      travel companion for your next adventure, tripoholics.com is the perfect
-      place for that!
-    </h6>
-    <h6>
-      Post your travel plans or search other travel plans. Find perfect match
-      and explore the World together!
-    </h6>
-  </div>
-</div>
-
-<!--
-<div class="container">
-    <div class="align-items-start">
-        <div class="col-sm-4 text-center text-secondary ">
+        <div class="text-center text-secondary offset-2">
             <h4>FIND A TRAVEL COMPANION OR SEEK AN ADVICE</h4>
-            <p>If you want to find travelers around you while traveling or to find a travel companion for your next adventure, tripoholics.com is the perfect place for that!</p>
-            <p>Post your travel plans or search other travel plans. Find perfect match and explore the World together!</p>
+            <br />
+            <br />
+            <h6>
+                If you want to find travelers around you while traveling or to find a
+                travel companion for your next adventure, tripoholics.com is the perfect
+                place for that!
+            </h6>
+            <h6>
+                Post your travel plans or search other travel plans. Find perfect match
+                and explore the World together!
+            </h6>
         </div>
     </div>
-    <div class="col-sm-4 align-items-end">
-        <link rel="stylesheet" href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/dist/mdb5/standard/core.min.css">
-                <div
-                    class="bg-image hover-overlay ripple shadow-1-strong rounded"
-                    data-mdb-ripple-color="light"
-                >
-                    <img src="static/node_modules/photos/tablet2.png" class="img-fluid">
-                        <a href="">
-                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
-                        </a>
 
+    <!--
+    <div class="container">
+        <div class="align-items-start">
+            <div class="col-sm-4 text-center text-secondary ">
+                <h4>FIND A TRAVEL COMPANION OR SEEK AN ADVICE</h4>
+                <p>If you want to find travelers around you while traveling or to find a travel companion for your next adventure, tripoholics.com is the perfect place for that!</p>
+                <p>Post your travel plans or search other travel plans. Find perfect match and explore the World together!</p>
+            </div>
+        </div>
+        <div class="col-sm-4 align-items-end">
+            <link rel="stylesheet" href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/dist/mdb5/standard/core.min.css">
+                    <div
+                        class="bg-image hover-overlay ripple shadow-1-strong rounded"
+                        data-mdb-ripple-color="light"
+                    >
+                        <img src="static/node_modules/photos/tablet2.png" class="img-fluid">
+                            <a href="">
+                                <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                            </a>
+
+        </div>
     </div>
-</div>
--->
+    -->
 
-<div class="container p-5 my-5 border">
-  <h1>Nesto 1</h1>
-  <p>This container has a border and some extra padding and margins.</p>
-</div>
+    <div class="container p-5 my-5 border">
+        <h1>Nesto 1</h1>
+        <p>This container has a border and some extra padding and margins.</p>
+    </div>
 
-<div id="section2" class="container p-5 my-5 bg-dark text-white">
-  <h1>Nesto 2</h1>
-  <p>
-    This container has a dark background color and a white text, and some extra
-    padding and margins.
-  </p>
-</div>
+    <div id="section2" class="container p-5 my-5 bg-dark text-white">
+        <h1>Nesto 2</h1>
+        <p>
+            This container has a dark background color and a white text, and some extra
+            padding and margins.
+        </p>
+    </div>
 
-<div class="container p-5 my-5 bg-primary text-white">
-  <h1>Nesto 3</h1>
-  <p>
-    This container has a blue background color and a white text, and some extra
-    padding and margins.
-  </p>
-</div>
+    <div class="container p-5 my-5 bg-primary text-white">
+        <h1>Nesto 3</h1>
+        <p>
+            This container has a blue background color and a white text, and some extra
+            padding and margins.
+        </p>
+    </div>
+
+
+    <div id="main">
+        <div id="app"></div>
+    </div>
 
 {% endblock %}
+

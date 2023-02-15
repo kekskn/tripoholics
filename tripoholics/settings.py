@@ -46,9 +46,20 @@ INSTALLED_APPS = [
     'rest_framework',
     # 'frontend.apps.FrontendConfig',
     'frontend',
+    'fontawesome_5',
+    'fontawesomefree',
+    'django_google_maps',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+DJANGO_ICONS = {
+    "ICONS": {
+        "edit": {"name": "far fa-camera"},
+    },
+}
+
+GOOGLE_MAPS_API_KEY = 'AIzaSyASeX7oUtGfcpiO0Uo5qYKzJ8gzbaGdkZc'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -127,10 +138,13 @@ STATIC_ROOT = ''
 
 STATIC_URL = '/static/'
 
-# STATICFILES_DIRS = (os.path.join('static'),)
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'frontend/static')
-]
+STATICFILES_DIRS = (os.path.join('frontend/static'),)
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-fieldcdd
