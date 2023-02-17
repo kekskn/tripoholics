@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'fontawesome_5',
     'fontawesomefree',
     'django_google_maps',
+    'utils', # utils for local dev (clearCache)
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
