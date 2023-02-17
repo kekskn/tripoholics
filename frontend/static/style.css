@@ -14,9 +14,9 @@
       height: 100%;
       position: relative; }
   .chat__dialogs-list {
-    max-width: 250px;
+    max-width: 364px;
     width: 100%;
-    background-color: #c95d60; }
+    background-color: #fff; }
   .chat__messages-block {
     max-height: 500px;
     overflow: auto;
@@ -55,33 +55,59 @@
   \*****************************************************************************************************************************************/
 .dialog-item {
   width: 100%;
-  background-color: #c95d60;
+  background-color: #fff;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 2px solid #cb7f82;
   cursor: pointer;
-  transition: all 0.3s ease; }
+  transition: all 0.3s ease;
+  padding: 12px 15px; }
   .dialog-item:hover {
-    background-color: #dc7b7e; }
-  .dialog-item:nth-child(1) {
-    border-top: 2px solid #cb7f82; }
+    background-color: #f5f5f5; }
+  .dialog-item:not(:nth-child(1)) {
+    border-top: 1px solid #f5f5f5; }
   .dialog-item__avatar {
-    padding: 15px 10px;
-    flex-shrink: 0; }
+    flex-shrink: 0;
+    margin-right: 15px; }
   .dialog-item__info {
-    max-width: 130px;
     width: 100%;
-    padding: 0 5px; }
+    align-items: center;
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: space-between; }
+    .dialog-item__info-wrapper {
+      width: 100%; }
+  .dialog-item__messages {
+    display: flex;
+    justify-content: space-between; }
   .dialog-item__fullname {
-    font-weight: bold; }
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 700; }
   .dialog-item__last-message {
-    font-size: 12px;
-    line-height: 12px; }
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 18px;
+    color: #707991; }
   .dialog-item__date {
-    font-size: 8px;
-    margin: 10px auto auto auto;
-    padding: 0 5px; }
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 16px;
+    color: #707991; }
+  .dialog-item__unread-messages {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e13f3f;
+    font-size: 12px;
+    color: #ffffff; }
 
 /*!*******************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/components/Chat/DialogsList/DialogsList.scss ***!
@@ -232,9 +258,25 @@
   unicode-range: U+0020-F6BE; }
 
 @font-face {
-  font-family: "Nunito Light";
-  src: url(effec7cd6b38cd8af17f.ttf) format("truetype");
+  font-family: "Nunito";
+  src: url(0ec468f65958d1263b60.ttf) format("truetype");
   font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  unicode-range: U+0020-2044; }
+
+@font-face {
+  font-family: "Nunito";
+  src: url(99a3b019e7727ac19479.ttf) format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  unicode-range: U+0020-2044; }
+
+@font-face {
+  font-family: "Nunito";
+  src: url(f4338623f94e6079de97.ttf) format("truetype");
+  font-weight: 700;
   font-style: normal;
   font-stretch: normal;
   unicode-range: U+0020-2044; }
