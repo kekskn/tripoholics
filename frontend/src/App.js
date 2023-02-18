@@ -12,7 +12,7 @@ export default function App() {
       {/* <Header /> */}
       <div
         className="content"
-        style={{ marginTop: `${blockHeightCalc("nav")}px` }}
+        // style={{ marginTop: `${blockHeightCalc("nav")}px` }}
       >
         <Routes>
           {/* <Route path="*" element={<Home items={pizzas}/>}/> */}

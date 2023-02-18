@@ -34,46 +34,77 @@
     }
 
     &__date {
-      display: flex;
-      justify-content: start;
+      float: right;
       font-size: 10px;
-      color: #979797;
-      font-family: Nunito Light;
-      margin-top: 4px;
+      margin-top: 5px;
       line-height: 10px;
+      font-family: "Nunito";
+      font-style: normal;
+      font-weight: 300;
+      font-size: 12px;
+      line-height: 16px;
+    }
+
+    &__main-block {
+      align-self: flex-end;
+      border-radius: 15px 15px 15px 0;
+      background-color: white;
+      color: #011627;
+      max-width: 334px;
+      padding: 6px 12px;
+
+      font-family: "Nunito";
+      font-style: normal;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 20px;
     }
 
     &.my {
       justify-content: end;
       flex-direction: row-reverse;
+      $my: &;
 
       #{$self}__avatar {
         padding: 0 0 0 15px;
       }
-      #{$self}__text {
-        align-self: flex-end;
+      #{$self}__main-block {
         border-radius: 15px 15px 0 15px;
-        background-color: white;
-        color: black;
-        border: 1px solid rgb(220, 220, 220);
+        background-color: #e13f3f;
+        color: #fff;
+        position: relative;
 
-        &.read {
-          &::before {
-            content: "";
-            background-image: url("../../../../static/photos/icons/read.png");
-            background-repeat: no-repeat;
-            background-size: cover;
-            width: 15px;
-            height: 15px;
-            position: absolute;
-            bottom: 0;
-            left: -20px;
-          }
+        &::before {
+          content: "";
+          background-image: url("../../../../static/photos/icons/sent-message.svg");
+          background-repeat: no-repeat;
+          background-size: cover;
+          width: 14px;
+          height: 14px;
+          position: absolute;
+          right: 8px;
+          bottom: 9px;
         }
       }
 
       #{$self}__date {
-        justify-content: end;
+        margin-right: 14px;
+      }
+    }
+
+    &.my.read {
+      #{$self}__main-block {
+        &::before {
+          content: "";
+          background-image: url("../../../../static/photos/icons/read-message.svg");
+          background-repeat: no-repeat;
+          background-size: cover;
+          width: 20px;
+          height: 14px;
+          position: absolute;
+          right: 6px;
+          bottom: 9px;
+        }
       }
     }
   }

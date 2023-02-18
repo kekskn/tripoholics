@@ -13,8 +13,14 @@ export default function MessageItem({ isMy, isOnline, text, isRead }) {
         <Avatar height={40} width={40} isOnline={isOnline} />
       </div>
       <div className="message-item__info">
-        <MessageText text={text} isRead={isRead} />
-        <div className="message-item__date">12:37</div>
+        {/* <MessageText text={text} isRead={isRead} /> */}
+        <div className="message-item__main-block">
+          {/* <div className="message-item__main-content">
+          </div> */}
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deserunt,
+          delectus harum culpa consequuntur facere,
+          <div className="message-item__date">12:37</div>
+        </div>
       </div>
     </div>
   );

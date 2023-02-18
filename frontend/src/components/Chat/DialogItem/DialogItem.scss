@@ -13,13 +13,10 @@
     background-color: #f5f5f5;
   }
 
-  &:not(:nth-child(1)) {
-    border-top: 1px solid #f5f5f5;
-  }
-
   &__avatar {
     flex-shrink: 0;
     margin-right: 15px;
+    display: flex;
   }
 
   &__info {

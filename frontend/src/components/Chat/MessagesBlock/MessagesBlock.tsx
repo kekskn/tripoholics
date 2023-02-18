@@ -1,7 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
+import Avatar from "../Avatar/Avatar";
 import MessageInputBlock from "../MessageInputBlock/MessageInputBlock";
 import MessageItem from "../MessageItem/MessageItem";
 import "./MessagesBlock.scss";
+
+import searchImg from "../../../../static/photos/icons/search.png";
+import optionsImg from "../../../../static/photos/icons/options.png";
 
 const initialMessages = [
   // "Привет!",
@@ -11,7 +15,7 @@ const initialMessages = [
   // "И у меня",
   {
     message: "Привет!",
-    author: "serpuhovskiy",
+    author: "serp",
   },
   {
     message: "Привет)",
@@ -19,7 +23,71 @@ const initialMessages = [
   },
   {
     message: "Как дела?",
-    author: "serpuhovskiy",
+    author: "serp",
+  },
+  {
+    message: "Отлично, а у тебя?",
+    author: "admin",
+  },
+  {
+    message: "Привет!",
+    author: "serp",
+  },
+  {
+    message: "Привет)",
+    author: "admin",
+  },
+  {
+    message: "Как дела?",
+    author: "serp",
+  },
+  {
+    message: "Отлично, а у тебя?",
+    author: "admin",
+  },
+  {
+    message: "Как дела?",
+    author: "serp",
+  },
+  {
+    message: "Отлично, а у тебя?",
+    author: "admin",
+  },
+  {
+    message: "Привет!",
+    author: "serp",
+  },
+  {
+    message: "Привет)",
+    author: "admin",
+  },
+  {
+    message: "Как дела?",
+    author: "serp",
+  },
+  {
+    message: "Отлично, а у тебя?",
+    author: "admin",
+  },
+  {
+    message: "Как дела?",
+    author: "serp",
+  },
+  {
+    message: "Отлично, а у тебя?",
+    author: "admin",
+  },
+  {
+    message: "Привет!",
+    author: "serp",
+  },
+  {
+    message: "Привет)",
+    author: "admin",
+  },
+  {
+    message: "Как дела?",
+    author: "serp",
   },
   {
     message: "Отлично, а у тебя?",
@@ -59,8 +127,8 @@ export default function MessagesBlock() {
     };
 
     document
-      .querySelector(".message-input-block__send")
-      .addEventListener("click", () => {
+      .querySelector(".message-input__btn.send-btn")
+      ?.addEventListener("click", () => {
         console.log("clicked send");
         const currentUser = document
           .querySelector("#user-name")
@@ -114,10 +182,31 @@ export default function MessagesBlock() {
   console.log("STATE: ", messages);
   return (
     <div className="chat__main-block">
+      <div className="chat__messages-block-header">
+        <div className="chat__interlocutor">
+          <Avatar width={40} height={40} isOnline={false} />
+          <div className="chat__interlocutor-info">
+            <div className="chat__interlocutor-fullname">Тест Тестов</div>
+            <div className="chat__interlocutor-isonline">Онлайн</div>
+          </div>
+        </div>
+        <div className="chat__options">
+          <button className="chat__options-block options-search">
+            <img src={searchImg} alt="" className="chat__options-search-img" />
+          </button>
+          <button className="chat__options-block options-options">
+            <img
+              src={optionsImg}
+              alt=""
+              className="chat__options-options-img"
+            />
+          </button>
+        </div>
+      </div>
       <div className="chat__main-block-wrapper">
         <div
           className="chat__messages-block"
-          style={{ bottom: inputBlockHeight }}
+          // style={{ bottom: inputBlockHeight }}
           ref={messagesBlockRef}
         >
           {renderMessages()}

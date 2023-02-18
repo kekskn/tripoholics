@@ -37,17 +37,21 @@ def logout_user(request):
 
 
 def register_user(request):
+    print('FORM DATA')
     if request.method == "POST":
+        print('request POST')
         form = RegisterUserForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data['username']
             password = form.cleaned_data['password1']
+            print(username, password)
             user = authenticate(username=username, password=password)
             login(request, user)
             messages.success(request, ("Registration successfull"))
             return redirect('index')
     else:
+        print('else request POST')
         form = RegisterUserForm()
 
     return render(request, 'authenticate/register.html', {'form': form})
