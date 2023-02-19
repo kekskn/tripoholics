@@ -33,6 +33,7 @@ CSRF_TRUSTED_ORIGINS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,14 +45,20 @@ INSTALLED_APPS = [
     'mysite.apps.MysiteConfig',
     'django_countries',
     'rest_framework',
+    'corsheaders',
+    'clientApi.apps.ClientapiConfig',
     # 'frontend.apps.FrontendConfig',
     'frontend',
+    'chat',
     'fontawesome_5',
     'fontawesomefree',
     'django_google_maps',
+    'utils', # utils for local dev (clearCache)
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 DJANGO_ICONS = {
     "ICONS": {
@@ -62,6 +69,7 @@ DJANGO_ICONS = {
 GOOGLE_MAPS_API_KEY = 'AIzaSyASeX7oUtGfcpiO0Uo5qYKzJ8gzbaGdkZc'
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -90,14 +98,32 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'tripoholics.wsgi.application'
+# Daphne
+ASGI_APPLICATION = "tripoholics.asgi.application"
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'djongo',
+        'CLIENT': {
+            "host": "mongodb+srv://Serpuhovskiy:CTHSQCEGTH2001@cluster0.66r0kvb.mongodb.net/?retryWrites=true&w=majority",
+            "name": "TripoholicsDB",
+            "authMechanism": "SCRAM-SHA-1" #For atlas cloud db
+        },
     }
 }
 

@@ -43,9 +43,25 @@
 }
 
 @font-face {
-  font-family: "Nunito Light";
-  src: url("../../static/fonts/Nunito Light.ttf") format("truetype");
+  font-family: "Nunito";
+  src: url("../../static/fonts/Nunito-Light.ttf") format("truetype");
   font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  unicode-range: U+0020-2044;
+}
+@font-face {
+  font-family: "Nunito";
+  src: url("../../static/fonts/Nunito-Regular.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  unicode-range: U+0020-2044;
+}
+@font-face {
+  font-family: "Nunito";
+  src: url("../../static/fonts/Nunito-Bold.ttf") format("truetype");
+  font-weight: 700;
   font-style: normal;
   font-stretch: normal;
   unicode-range: U+0020-2044;

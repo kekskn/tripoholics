@@ -1,6 +1,7 @@
 .avatar {
   display: inline-block;
   position: relative;
+  height: 100%;
 
   &:hover {
     cursor: pointer;
@@ -10,7 +11,7 @@
     &::before {
       content: "";
       position: absolute;
-      top: 30px;
+      top: 37px;
       right: 3px;
       width: 10px;
       height: 10px;

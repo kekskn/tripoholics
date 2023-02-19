@@ -151,6 +151,50 @@
     <!-- Copyright -->
 </footer>
 
-<script src="{% static 'main.bundle.js' %}"></script>
-</body>
+    {{ room_name|json_script:"room-name" }}
+
+    <script>
+      // window.currentUser = {{ user }};
+      // const roomName = JSON.parse(
+      //   document.getElementById("room-name").textContent
+      // );
+
+      // const chatSocket = new WebSocket(
+      //   "ws://" + window.location.host + "/ws/my_messages/" + roomName + "/"
+      // );
+
+      // chatSocket.onmessage = function (e) {
+      //   const data = JSON.parse(e.data);
+      //   // document.querySelector("#chat-log").value += data.message + "\n";
+      //   console.log("NEW MESSAGE: ", data.message);
+      // };
+
+      // chatSocket.onclose = function (e) {
+      //   console.error("Chat socket closed unexpectedly");
+      // };
+
+      // // document.querySelector("#chat-message-input").focus();
+      // // document.querySelector("#chat-message-input").onkeyup = function (e) {
+      // //   if (e.keyCode === 13) {
+      // //     // enter, return
+      // //     document.querySelector("#chat-message-submit").click();
+      // //   }
+      // // };
+
+      // document.querySelector(".message-input-block__send").onclick =
+      //   function () {
+      //     console.log("clicked send");
+      //     const messageInputDom = document.querySelector(".message-input");
+      //     const message = messageInputDom.value;
+      //     chatSocket.send(
+      //       JSON.stringify({
+      //         message: message,
+      //       })
+      //     );
+      //     messageInputDom.value = "";
+      //   };
+    </script>
+    {{ username|json_script:"user-name" }}
+    <script src="{% static 'main.bundle.js' %}"></script>
+  </body>
 </html>

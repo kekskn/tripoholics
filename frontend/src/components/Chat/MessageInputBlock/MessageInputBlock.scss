@@ -1,59 +1,97 @@
-.message-input-block {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 20px 0;
+.message-input {
+  &__left-btns {
+    display: flex;
+  }
 
-  &__left-icons {
+  &__btn {
+    padding: 0;
+    background: transparent;
+    border: none;
+    width: 24px;
+    height: 24px;
+    margin-right: 16px;
+
+    & img {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &__right-btns {
     display: flex;
 
-    & > div {
-      display: inline-block;
-      width: 25px;
-      height: 25px;
-      margin: 0 10px;
-      cursor: pointer;
+    & > button {
+      margin-right: 0;
     }
   }
 
-  &__field {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    min-height: 40px;
-    height: 100%;
-    margin-right: 15px;
-    border-radius: 20px;
-    background-color: white;
-
-    & input {
-      width: 100%;
-      min-height: 40px;
-      height: 100%;
-      border: none;
-      border-radius: 20px;
-      font-family: Nunito Light;
-      padding-left: 30px;
-    }
-  }
-
-  &__icon {
-    margin-left: 20px;
-
-    cursor: pointer;
-    &:last-child {
-      margin-right: 15px;
-    }
-  }
-
-  &__send {
-    background-color: #c86e71;
-    width: 40px;
-    height: 40px;
+  &-block {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 50%;
-    cursor: pointer;
+    margin: 10px 0 20px 0;
+    height: 56px;
+
+    &__left-icons {
+      display: flex;
+
+      & > div {
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        margin: 0 10px;
+        cursor: pointer;
+      }
+    }
+
+    &__field {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      min-height: 56px;
+      height: 100%;
+      border-radius: 20px;
+      background-color: white;
+      padding: 16px;
+
+      & input {
+        width: 100%;
+        min-height: 40px;
+        height: 100%;
+        border: none;
+        border-radius: 20px;
+        font-family: "Nunito";
+        font-style: normal;
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 20px;
+        color: #707991;
+
+        &:focus {
+          border: none;
+          outline: none;
+        }
+      }
+    }
+
+    &__icon {
+      margin-left: 20px;
+
+      cursor: pointer;
+      &:last-child {
+        margin-right: 15px;
+      }
+    }
+
+    &__send {
+      background-color: #c86e71;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      cursor: pointer;
+    }
   }
 }

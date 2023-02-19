@@ -12,13 +12,14 @@ export default function App() {
       {/* <Header /> */}
       <div
         className="content"
-        style={{ marginTop: `${blockHeightCalc("nav")}px` }}
+        // style={{ marginTop: `${blockHeightCalc("nav")}px` }}
       >
         <Routes>
           {/* <Route path="*" element={<Home items={pizzas}/>}/> */}
           {/* <Route path="*" element={<Home items={this.props.items} />} /> */}
           <Route path="/" element={<Home />} />
-          <Route path="/my_messages" element={<Chat />} />
+          {/* <Route path="/my_messages" element={<Chat />} /> */}
+          <Route path="/my_messages/*" element={<Chat />} />
         </Routes>
       </div>
     </div>
