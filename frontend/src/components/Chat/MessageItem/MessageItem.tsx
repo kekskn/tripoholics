@@ -17,8 +17,9 @@ export default function MessageItem({ isMy, isOnline, text, isRead }) {
         <div className="message-item__main-block">
           {/* <div className="message-item__main-content">
           </div> */}
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deserunt,
-          delectus harum culpa consequuntur facere,
+          {/* Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deserunt,
+          delectus harum culpa consequuntur facere, */}
+          {text}
           <div className="message-item__date">12:37</div>
         </div>
       </div>

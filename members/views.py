@@ -42,6 +42,7 @@ def register_user(request):
         print('request POST')
         form = RegisterUserForm(request.POST)
         if form.is_valid():
+            print('FORM IS VALID')
             form.save()
             username = form.cleaned_data['username']
             password = form.cleaned_data['password1']

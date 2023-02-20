@@ -9,17 +9,11 @@ import { blockHeightCalc } from "./utils";
 export default function App() {
   return (
     <div className="wrapper">
-      {/* <Header /> */}
-      <div
-        className="content"
-        // style={{ marginTop: `${blockHeightCalc("nav")}px` }}
-      >
+      <div className="content">
         <Routes>
-          {/* <Route path="*" element={<Home items={pizzas}/>}/> */}
-          {/* <Route path="*" element={<Home items={this.props.items} />} /> */}
           <Route path="/" element={<Home />} />
-          {/* <Route path="/my_messages" element={<Chat />} /> */}
-          <Route path="/my_messages/*" element={<Chat />} />
+          <Route path="/my_messages" element={<Chat />} />
+          <Route path="/my_messages/:roomName" element={<Chat />} />
         </Routes>
       </div>
     </div>

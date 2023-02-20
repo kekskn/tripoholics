@@ -9,4 +9,4 @@ class MessagesSerializer(serializers.ModelSerializer):
 class UsersSerializer(serializers.ModelSerializer):
     class Meta:
         model = Users
-        fields = ('UserId', 'UserName', 'Message', 'DateOfRegistration', 'PhotoFileName')
+        fields = ('UserId', 'UserName', 'DateOfRegistration')

@@ -32,13 +32,14 @@
     "@types/prop-types": "^15.7.5",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.8",
+    "@types/react-router-dom": "^5.3.3",
     "ajv": "^8.11.0",
     "awesome-typescript-loader": "^5.2.1",
     "classnames": "^2.3.2",
     "date-fns": "^2.29.3",
     "emoji-mart": "^5.2.2",
     "emoji-picker-react": "^4.4.4",
-    "react-router-dom": "^6.4.3",
+    "react-router-dom": "^6.8.1",
     "ts-loader": "^9.4.1"
   }
 }

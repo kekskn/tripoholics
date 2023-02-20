@@ -72,7 +72,10 @@ export default function MessageInputBlock({ onChangeHeight }) {
         />
         <div className="message-input__right-btns">
           {/* {isWrittenMessage ? ( */}
-          <button className="message-input__btn send-btn">
+          <button
+            className="message-input__btn send-btn"
+            onClick={onSendMessage}
+          >
             <img src={sendIcon} alt="" />
           </button>
           {/* ) : (

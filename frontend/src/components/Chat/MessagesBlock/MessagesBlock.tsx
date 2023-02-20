@@ -15,7 +15,7 @@ const initialMessages = [
   // "И у меня",
   {
     message: "Привет!",
-    author: "serp",
+    author: "Serpuhovskiy",
   },
   {
     message: "Привет)",
@@ -23,7 +23,7 @@ const initialMessages = [
   },
   {
     message: "Как дела?",
-    author: "serp",
+    author: "Serpuhovskiy",
   },
   {
     message: "Отлично, а у тебя?",
@@ -31,7 +31,7 @@ const initialMessages = [
   },
   {
     message: "Привет!",
-    author: "serp",
+    author: "Serpuhovskiy",
   },
   {
     message: "Привет)",
@@ -39,7 +39,7 @@ const initialMessages = [
   },
   {
     message: "Как дела?",
-    author: "serp",
+    author: "Serpuhovskiy",
   },
   {
     message: "Отлично, а у тебя?",
@@ -47,7 +47,7 @@ const initialMessages = [
   },
   {
     message: "Как дела?",
-    author: "serp",
+    author: "Serpuhovskiy",
   },
   {
     message: "Отлично, а у тебя?",
@@ -55,7 +55,7 @@ const initialMessages = [
   },
   {
     message: "Привет!",
-    author: "serp",
+    author: "Serpuhovskiy",
   },
   {
     message: "Привет)",
@@ -63,7 +63,7 @@ const initialMessages = [
   },
   {
     message: "Как дела?",
-    author: "serp",
+    author: "Serpuhovskiy",
   },
   {
     message: "Отлично, а у тебя?",
@@ -71,7 +71,7 @@ const initialMessages = [
   },
   {
     message: "Как дела?",
-    author: "serp",
+    author: "Serpuhovskiy",
   },
   {
     message: "Отлично, а у тебя?",
@@ -79,7 +79,7 @@ const initialMessages = [
   },
   {
     message: "Привет!",
-    author: "serp",
+    author: "Serpuhovskiy",
   },
   {
     message: "Привет)",
@@ -87,7 +87,7 @@ const initialMessages = [
   },
   {
     message: "Как дела?",
-    author: "serp",
+    author: "Serpuhovskiy",
   },
   {
     message: "Отлично, а у тебя?",
