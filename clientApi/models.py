@@ -1,19 +1,29 @@
-from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
+from django.contrib import admin
 from django.db import models
+import uuid
 
-User = get_user_model()
+# User = get_user_model()
 # Create your models here.
 
-class Messages(models.Model):
-    author = models.ForeignKey(User, related_name='author_messages', on_delete=models.CASCADE)
-    MessageId = models.AutoField(primary_key=True)
-    MessageContent = models.CharField(max_length=500)
-    MessageName = models.CharField(max_length=50)
+class Dialog(models.Model):
+    test = models.CharField(max_length=20)
+    dialog_id = models.AutoField(primary_key=True)
+    first_user_id = models.ForeignKey(User, related_name='first_user', on_delete=models.CASCADE)
+    second_user_id = models.ForeignKey(User, related_name='second_user', on_delete=models.CASCADE)
 
-class Users(models.Model):
-    UserId = models.AutoField(primary_key=True)
-    UserName = models.CharField(max_length=500)
-    Message = models.CharField(max_length=50)
-    DateOfRegistration = models.DateField()
-    PhotoFileName = models.CharField(max_length=500)
+    def __str__(self):
+        return f'Author 1: {self.first_user_id.username}, Author 2: {self.second_user_id.username}'
 
+class Message(models.Model):
+    message_id = models.AutoField(primary_key=True)
+    author_id = models.ForeignKey(User, related_name='author_messages', on_delete=models.CASCADE)
+    dialog_id = models.ForeignKey(Dialog, on_delete=models.CASCADE)
+    message_content = models.CharField(max_length=500)
+
+    def __str__(self):
+        return f'{self.message_content}'
+
+
+class CurrentUser(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)

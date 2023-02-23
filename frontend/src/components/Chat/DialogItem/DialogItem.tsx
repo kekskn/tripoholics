@@ -1,19 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { formatDistance, subDays } from "date-fns";
 import ru from "date-fns/esm/locale/ru/index.js";
 
 import Avatar from "../Avatar/Avatar";
 import maxMessageLengthCalc from "../../../utils/maxMessageLengthCalc";
-// import maxMessageLengthCalc from "src/utils/maxMessageLengthCalc";
 
 import "./DialogItem.scss";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-export default function DialogItem({ date }) {
+export default function DialogItem({ date, roomName }) {
+  const [isActiveDialog, setIsActiveDialog] = useState(false);
+  let activeStyle = {
+    textDecoration: "none",
+  };
+  let notActiveStyle = {
+    textDecoration: "none",
+    color: "inherit",
+  };
   return (
-    <Link
-      to="/my_messages/zzz"
-      style={{ textDecoration: "none", color: "inherit" }}
+    <NavLink
+      to={`/my_messages/${roomName}/`}
+      className="dialog-item-link"
+      style={({ isActive }) => {
+        if (isActive) {
+          setIsActiveDialog(true);
+          return activeStyle;
+        } else {
+          setIsActiveDialog(false);
+          return notActiveStyle;
+        }
+      }}
     >
       <div className="dialog-item">
         <div className="dialog-item__avatar">
@@ -33,10 +49,12 @@ export default function DialogItem({ date }) {
             <div className="dialog-item__last-message">
               {maxMessageLengthCalc("Приветик, как дела? Я тут вспомнил...")}
             </div>
-            <div className="dialog-item__unread-messages">3</div>
+            {!isActiveDialog && (
+              <div className="dialog-item__unread-messages">3</div>
+            )}
           </div>
         </div>
       </div>
-    </Link>
+    </NavLink>
   );
 }

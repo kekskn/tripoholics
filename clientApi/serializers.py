@@ -1,12 +1,19 @@
 from rest_framework import serializers
-from clientApi.models import Messages, Users
+from django.contrib.auth.models import User
+from clientApi.models import Message, Dialog, CurrentUser
+
+
+class DialogsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Dialog
+        fields = ('test', 'dialog_id', 'first_user_id', 'second_user_id')
 
 class MessagesSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Messages
-        fields = ('MessageId', 'MessageContent', 'MessageName')
+        model = Message
+        fields = ('author_id', 'message_id', 'dialog_id', 'message_content')
 
-class UsersSerializer(serializers.ModelSerializer):
+class CurrentUserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Users
-        fields = ('UserId', 'UserName', 'DateOfRegistration')
+        model = User
+        fields = ('id', 'first_name', 'last_name')

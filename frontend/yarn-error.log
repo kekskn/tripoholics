@@ -1,5 +1,5 @@
 Arguments: 
-  /Users/serpuhovskiy/.nvm/versions/node/v16.14.2/bin/node /Users/serpuhovskiy/.nvm/versions/node/v16.14.2/bin/yarn remove awesome-typescript-loader
+  /Users/serpuhovskiy/.nvm/versions/node/v16.14.2/bin/node /Users/serpuhovskiy/.nvm/versions/node/v16.14.2/bin/yarn add axios
 
 PATH: 
   /Users/serpuhovskiy/.nvm/versions/node/v16.14.2/bin:/Library/Frameworks/Python.framework/Versions/3.11/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/serpuhovskiy/.nvm/versions/node/v16.14.2/bin
@@ -53,6 +53,7 @@ npm manifest:
       "@types/react-dom": "^18.0.8",
       "@types/react-router-dom": "^5.3.3",
       "ajv": "^8.11.0",
+      "awesome-typescript-loader": "^5.2.1",
       "classnames": "^2.3.2",
       "date-fns": "^2.29.3",
       "emoji-mart": "^5.2.2",

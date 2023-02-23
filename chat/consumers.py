@@ -30,6 +30,7 @@ class ChatConsumer(WebsocketConsumer):
 
     # Receive message from WebSocket
     def receive(self, text_data):
+        print('receiveee: ', text_data)
         text_data_json = json.loads(text_data)
         message = text_data_json["message"]
         author = text_data_json["author"]
@@ -43,6 +44,7 @@ class ChatConsumer(WebsocketConsumer):
 
     # Receive message from room group
     def chat_message(self, event):
+        print('EVENTT: ', event)
         message = event["message"]
         author = event["author"]
 
