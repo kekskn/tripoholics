@@ -204,7 +204,7 @@
       position: relative; }
       .chat__dialogs-search-input-wrapper::before {
         content: "";
-        background-image: url(d1bba74ccb37ad405794.svg);
+        background-image: url(66833716b76294eb33ca.svg);
         width: 18px;
         height: 18px;
         position: absolute;
@@ -354,7 +354,7 @@
       position: relative; }
       .message-item.my .message-item__main-block::before {
         content: "";
-        background-image: url(459cc9716e247e42e2cc.svg);
+        background-image: url(98494df1311cea02ab8f.svg);
         background-repeat: no-repeat;
         background-size: cover;
         width: 14px;
@@ -366,7 +366,7 @@
       margin-right: 14px; }
   .message-item.my.read .message-item__main-block::before {
     content: "";
-    background-image: url(182d11f3ceed8e6de4e4.svg);
+    background-image: url(6cbc5664f015f0d77517.svg);
     background-repeat: no-repeat;
     background-size: cover;
     width: 20px;

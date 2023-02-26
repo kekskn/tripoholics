@@ -24,10 +24,10 @@
                         <p class="text-secondary">Crna Gora</p>
                     </div>
                     <div class="col-sm-3">
-                        <h3>85 CITIES</h3>
+                        <h3>{{ cities_count }} CITIES</h3>
                     </div>
                     <div class="col-sm-3">
-                        <h3>20 COUNTRIES</h3>
+                        <h3>{{ countries_count }} COUNTRIES</h3>
                     </div>
                     <div class="col-sm-3">
                         <p>ADD PLACES</p>
@@ -39,8 +39,18 @@
 
             </div>
         </div>
+
+        <!-- PROBA -->
+
+
+
+
+        <!-- KRAJ PROBE -->
+
         <h2 class="h5 text-center">MY NEXT TRIPS</h2>
+        {% for obj in objs %}
         <div class="col-12 col-sm-6 col-xl-4 mb-4">
+
             <div class="card border-light shadow-lg" style="background-color: #d44a56">
                 <div class="card-body">
                     <div class="row d-block d-xl-flex align-items-center">
@@ -48,68 +58,27 @@
                             <div class="icon icon-shape icon-md icon-shape-blue rounded mr-4 mr-sm-0"><span class="fas fa-chart-line"></span></div>
                         </div>
                         <div class="col-12 col-xl-7 px-xl-0">
+
                             <div class="d-none d-sm-block">
-                                <h2 style="color: white" class="h5 text-uppercase">Moscow</h2>
+                                <h2 style="color: white" class="h5 text-uppercase">{{obj.to_where}}</h2>
                             </div>
-                            <small style="color: black">from: <span style="color: white;" class="icon icon-small"><span class="-fas fa-globeeurope"></span>Novi Sad</span></small>
+                            <small style="color: black">from: <span style="color: white;" class="icon icon-small"><span class="-fas fa-globeeurope"></span>{{obj.from_where}}</span></small>
                             <br>
-                            <small style="color: black">in period: <span style="color: white;" class="icon icon-small"><span class="-fas fa-globeeurope"></span>Feb 1 - Feb 14</span></small>
+                            <small style="color: black">on date: <span style="color: white;" class="icon icon-small"><span class="-fas fa-globeeurope"></span>{{obj.when_traveled}}</span></small>
                             <br>
-                            <small style="color: black">by: <span style="color: white;" class="icon icon-small"><span class="-fas fa-globeeurope"></span>Plane</span></small>
+                            <small style="color: black">by: <span style="color: white;" class="icon icon-small"><span class="-fas fa-globeeurope"></span>{{obj.transport_type}}</span></small>
                             <br>
-                            <small style="color: black">with: <span style="color: white;" class="icon icon-small"><span class="-fas fa-globeeurope"></span>Family</span></small>
+                            <small style="color: black">with: <span style="color: white;" class="icon icon-small"><span class="-fas fa-globeeurope"></span>{{obj.with_whom}}</span></small>
+
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
-        <div class="col-12 col-sm-6 col-xl-4 mb-4">
-            <div class="card border-light shadow-lg" style="background-color: #d44a56">
-                <div class="card-body">
-                    <div class="row d-block d-xl-flex align-items-center">
-                        <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-                            <div class="icon icon-shape icon-md icon-shape-blue rounded mr-4 mr-sm-0"><span class="fas fa-chart-line"></span></div>
-                        </div>
-                        <div class="col-12 col-xl-7 px-xl-0">
-                            <div class="d-none d-sm-block">
-                                <h2 style="color: white" class="h5 text-uppercase">Madrid</h2>
-                            </div>
-                            <small style="color: black">from: <span style="color: white;" class="icon icon-small"><span class="-fas fa-globeeurope"></span>Belgrade</span></small>
-                            <br>
-                            <small style="color: black">in period: <span style="color: white;" class="icon icon-small"><span class="-fas fa-globeeurope"></span>Mar 1 - Mar 9</span></small>
-                            <br>
-                            <small style="color: black">by: <span style="color: white;" class="icon icon-small"><span class="-fas fa-globeeurope"></span>Plane</span></small>
-                            <br>
-                            <small style="color: black">with: <span style="color: white;" class="icon icon-small"><span class="-fas fa-globeeurope"></span>Friends</span></small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-sm-6 col-xl-4 mb-4">
-            <div class="card border-light shadow-lg" style="background-color: #d44a56">
-                <div class="card-body">
-                    <div class="row d-block d-xl-flex align-items-center">
-                        <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-                            <div class="icon icon-shape icon-md icon-shape-blue rounded mr-4 mr-sm-0"><span class="fas fa-chart-line"></span></div>
-                        </div>
-                        <div class="col-12 col-xl-7 px-xl-0">
-                            <div class="d-none d-sm-block">
-                                <h2 style="color: white" class="h5 text-uppercase">Berlin</h2>
-                            </div>
-                            <small style="color: black">from: <span style="color: white;" class="icon icon-small"><span class="-fas fa-globeeurope"></span>Moscow</span></small>
-                            <br>
-                            <small style="color: black">in period: <span style="color: white;" class="icon icon-small"><span class="-fas fa-globeeurope"></span>Mar 9 - Mar 13</span></small>
-                            <br>
-                            <small style="color: black">by: <span style="color: white;" class="icon icon-small"><span class="-fas fa-globeeurope"></span>Plane</span></small>
-                            <br>
-                            <small style="color: black">with: <span style="color: white;" class="icon icon-small"><span class="-fas fa-globeeurope"></span>Friends</span></small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        {% endfor %}
+
+
     <div class="row">
         <div class="col-12 col-xl-8 mb-4">
             <div class="row">
@@ -479,6 +448,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
 

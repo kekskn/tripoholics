@@ -7,4 +7,6 @@ urlpatterns = [
     path('register_user', views.register_user, name="register"),
     path('myprofile', views.myprofile, name="myprofile"),
     path('add_travel_page', views.add_travel_page, name="add_travel_page"),
+    path('add_past_trip', views.add_past_trip, name="add_past_trip"),
+    path('add_next_trip', views.add_next_trip, name="add_next_trip"),
     ]
