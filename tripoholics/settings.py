@@ -120,7 +120,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'CLIENT': {
+<<<<<<< HEAD
             # "host": "mongodb+srv://Serpuhovskiy:CTHSQCEGTH2001@cluster0.66r0kvb.mongodb.net/?retryWrites=true&w=majority",
+=======
+>>>>>>> main
             "host": "mongodb+srv://Admin:CTHSQCEGTH20014sss@tripoholics.jmrqt1b.mongodb.net/?retryWrites=true&w=majority",
             "name": "TripoholicsDB",
             "authMechanism": "SCRAM-SHA-1" #For atlas cloud db

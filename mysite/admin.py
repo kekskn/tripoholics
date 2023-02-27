@@ -1,8 +1,9 @@
 from django.contrib import admin
-from .models import MyUser, AddTravel, MyProfile
+from .models import MyUser, AddPastTravel, AddFutureTravel, MyProfile
 
 
 admin.site.register(MyUser)
 admin.site.register(MyProfile)
-admin.site.register(AddTravel)
+admin.site.register(AddPastTravel)
+admin.site.register(AddFutureTravel)
 
