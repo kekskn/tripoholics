@@ -1,24 +1,42 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/store";
 import DialogItem from "../DialogItem/DialogItem";
 import DialogsSearch from "../DialogsSearch/DialogsSearch";
+import { Oval } from "react-loader-spinner";
+import ContentLoader from "react-content-loader";
 import "./DialogsList.scss";
+import renderSkeleton from "./helpers/renderSkeleton";
 
-export default function DialogsList({ roomName }) {
+export default function DialogsList() {
+  const user = useSelector((store: RootState) => store?.user);
+  const dialogs = useSelector((store: RootState) => store?.chat?.dialogs);
+  useEffect(() => {
+    console.log("dialogssssss: ", dialogs, user);
+  }, [dialogs, user]);
   return (
     <div className="chat__dialogs-list">
       <DialogsSearch />
       <div className="chat__dialogs-list-wrapper">
-        <DialogItem date={new Date(Date.now() - 500000)} roomName="q" />
-        <DialogItem date={new Date(Date.now() - 9000000)} roomName="w" />
-        <DialogItem date={new Date(Date.now() - 10000)} roomName="e" />
-        <DialogItem date={new Date(Date.now() - 10000)} roomName="r" />
-        <DialogItem date={new Date(Date.now() - 10000)} roomName="t" />
-        <DialogItem date={new Date(Date.now() - 10000)} roomName="y" />
-        <DialogItem date={new Date(Date.now() - 9000000)} roomName="u" />
-        {/* <DialogItem date={new Date(Date.now() - 10000)} />
-        <DialogItem date={new Date(Date.now() - 10000)} />
-        <DialogItem date={new Date(Date.now() - 10000)} />
-        <DialogItem date={new Date(Date.now() - 10000)} /> */}
+        {dialogs.length
+          ? dialogs.map((dialog) => {
+              // let companion;
+              // if (dialog.first_user_fio === `${user.name} ${user.surname}`) {
+              //   companion = dialog.second_user_fio;
+              // } else {
+              //   companion = dialog.first_user_fio;
+              // }
+              return (
+                <DialogItem
+                  key={dialog.dialog_id}
+                  date={new Date(Date.now() - 500000)}
+                  companion={dialog.interlocutor}
+                  roomName={dialog.dialog_id}
+                  dialogId={dialog.dialog_id}
+                />
+              );
+            })
+          : renderSkeleton()}
       </div>
     </div>
   );

@@ -15,6 +15,7 @@
       height: 100%;
       position: relative; }
   .chat__dialogs-list {
+    position: relative;
     max-width: 364px;
     width: 100%;
     background-color: #fff;
@@ -27,6 +28,7 @@
     /* Firefox */ }
     .chat__dialogs-list-wrapper {
       position: absolute;
+      width: 100%;
       max-height: 726px;
       height: 100%;
       overflow: auto;
@@ -108,9 +110,14 @@
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/components/Chat/Avatar/Avatar.scss ***!
   \*********************************************************************************************************************************/
 .avatar {
-  display: inline-block;
   position: relative;
-  height: 100%; }
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  color: white;
+  font-size: 18px; }
   .avatar:hover {
     cursor: pointer; }
   .avatar.online::before {
@@ -304,7 +311,8 @@
 .message-item {
   display: flex;
   align-items: end;
-  margin-top: 20px; }
+  margin-top: 7px;
+  margin-left: 55px; }
   .message-item__avatar {
     padding: 0 15px 0 0;
     display: flex;
@@ -350,7 +358,8 @@
     line-height: 20px; }
   .message-item.my {
     justify-content: end;
-    flex-direction: row-reverse; }
+    flex-direction: row-reverse;
+    margin-right: 55px; }
     .message-item.my .message-item__avatar {
       padding: 0 0 0 15px; }
     .message-item.my .message-item__main-block {
@@ -380,6 +389,14 @@
     position: absolute;
     right: 6px;
     bottom: 9px; }
+  .message-item.isWithAvatar {
+    margin-bottom: 20px;
+    margin-top: 0;
+    margin-left: 0; }
+    .message-item.isWithAvatar.my {
+      margin-right: 0; }
+  .message-item.first {
+    margin-top: 10px; }
 
 /*!***********************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/components/Chat/MessagesBlock/MessagesBlock.scss ***!
@@ -402,6 +419,113 @@
     font-weight: 300;
     margin-top: 15px;
     font-size: 20px; }
+
+/*!**********************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/components/Map/Map.scss ***!
+  \**********************************************************************************************************************/
+.map-container {
+  height: 400px; }
+
+.sidebar {
+  background-color: rgba(35, 55, 75, 0.9);
+  color: #fff;
+  padding: 6px 12px;
+  font-family: monospace;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 12px;
+  border-radius: 4px; }
+
+.marker {
+  width: 30px;
+  height: 30px;
+  background-color: red; }
+
+.mapbox__popup-wrapper {
+  max-width: 350px !important; }
+  .mapbox__popup-wrapper .mapboxgl-popup-content {
+    padding: 0;
+    box-shadow: none;
+    background-color: transparent; }
+
+/*!******************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/components/Map/Popup/Popup.scss ***!
+  \******************************************************************************************************************************/
+.map__popup-wrapper {
+  display: flex;
+  width: 350px;
+  height: 200px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  overflow: hidden; }
+
+.map__popup-left-block {
+  width: 90px;
+  height: 100%;
+  background-color: #ededec; }
+
+.map__popup-avatar {
+  margin-top: 22px; }
+
+.map__popup-right-block {
+  width: 100%;
+  background-color: white; }
+
+.map__popup-user {
+  margin-top: 22px;
+  background-color: #e13f3f;
+  padding: 10px;
+  max-height: 55px;
+  height: auto;
+  font-family: "Nunito";
+  font-style: normal;
+  color: white;
+  display: flex;
+  justify-content: space-between; }
+  .map__popup-user-fio {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 20px; }
+  .map__popup-user-nickname {
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 16px; }
+
+.map__popup-icon {
+  max-width: 35px; }
+
+.map__popup-descr {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; }
+  .map__popup-descr-item {
+    max-height: 25px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-family: "Nunito";
+    font-style: bold;
+    font-size: 18px;
+    color: black; }
+    .map__popup-descr-item img {
+      width: 25px; }
+
+.map__popup-btns {
+  display: flex;
+  justify-content: space-around; }
+
+.map__popup-btn {
+  font-family: "Nunito";
+  font-style: bold;
+  font-size: 18px;
+  outline: none;
+  background-color: white;
+  border: 1px solid #464646;
+  border-radius: 5px; }
 
 /*!****************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/styles/style.scss ***!
