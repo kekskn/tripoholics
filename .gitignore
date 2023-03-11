@@ -15,3 +15,6 @@ local_settings.py
 .sqlite3.swp
 db.sqlite3
 db.sqlite3-journal
+
+# JS bundles
+*.bundle.js
