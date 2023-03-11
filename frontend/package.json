@@ -29,6 +29,7 @@
   "dependencies": {
     "@emoji-mart/data": "^1.0.6",
     "@emoji-mart/react": "^1.0.1",
+    "@reduxjs/toolkit": "^1.9.3",
     "@types/prop-types": "^15.7.5",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.8",
@@ -40,7 +41,13 @@
     "date-fns": "^2.29.3",
     "emoji-mart": "^5.2.2",
     "emoji-picker-react": "^4.4.4",
+    "mapbox-gl": "^2.13.0",
+    "react-content-loader": "^6.2.0",
+    "react-loader-spinner": "^5.3.4",
+    "react-redux": "^8.0.5",
     "react-router-dom": "^6.8.1",
+    "redux": "^4.2.1",
+    "redux-saga": "^1.2.2",
     "ts-loader": "^9.4.1"
   }
 }

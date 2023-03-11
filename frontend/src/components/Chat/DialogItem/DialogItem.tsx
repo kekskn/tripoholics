@@ -8,7 +8,7 @@ import maxMessageLengthCalc from "../../../utils/maxMessageLengthCalc";
 import "./DialogItem.scss";
 import { NavLink } from "react-router-dom";
 
-export default function DialogItem({ date, roomName }) {
+export default function DialogItem({ date, roomName, companion, dialogId }) {
   const [isActiveDialog, setIsActiveDialog] = useState(false);
   let activeStyle = {
     textDecoration: "none",
@@ -17,9 +17,10 @@ export default function DialogItem({ date, roomName }) {
     textDecoration: "none",
     color: "inherit",
   };
+
   return (
     <NavLink
-      to={`/my_messages/${roomName}/`}
+      to={`/my_messages/${dialogId}`}
       className="dialog-item-link"
       style={({ isActive }) => {
         if (isActive) {
@@ -33,11 +34,11 @@ export default function DialogItem({ date, roomName }) {
     >
       <div className="dialog-item">
         <div className="dialog-item__avatar">
-          <Avatar height={48} width={48} isOnline />
+          <Avatar height={48} width={48} isOnline letter={companion[0]} />
         </div>
         <div className="dialog-item__info-wrapper">
           <div className="dialog-item__info">
-            <div className="dialog-item__fullname">Тест Тестов</div>
+            <div className="dialog-item__fullname">{companion}</div>
             <div className="dialog-item__date">
               {formatDistance(date, new Date(), {
                 addSuffix: true,
@@ -47,7 +48,7 @@ export default function DialogItem({ date, roomName }) {
           </div>
           <div className="dialog-item__messages">
             <div className="dialog-item__last-message">
-              {maxMessageLengthCalc("Приветик, как дела? Я тут вспомнил...")}
+              {maxMessageLengthCalc("Приветик, как дела? Я тут вспомнил")}
             </div>
             {!isActiveDialog && (
               <div className="dialog-item__unread-messages">3</div>
