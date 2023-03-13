@@ -1,0 +1,5 @@
+export const ON_LOAD = "ON_LOAD";
+export const SET_CLIENT_INFO = "SET_CLIENT_INFO";
+export const FETCH_MESSAGES = "FETCH_MESSAGES";
+export const SEND_NEW_MESSAGE = "SEND_NEW_MESSAGE";
+export const GET_CURRENT_DIALOG = "GET_CURRENT_DIALOG";

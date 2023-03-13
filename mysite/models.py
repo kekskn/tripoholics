@@ -6,6 +6,7 @@ from django.db.models.signals import post_save
 
 
 class MyUser(models.Model):
+    # user_id = models.AutoField(primary_key=True)
     first_name = models.CharField(max_length=25)
     last_name = models.CharField(max_length=25)
     email = models.EmailField('User Email')
