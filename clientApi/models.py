@@ -1,19 +1,47 @@
-from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User, AbstractUser
+from django.contrib import admin
 from django.db import models
+from django.utils import timezone
+from django.core.cache import cache
 
-User = get_user_model()
-# Create your models here.
+timezone.localtime(timezone.now())
 
-class Messages(models.Model):
-    author = models.ForeignKey(User, related_name='author_messages', on_delete=models.CASCADE)
-    MessageId = models.AutoField(primary_key=True)
-    MessageContent = models.CharField(max_length=500)
-    MessageName = models.CharField(max_length=50)
+class Dialog(models.Model):
+    dialog_id = models.AutoField(primary_key=True)
+    first_user_id = models.ForeignKey(User, related_name='first_user', on_delete=models.CASCADE)
+    second_user_id = models.ForeignKey(User, related_name='second_user', on_delete=models.CASCADE)
 
-class Users(models.Model):
-    UserId = models.AutoField(primary_key=True)
-    UserName = models.CharField(max_length=500)
-    Message = models.CharField(max_length=50)
-    DateOfRegistration = models.DateField()
-    PhotoFileName = models.CharField(max_length=500)
+    def first_user_fio(self):
+        self.first_user_fio = f'{self.first_user_id.first_name} {self.first_user_id.last_name}'
+        self.save()
+        return self.first_user_fio
 
+    def second_user_fio(self):
+        self.second_user_fio = f'{self.second_user_id.first_name} {self.second_user_id.last_name}'
+        self.save()
+        return self.second_user_fio
+
+    def __str__(self):
+        return f'Author 1: {self.first_user_id.username}, Author 2: {self.second_user_id.username}'
+
+class Message(models.Model):
+    message_id = models.AutoField(primary_key=True)
+    author_id = models.ForeignKey(User, related_name='author_messages', on_delete=models.CASCADE)
+    dialog_id = models.ForeignKey(Dialog, on_delete=models.CASCADE)
+    message_content = models.CharField(max_length=500)
+    sent_date = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f'{self.message_content}'
+
+
+class CurrentUser(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    def is_online(self):
+        last_seen = cache.get(f'last-seen-{self.user.id}')
+        if last_seen is not None and timezone.now() < last_seen + timezone.timedelta(seconds=300):
+            return True
+        return False
+
+    # street = models.CharField(max_length=500)

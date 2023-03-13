@@ -1,0 +1,95 @@
+// .popup {
+//   widows: 50px;
+//   height: 50px;
+//   background-color: red;
+// }
+
+.map__popup {
+  &-wrapper {
+    display: flex;
+    width: 350px;
+    height: 200px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+
+  &-left-block {
+    width: 90px;
+    height: 100%;
+    background-color: #ededec;
+  }
+
+  &-avatar {
+    margin-top: 22px;
+  }
+
+  &-right-block {
+    width: 100%;
+    background-color: white;
+  }
+
+  &-user {
+    margin-top: 22px;
+    background-color: #e13f3f;
+    padding: 10px;
+    max-height: 55px;
+    height: auto;
+    font-family: "Nunito";
+    font-style: normal;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+
+    &-fio {
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 20px;
+    }
+    &-nickname {
+      font-weight: 300;
+      font-size: 12px;
+      line-height: 16px;
+    }
+  }
+  &-icon {
+    max-width: 35px;
+  }
+
+  &-descr {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &-item {
+      max-height: 25px;
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      font-family: "Nunito";
+      font-style: bold;
+      font-size: 18px;
+      color: black;
+
+      & img {
+        width: 25px;
+      }
+    }
+  }
+
+  &-btns {
+    display: flex;
+    justify-content: space-around;
+  }
+  &-btn {
+    font-family: "Nunito";
+    font-style: bold;
+    font-size: 18px;
+    outline: none;
+    background-color: white;
+    border: 1px solid rgb(70, 70, 70);
+    border-radius: 5px;
+  }
+}

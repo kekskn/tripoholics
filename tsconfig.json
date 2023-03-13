@@ -7,7 +7,7 @@
     "jsx": "react",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "baseUrl": "frontend"
+    "baseUrl": "frontend/"
   },
   "include": ["./frontend/"]
 }
