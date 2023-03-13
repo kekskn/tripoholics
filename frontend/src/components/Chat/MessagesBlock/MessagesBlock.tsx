@@ -12,15 +12,18 @@ import renderMessagesSkeleton from "./helpers/renderMessagesSkeleton";
 import {
   // fetchMessages,
   getCurrentDialog,
+  getCurrentEmptyDialog,
   sendNewMessage,
   setCurrentDialog,
+  setRealDialogFromEmptyDialog,
 } from "src/redux/actions";
 import { sendMessage } from "src/api";
 import { useNavigate } from "react-router-dom";
 import ContentLoader from "react-content-loader";
 import { usePosition } from "src/components/hooks/usePosition";
+import EmptyChat from "./EmptyChat/EmptyChat";
 
-export default function MessagesBlock({ dialogId }) {
+export default function MessagesBlock({ dialogId, isNewDialog }) {
   const [inputBlockHeight, setInputBlockHeight] = useState("");
   const [messages, setMessages] = useState([]);
   const messagesBlockRef = useRef<any>();
@@ -31,7 +34,8 @@ export default function MessagesBlock({ dialogId }) {
   );
 
   useEffect(() => {
-    setMessages(currentDialog.messages);
+    console.log("currentDialog", currentDialog);
+    if (currentDialog.messages) setMessages(currentDialog.messages);
   }, [currentDialog.messages]);
 
   const dispatch = useDispatch();
@@ -42,68 +46,71 @@ export default function MessagesBlock({ dialogId }) {
   };
 
   useEffect(() => {
-    // const roomName = JSON.parse(
-    //   document.getElementById("room-name").textContent
-    // );
+    if (user.id && currentDialog.companion_id) {
+      document.getElementById("room-name").textContent = dialogId;
 
-    // const dialog = new URLSearchParams(window.location.search).get("dialog");
+      const chatSocket = new WebSocket(
+        "ws://" + window.location.host + "/ws/my_messages/" + dialogId + "/"
+      );
 
-    // const url = window.location.href;
-    // const dialog = url.split("/").reverse()[0];
+      chatSocket.onmessage = function (e) {
+        const data = JSON.parse(e.data);
+        console.log("data from socket", data);
+        setMessages((oldArray) => [
+          ...oldArray,
+          {
+            message_content: data.message_content,
+            author_id: data.author_id,
+            sent_date: data.sent_date,
+          },
+        ]);
+        console.log("NEW MESSAGE: ", data.message);
+      };
 
-    document.getElementById("room-name").textContent = dialogId;
+      chatSocket.onclose = function (e) {
+        console.error("Chat socket closed unexpectedly");
+      };
 
-    const chatSocket = new WebSocket(
-      "ws://" + window.location.host + "/ws/my_messages/" + dialogId + "/"
-    );
+      document
+        // .querySelector(".message-input__btn.send-btn")
+        .addEventListener("onSendMessage", async () => {
+          console.log("clicked send");
+          const currentUser = document
+            .querySelector("#user-name")
+            .innerHTML.replace(/[\"]/g, "");
+          const messageInputDom = document.querySelector(
+            ".message-input"
+          ) as HTMLInputElement;
+          const message = messageInputDom.value;
 
-    chatSocket.onmessage = function (e) {
-      const data = JSON.parse(e.data);
-      console.log("data from socket", data);
-      setMessages((oldArray) => [
-        ...oldArray,
-        {
-          message_content: data.message_content,
-          author_id: data.author_id,
-          sent_date: data.sent_date,
-        },
-      ]);
-      console.log("NEW MESSAGE: ", data.message);
-    };
-
-    chatSocket.onclose = function (e) {
-      console.error("Chat socket closed unexpectedly");
-    };
-
-    document
-      // .querySelector(".message-input__btn.send-btn")
-      .addEventListener("onSendMessage", async () => {
-        console.log("clicked send");
-        const currentUser = document
-          .querySelector("#user-name")
-          .innerHTML.replace(/[\"]/g, "");
-        const messageInputDom = document.querySelector(
-          ".message-input"
-        ) as HTMLInputElement;
-        const message = messageInputDom.value;
-
-        const body = {
-          message_content: message,
-          author_id: user.id,
-          dialog_id: dialogId,
-        };
-        // dispatch(sendNewMessage(body));
-        const { success } = await sendMessage(body);
-        console.log("success?", success);
-        if (success)
-          chatSocket.send(
-            JSON.stringify({
-              message_content: message,
-              author_id: user.id,
+          const body = {
+            message_content: message,
+            author_id: user.id,
+            dialog_id: dialogId,
+            is_new_dialog: true,
+            interlocutor_id: currentDialog.companion_id,
+          };
+          // dispatch(sendNewMessage(body));
+          const { success, new_dialog_id } = await sendMessage(body);
+          console.log("from API: ", success, new_dialog_id);
+          dispatch(
+            setRealDialogFromEmptyDialog({
+              old_dialog_id: Number(dialogId),
+              new_dialog_id,
             })
           );
-      });
-  }, [dialogId]);
+          navigate(`/my_messages/${new_dialog_id}`);
+          console.log("success?", success);
+          if (success)
+            chatSocket.send(
+              JSON.stringify({
+                message_content: message,
+                author_id: user.id,
+              })
+            );
+        });
+    }
+  }, [dialogId, user.id, currentDialog.companion_id]);
 
   useEffect(() => {
     if (messagesBlockRef.current) {
@@ -114,33 +121,21 @@ export default function MessagesBlock({ dialogId }) {
     }
   }, [messages]);
 
-  // useEffect(() => {
-  //   const url = window.location.href;
-  //   let dialog;
-
-  //   if (url[url.length - 1] === "/") dialog = url.split("/").reverse()[1];
-  //   else dialog = url.split("/").reverse()[0];
-
-  //   console.log("DIALOGGG: ", dialog);
-  //   if (!currentDialog.companion) dispatch(setCurrentDialogById(dialog));
-  // }, []);
-
-  // useEffect(() => {
-  //   navigate('/my_messages')
-  // }, [])
-
   useEffect(() => {
     console.log("messagesBlock");
-    dispatch(getCurrentDialog(dialogId));
+    if (dialogId && !isNewDialog) dispatch(getCurrentDialog(dialogId));
+    if (isNewDialog) dispatch(getCurrentEmptyDialog(dialogId));
     // dispatch(setCurrentDialogById(dialogId));
     // dispatch(fetchMessages(dialogId));
-  }, [dialogId]);
+  }, [dialogId, isNewDialog]);
 
   const position = usePosition();
 
   console.log("POSITION", position);
 
   function renderMessages() {
+    if (messages && messages.length === 0) return <EmptyChat isNewDialog />;
+    // console.log
     return (messages || []).map((item, index) => {
       const isMy = item.author_id === user.id;
       // const isWithAvatar = (i >0) ? messages[i-1].author_id

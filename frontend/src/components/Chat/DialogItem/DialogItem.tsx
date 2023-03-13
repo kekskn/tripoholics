@@ -8,7 +8,13 @@ import maxMessageLengthCalc from "../../../utils/maxMessageLengthCalc";
 import "./DialogItem.scss";
 import { NavLink } from "react-router-dom";
 
-export default function DialogItem({ date, roomName, companion, dialogId }) {
+export default function DialogItem({
+  date,
+  roomName,
+  companion,
+  dialogId,
+  isEmptyDialog,
+}) {
   const [isActiveDialog, setIsActiveDialog] = useState(false);
   let activeStyle = {
     textDecoration: "none",
@@ -20,7 +26,7 @@ export default function DialogItem({ date, roomName, companion, dialogId }) {
 
   return (
     <NavLink
-      to={`/my_messages/${dialogId}`}
+      to={`/my_messages/${isEmptyDialog ? `new_dialog/${dialogId}` : dialogId}`}
       className="dialog-item-link"
       style={({ isActive }) => {
         if (isActive) {
