@@ -57,19 +57,7 @@ def register_user(request):
 
     return render(request, 'authenticate/register.html', {'form': form})
 
-def myprofile(request):
 
-    countries_count = AddPastTravel.objects.all().count()
-    cities_count = AddPastTravel.objects.all().count()
-
-    data = {"countries_count": countries_count,
-            "cities_count": cities_count}
-    p = AddFutureTravel.objects.all()
-    data["objs"] = p
-
-
-
-    return render(request, 'authenticate/myprofile.html', data)
 
 def add_travel_page(request, *args, **kwargs):
     return render(request, 'authenticate/add_travel_page.html')
@@ -116,3 +104,20 @@ def add_past_trip(request):
         form = AddPastTravelForm()
     return render(request, 'authenticate/add_past_trip.html', {'form': form})
 
+def myprofile(request):
+
+    countries_count = AddPastTravel.objects.all().count()
+    cities_count = AddPastTravel.objects.all().count()
+    countries_names = AddPastTravel.objects.all()
+    countries_percent = round((countries_count/195)*100, 1)
+    stroke_percent = 505-505*countries_percent/100
+    data = {"countries_count": countries_count,
+            "cities_count": cities_count,
+            "countries_percent": countries_percent,
+            "stroke_percent": stroke_percent,
+            "countries_names": countries_names}
+    p = AddFutureTravel.objects.all()
+    data["objs"] = p
+
+
+    return render(request, 'authenticate/myprofile.html', data)
