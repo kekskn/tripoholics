@@ -10,7 +10,7 @@ import EmptyChat from "./MessagesBlock/EmptyChat/EmptyChat";
 import { onLoad, setUserInfo } from "../../redux/actions";
 
 export default function Chat() {
-  const { dialogId } = useParams();
+  const { dialogId, newDialogId } = useParams();
   // const [messages, setMessages] = useState([]);
   // const dispatch = useDispatch();
   // console.log("roomName: ", roomName);
@@ -24,11 +24,18 @@ export default function Chat() {
   //     });
   // }
 
-  console.log("dialogID: ", dialogId);
+  console.log("dialogID: ", dialogId, newDialogId);
   return (
     <div className="chat">
       <DialogsList />
-      {dialogId ? <MessagesBlock dialogId={dialogId} /> : <EmptyChat />}
+      {dialogId || newDialogId ? (
+        <MessagesBlock
+          dialogId={dialogId ? dialogId : newDialogId}
+          isNewDialog={!!newDialogId}
+        />
+      ) : (
+        <EmptyChat isNewDialog={false} />
+      )}
     </div>
   );
 }

@@ -24,6 +24,17 @@ class Dialog(models.Model):
     def __str__(self):
         return f'Author 1: {self.first_user_id.username}, Author 2: {self.second_user_id.username}'
 
+class EmptyDialog(models.Model):
+    dialog_id = models.AutoField(primary_key=True)
+    author_id = models.ForeignKey(User, related_name='author', on_delete=models.CASCADE)
+    interlocutor_id = models.ForeignKey(User, related_name='interlocutor', on_delete=models.CASCADE)
+    
+    def author(self):
+        return f'{self.author_id.first_name} {self.author_id.last_name}'
+
+    def interlocutor(self):
+        return f'{self.interlocutor_id.first_name} {self.interlocutor_id.last_name}'
+
 class Message(models.Model):
     message_id = models.AutoField(primary_key=True)
     author_id = models.ForeignKey(User, related_name='author_messages', on_delete=models.CASCADE)
@@ -43,5 +54,3 @@ class CurrentUser(models.Model):
         if last_seen is not None and timezone.now() < last_seen + timezone.timedelta(seconds=300):
             return True
         return False
-
-    # street = models.CharField(max_length=500)

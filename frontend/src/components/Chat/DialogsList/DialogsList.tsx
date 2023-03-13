@@ -1,31 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import DialogItem from "../DialogItem/DialogItem";
 import DialogsSearch from "../DialogsSearch/DialogsSearch";
-import { Oval } from "react-loader-spinner";
-import ContentLoader from "react-content-loader";
 import "./DialogsList.scss";
 import renderSkeleton from "./helpers/renderSkeleton";
 
 export default function DialogsList() {
   const user = useSelector((store: RootState) => store?.user);
   const dialogs = useSelector((store: RootState) => store?.chat?.dialogs);
-  useEffect(() => {
-    console.log("dialogssssss: ", dialogs, user);
-  }, [dialogs, user]);
+  const [value, setValue] = useState("");
+
+  const filteredDialogs = dialogs.filter((dialog) =>
+    dialog.interlocutor.toLowerCase().includes(value.toLowerCase())
+  );
+
   return (
     <div className="chat__dialogs-list">
-      <DialogsSearch />
+      <DialogsSearch setValue={setValue} />
       <div className="chat__dialogs-list-wrapper">
         {dialogs.length
-          ? dialogs.map((dialog) => {
-              // let companion;
-              // if (dialog.first_user_fio === `${user.name} ${user.surname}`) {
-              //   companion = dialog.second_user_fio;
-              // } else {
-              //   companion = dialog.first_user_fio;
-              // }
+          ? filteredDialogs.map((dialog) => {
               return (
                 <DialogItem
                   key={dialog.dialog_id}
@@ -33,6 +28,7 @@ export default function DialogsList() {
                   companion={dialog.interlocutor}
                   roomName={dialog.dialog_id}
                   dialogId={dialog.dialog_id}
+                  isEmptyDialog={dialog.isEmptyDialog}
                 />
               );
             })
