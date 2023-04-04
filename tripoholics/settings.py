@@ -53,7 +53,9 @@ INSTALLED_APPS = [
     'fontawesome_5',
     'fontawesomefree',
     'django_google_maps',
-    'utils', # utils for local dev (clearCache)
+    'utils',  # utils for local dev (clearCache)
+    'chartjs',
+    # 'cities',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -124,10 +126,12 @@ DATABASES = {
             # "host": "mongodb+srv://Serpuhovskiy:CTHSQCEGTH2001@cluster0.66r0kvb.mongodb.net/?retryWrites=true&w=majority",
             "host": "mongodb+srv://Admin:CTHSQCEGTH20014sss@tripoholics.jmrqt1b.mongodb.net/?retryWrites=true&w=majority",
             "name": "TripoholicsDB",
-            "authMechanism": "SCRAM-SHA-1" #For atlas cloud db
+            "authMechanism": "SCRAM-SHA-1"  # For atlas cloud db
         },
     }
 }
+
+# GDAL_LIBRARY_PATH = r'C:\OSGeo4W\bin\gdal306.dll'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
