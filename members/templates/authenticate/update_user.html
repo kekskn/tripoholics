@@ -16,10 +16,13 @@
     {% endif %}
 
     <div class="container">
-        <h1>Register</h1>
-
-        <form action="{% url 'register' %}" method="POST" enctype="multipart/form-data">
-            {% csrf_token %} {{ user_form.as_p }} </br> {{ profile_form.as_p }}
+        <h1>Update your profile here!</h1>
+        <br/>
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ user_form.as_p }}
+            <br/>
+            {{ profile_form.as_p }}
 
             <input type="submit" value="Submit" class="btn btn-danger"/>
         </form>
