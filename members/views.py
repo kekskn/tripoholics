@@ -13,6 +13,8 @@ from django.views.generic import View
 from mysite.models import AddFutureTravel, AddPastTravel, MyProfile, Follow
 from django.db.models import Sum, Count, Q, Avg
 
+from mysite.models import MyProfile
+
 
 def my_messages(request, *args, **kwargs):
     return render(request, 'messages.html')
@@ -67,7 +69,6 @@ def register_user(request):
         profile_form = ProfilePicForm()
 
     return render(request, 'authenticate/register.html', {'user_form': user_form, 'profile_form': profile_form})
-
 
 @login_required
 def update_user(request):

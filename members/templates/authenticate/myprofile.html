@@ -1,639 +1,39 @@
 {% extends "frontend/base.html" %} {% load static %} {% block content %}
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <script src="{% static 'script.js' %}"></script>
-
-    <div id="map"></div>
-    <script>
-        mapboxgl.accessToken = 'pk.eyJ1Ijoia2Vrc2tuIiwiYSI6ImNsYmo5M3o0czEwdWIzcHEzOG1oZTZ4enUifQ.fxi2SRHRvtqBeUyPlEjc4A';
-        var map = new mapboxgl.Map({
-            container: 'map',
-            style: 'mapbox://styles/mapbox/streets-v11'
-        });
-
-    </script>
-
-
-    <div class="row justify-content-md-center">
-        <div class="col-12 mb-4">
-            <div class="card bg-yellow-alt shadow-sm">
-                <div class="row card-header d-flex flex-row align-items-center flex-0 justify-content-center">
-                    <div class='d-block col-sm-3 media-body align-items-center'>
-                        {% if profile.profile_image %}
-                            <img src='{{ profile.profile_image.url }}' alt='Profile Picture' class='avatar'>
-                        {% else %}
-                            <img src='{% static "../media/profile_pics/default-profile-photo.jpg" %}'
-                                 alt='Default Profile Picture' class='avatar'>
-                        {% endif %}
-                        <b class='account-heading text-center'>{{ user.last_name }} <br>{{ user.first_name }}</b>
-                        <p class='text-secondary'>{{ profile.country }}</p>
-                    </div>
-                    <div class="cities col-sm-3">
-                        <svg fill="#2596be" width="80px" height="80px" version="1.1" id="Capa_1"
-                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                             viewBox="0 0 511 511" xml:space="preserve">
-
-                            <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-
-                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-
-                            <g id="SVGRepo_iconCarrier"> <g> <path
-                                    d="M511,247.5c0-0.583-0.073-1.147-0.199-1.691c-2.394-64.611-28.67-125.009-74.635-170.975C387.908,26.577,323.747,0,255.5,0 S123.092,26.577,74.834,74.834C26.577,123.092,0,187.253,0,255.5s26.577,132.408,74.834,180.666 C123.092,484.423,187.253,511,255.5,511s132.408-26.577,180.666-74.834C484.423,387.908,511,323.747,511,255.5 c0-2.293-0.035-4.58-0.095-6.863C510.961,248.265,511,247.887,511,247.5z M85.441,85.441C130.865,40.016,191.26,15,255.5,15 s124.635,25.016,170.059,70.441c41.751,41.751,66.244,96.152,69.935,154.559H471v-0.5c0-4.142-3.358-7.5-7.5-7.5H439v-16.5 c0-4.142-3.358-7.5-7.5-7.5H415v-16.5c0-4.142-3.358-7.5-7.5-7.5s-7.5,3.358-7.5,7.5V208h-0.5c-4.142,0-7.5,3.358-7.5,7.5v0.5h-9 v-80.5c0-4.142-3.358-7.5-7.5-7.5h-32c-4.142,0-7.5,3.358-7.5,7.5V208h-9v-16.5c0-4.142-3.358-7.5-7.5-7.5H295v-48.5 c0-2.634-1.382-5.076-3.641-6.431l-40-24c-2.318-1.39-5.203-1.426-7.554-0.095S240,108.798,240,111.5V152h-17V95.651 c0-0.008,0-0.016,0-0.024V63.5c0-4.142-3.358-7.5-7.5-7.5s-7.5,3.358-7.5,7.5v26.922l-35.286,14.114 c-2.847,1.139-4.714,3.896-4.714,6.963V192h-17v-16.5c0-4.142-3.358-7.5-7.5-7.5h-32c-4.142,0-7.5,3.358-7.5,7.5v26.922l-17,6.8 V191.5c0-4.142-3.358-7.5-7.5-7.5s-7.5,3.358-7.5,7.5v23.722l-3.286,1.314C65.867,217.675,64,220.433,64,223.5v8.5H39.5 c-4.142,0-7.5,3.358-7.5,7.5v8.5H15.128C16.997,186.571,41.789,129.093,85.441,85.441z M496,255.5 c0,10.965-0.746,21.814-2.181,32.5H471v-33h24.994C495.994,255.167,496,255.333,496,255.5z M439,288v-41h17v41H439z M383,288v-57h9 v57H383z M327,288v-24.5V223h9v65H327z M279,288v-10.146l33-5.5V288H279z M255.5,448c-4.142,0-7.5,3.358-7.5,7.5v40.373 c-30.169-0.918-59.381-7.37-86.474-18.868L255.5,310.742l93.974,166.262c-27.093,11.498-56.305,17.95-86.474,18.868V455.5 C263,451.358,259.642,448,255.5,448z M183,288V116.578l25-10V288H183z M151,288v-32.5V207h17v81H151z M103,288v-25h33v25H103z M79,288v-59.422l25-10V248h-8.5c-4.142,0-7.5,3.358-7.5,7.5V288H79z M47,288v-41h17v41H47z M17.181,288 c-1.107-8.243-1.798-16.583-2.054-25H32v25H17.181z M136,248h-17v-40.349c0-0.008,0-0.016,0-0.024V183h17V248z M223,167h17v121h-17 V167z M255.637,288c-0.004,0-0.008,0-0.011,0h-0.251c-0.004,0-0.008,0-0.011,0H255V124.747l25,15V262.48l-9.733,1.622 c-3.617,0.603-6.267,3.731-6.267,7.398V288H255.637z M312,257.146l-17,2.833V199h17V257.146z M351,143h17v145h-17V143z M407,223h17 v65h-17V223z M19.664,303H175.5h40h27.146L147.86,470.698c-22.799-11.431-43.859-26.58-62.419-45.139 C51.425,391.544,28.856,349.133,19.664,303z M425.559,425.559c-18.559,18.56-39.62,33.708-62.419,45.139L268.354,303H343.5h32h24 h32h59.836C482.144,349.133,459.575,391.544,425.559,425.559z"/>
-                                <path d="M263,407.5c0-4.142-3.358-7.5-7.5-7.5s-7.5,3.358-7.5,7.5v24c0,4.142,3.358,7.5,7.5,7.5s7.5-3.358,7.5-7.5V407.5z"/>
-                                <path d="M255.5,391c4.142,0,7.5-3.358,7.5-7.5v-8c0-4.142-3.358-7.5-7.5-7.5s-7.5,3.358-7.5,7.5v8 C248,387.642,251.358,391,255.5,391z"/>
-                                <path d="M255.5,359c1.97,0,3.91-0.8,5.3-2.2c1.4-1.39,2.2-3.33,2.2-5.3c0-1.97-0.8-3.91-2.2-5.3c-1.39-1.4-3.32-2.2-5.3-2.2 s-3.91,0.8-5.3,2.2c-1.4,1.39-2.2,3.33-2.2,5.3c0,1.97,0.8,3.91,2.2,5.3C251.59,358.2,253.53,359,255.5,359z"/> </g> </g>
-
-                        </svg>
-                        <div class="cities-text">
-                            <h3 class="cities-text-h3">{{ cities_count }}</h3>
-                            <h3 style="display: block;">CITIES</h3>
-                        </div>
-                    </div>
-                    <div class="cities col-sm-3">
-                        <svg width="80px" height="80px" viewBox="0 0 64 64" version="1.1"
-                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                             xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" fill="#2596be">
-
-                            <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-
-                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-
-                            <g id="SVGRepo_iconCarrier"><title>Globe</title>
-                                <desc>Created with Sketch.</desc>
-                                <defs></defs>
-                                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"
-                                   sketch:type="MSPage">
-                                    <g id="Globe" sketch:type="MSLayerGroup" transform="translate(1.000000, 1.000000)"
-                                       stroke="#2596be" stroke-width="2">
-                                        <circle id="Oval" sketch:type="MSShapeGroup" cx="31" cy="31" r="31"></circle>
-                                        <path d="M31.9,0.2 C31.9,0.2 30,2 29,3 C28,4 26,4 27,5 C28,6 28,7 28,7 L27,8 C27,8 27,9 25,10 C23,11 23,10 22,11 C21,12 21,12 20,12 C19,12 19,13 18,13 C17,13 18,9 18,9 L20,8 L22,7 C22,7 23,5 22,5 L21,5 C21,5 21,4 20,3 L19,2"
-                                              id="Shape" sketch:type="MSShapeGroup"></path>
-                                        <path d="M10.5,7.9 L12,14 L11,16 C11,16 9,16 9,18 C9,20 8,18 9,20 C10,22 9,23 9,23 L9,24 L9,26 L6,26 C6,26 6,26 5,26 C4,26 4,26 3,27 C2,28 2,28 2,29 L2,30 L1,32 L0,33"
-                                              id="Shape" sketch:type="MSShapeGroup"></path>
-                                        <path d="M0.5,36.4 C1.5,37.4 2.5,37.4 2.5,37.4 C2.5,37.4 7,36 8,37 C9,38 9,40 9,40 L9,41 C9,41 11,44 12,44 L13,44 C13,44 14,45 15,45 C16,45 17,46 17,46 C17,46 18,49 17,49 C16,49 16,50 16,50 C16,50 16,54 18,55 C20,56 22,57 23,58 C24,59 25,58 25,59 C25,60 27,62 31,62"
-                                              id="Shape" sketch:type="MSShapeGroup"></path>
-                                        <path d="M62,34 C62,34 59,31 59,32 C59,33 58,34 58,36 C58,38 57,41 57,41 L55,39 L56,34 L53,31 L51,31 C51,31 52,33 52,34 L52,38 C52,38 50,42 50,43 C50,44 49,43 48,45 C47,47 46,47 45,49 C44,51 42,52 41,54 C40,56 39,55 39,54 C39,53 37,51 38,50 C39,49 38,48 39,47 C40,46 41,46 40,45 C39,44 38,44 38,43 L38,39 C38,39 36,36 35,37 L33,39 L29,36 L31,31 L30,27 C30,27 33,24 33,23 C33,22 34,21 34,21 L33,17 C33,17 32,16 34,17 C36,18 37,20 37,20 L40,19 C40,19 40,19 40,18 C40,17 41,15 42,15 L44,15 L48,11 C48,11 44,10 44,9 C44,8 44,7 45,6 C46,5 48,5 48,5"
-                                              id="Shape" sketch:type="MSShapeGroup"></path>
-                                    </g>
-                                </g>
-                            </g>
-
-                        </svg>
-                        <div class="cities-text">
-                            <h3 class="cities-text-h3">{{ countries_count }}</h3>
-                            <h3 style="display: block;">COUNTRIES</h3>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        {% if profiles %}
-                            {% for profile in profiles %}
-                                {{ profile.user.username }}
-                            {% endfor %}
-                        {% endif %}
-                        <div class="buttons">
-                            <a href="{% url 'update_user' %}" class="btn btn-outline-secondary">Update Profile</a>
-                            <a href="{% url 'user_list' %}" class="btn btn-outline-secondary">List of users</a>
-                            <a href="{% url 'my_friends' %}" class="btn btn-outline-secondary">My friends</a>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- NEXT TRIPS -->
-
-    <h2 class="h5 text-center">MY NEXT TRIPS</h2>
-    <div class="row justify-content-center">
-        {% for obj in objs %}
-            <div class="col-12 col-sm-6 col-xl-4 mb-4">
-                <div class="card border-light shadow-lg my-card d-flex flex-column justify-content-center align-items-center">
-                    <div class="card-body">
-                        <h2 class="h5 text-uppercase my-title">{{ obj.to_where.name }}</h2>
-                        <p class="my-info"><span class="my-label">from:</span> <span
-                                class="my-value text-left">{{ obj.from_where.name }}</span></p>
-                        <p class="my-info"><span class="my-label">on date:</span> <span
-                                class="my-value">{{ obj.when_traveled }}</span></p>
-                        <p class="my-info"><span class="my-label">by:</span> <span
-                                class="my-value">{{ obj.transport_type }}</span></p>
-                        <p class="my-info"><span class="my-label">with:</span> <span
-                                class="my-value">{{ obj.with_whom }}</span></p>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-
-
-    <!-- PERCENTAGE AND TRIPS-->
-    {% if not countries_names %}
-        <div class="add-travel-container">
-            <p>Add your first trip to see your calculated data here</p>
-            <button class="add-travel-btn">Add Travel</button>
-        </div>
-    {% else %}
-        <div class="row">
-            <div class="col-6 mb-4">
-                <div class="card border-light shadow-sm">
-                    <div class="card-header">
-                        <div class="row align-items-left">
-                            <div class="container1">
-                                <div class="progress-bar">
-                                    <svg>
-                                        <circle cx="90" cy="90" r="90"></circle>
-                                        <div class="text">
-                                            <div id="num-html">{{ countries_percent }}%</div>
-                                            <span>of world explored</span>
-                                        </div>
-                                    </svg>
-                                </div>
-                                <div class="text-description">
-                                    <p>{{ user.first_name }} has been to:
-                                        <small>
-                                            {% for to_where in countries_names %}
-                                                {{ to_where.name }}{% if not forloop.last %}, {% endif %}
-                                            {% endfor %}
-                                        </small>
-                                        out of 195 countries</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 mb-4">
-                <div class="card border-light shadow-sm">
-                    <div class="card-header">
-                        <div class="row align-items-right">
-                            <div class="container2">
-                                <div class="number-trip">
-                                    <svg width="80px" height="80px" viewBox="0 0 64 64"
-                                         xmlns="http://www.w3.org/2000/svg"
-                                         xmlns:xlink="http://www.w3.org/1999/xlink"
-                                         aria-hidden="true" role="img"
-                                         class="iconify iconify--emojione-monotone"
-                                         preserveAspectRatio="xMidYMid meet" fill="#2596be"
-                                         stroke="#2596be" stroke-width="1.28">
-                                        <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
-                                           stroke-linejoin="round"/>
-                                        <g id="SVGRepo_iconCarrier">
-                                            <path d="M32 2C15.432 2 2 15.432 2 32s13.432 30 30 30s30-13.432 30-30S48.568 2 32 2M18 16.723L22.619 15H26v14h-3.945V17.908H22l-3.33 1.271l-.67-2.456M23.207 49c-1.832 0-3.377-.459-4.207-.959l.676-2.375c.586.291 1.941.832 3.291.832c1.719 0 2.592-.789 2.592-1.811c0-1.334-1.395-1.939-2.855-1.939h-1.35v-2.271h1.287c1.109-.02 2.523-.414 2.523-1.561c0-.813-.695-1.416-2.09-1.416c-1.154 0-2.375.479-2.963.813l-.674-2.293c.85-.52 2.549-1.02 4.377-1.02c3.027 0 4.707 1.521 4.707 3.373c0 1.439-.85 2.564-2.594 3.148v.039c1.702.294 3.073 1.522 3.073 3.294C29 47.248 26.801 49 23.207 49M35.5 27.053l1.824-1.611c3.08-2.689 4.578-4.236 4.619-5.846c0-1.123-.693-2.014-2.32-2.014c-1.215 0-2.277.594-3.018 1.146l-.93-2.309c1.063-.785 2.711-1.42 4.619-1.42c3.189 0 4.947 1.82 4.947 4.32c0 2.309-1.715 4.152-3.754 5.932l-1.301 1.057v.043H45.5V29h-10v-1.947M46 45.662h-1.832V49h-3.393v-3.338H34v-2.133L39.789 35h4.379v8.205H46v2.457"
-                                                  fill="#f7f7f7"/>
-                                            <path d="M39.389 40.107l-2.047 3.057v.041h3.434v-3.098c0-.844.047-1.703.117-2.609h-.092c-.494.906-.895 1.725-1.412 2.609"
-                                                  fill="#f7f7f7"/>
-                                        </g>
-                                    </svg>
-                                    <div class="row text-num">
-                                        <span>number of trips</span>
-                                        <div id="num-html">{{ trip_count }}</div>
-                                    </div>
-                                </div>
-                                <div class="time-trip">
-                                    <svg width="85px" height="85px" viewBox="0 0 24 24"
-                                         fill="none" xmlns="http://www.w3.org/2000/svg"
-                                         stroke="#2596be">
-                                        <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
-                                           stroke-linejoin="round"/>
-                                        <g id="SVGRepo_iconCarrier">
-                                            <path d="M16 15.2V16.8875L16.9 17.9M15 2.5V6.5M9 2.5V6.5M9 11.5H3.51733M3.51733 11.5C3.50563 11.8208 3.5 12.154 3.5 12.5C3.5 17.4094 4.64094 19.7517 8 20.6041M3.51733 11.5C3.7256 5.79277 5.84596 4 12 4C17.3679 4 19.6668 5.36399 20.3048 9.5M20.5 17C20.5 19.4853 18.4853 21.5 16 21.5C13.5147 21.5 11.5 19.4853 11.5 17C11.5 14.5147 13.5147 12.5 16 12.5C18.4853 12.5 20.5 14.5147 20.5 17Z"
-                                                  stroke="#2596be" stroke-width="0.6"
-                                                  stroke-linecap="round"
-                                                  stroke-linejoin="round"/>
-                                        </g>
-                                    </svg>
-                                    <div class="text-trips">
-                                        <span>total time on travel</span>
-                                        <div class="days-html">{{ days_total }}
-                                            <span>days</span></div>
-                                        <div class="days2-html">   {{ months_on_travel }}
-                                            <span>months</span>
-                                            {{ weeks_on_travel }}
-                                            <span>weeks</span> {{ days_on_travel }}
-                                            <span>days</span></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- TRANSPORT PREFERENCE-->
-
-
-        <div class="chartCard">
-            <div class="chartBox">
-                <canvas id="myChart"></canvas>
-            </div>
-            <div class="chartBox">
-                <canvas id="myChart1"></canvas>
-            </div>
-        </div>
-
-        <!-- trip duration -->
-
-        <div class="col-12 mb-6">
-            <div class="card ">
-                <div class="row align-items-right">
-                    <div class="container3">
-                        <div class="duration-trip">
-                            <svg width="85px" height="85px" viewBox="0 0 24 24"
-                                 fill="none" xmlns="http://www.w3.org/2000/svg"
-                                 stroke="#2596be">
-                                <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
-                                   stroke-linejoin="round"/>
-                                <g id="SVGRepo_iconCarrier">
-                                    <path d="M16 15.2V16.8875L16.9 17.9M15 2.5V6.5M9 2.5V6.5M9 11.5H3.51733M3.51733 11.5C3.50563 11.8208 3.5 12.154 3.5 12.5C3.5 17.4094 4.64094 19.7517 8 20.6041M3.51733 11.5C3.7256 5.79277 5.84596 4 12 4C17.3679 4 19.6668 5.36399 20.3048 9.5M20.5 17C20.5 19.4853 18.4853 21.5 16 21.5C13.5147 21.5 11.5 19.4853 11.5 17C11.5 14.5147 13.5147 12.5 16 12.5C18.4853 12.5 20.5 14.5147 20.5 17Z"
-                                          stroke="#2596be" stroke-width="0.6"
-                                          stroke-linecap="round"
-                                          stroke-linejoin="round"/>
-                                </g>
-                            </svg>
-                            <div class="text-duration">
-                                <span>average trip duration</span>
-                                <div class="days-html">{{ rounded_average }}
-                                    <span>days</span></div>
-                            </div>
-                        </div>
-                        <div class="reason-trip">
-                            <div class="text-reason">
-                                <span>Top 3 reasons for travel</span>
-                                <div class="reason-html">
-                                    {% for reason in top_reasons %}
-                                        <p style="color: #d44a56;font-weight: 1000 ;font-size: {{ reason.size }};">
-                                            <i class="fas fa-circle"></i>
-                                            {{ reason.reason }}
-                                        </p>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-        </div>
-
-        <!-- ACCOMMODATION PREFERENCE -->
-
-        <div class="chartCard2">
-            <div class="chartBox2">
-                <canvas id="myChart2"></canvas>
-            </div>
-        </div>
-
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
-        <script>
-            // setup
-            const data = {
-                labels: ["Plane", "Train", "Bus", "Car", "Bike", "Hitchhike", "Ship", "Other"],
-                datasets: [{
-                    label: 'Transport preferences',
-                    data: [{% for transport in transport_list %} '{{ transport }}', {% endfor %}],
-                    backgroundColor: [
-                        '#3cd4cc',
-                        '#d44a56',
-                        '#83c34c',
-                        '#2596be',
-                        '#e07474',
-                        '#feec1e',
-                        '#4ac1f7',
-                        '#3D264B'
-                    ],
-                    borderWidth: 0.5
-                }]
-            };
-
-            // config
-            const config = {
-                    type: 'pie',
-                    data,
-                    options: {
-                        plugins: {
-                            legend: {
-                                position: 'right'
-                            },
-                            title: {
-                                display: true,
-                                text: 'TRANSPORTATION PREFERENCE',
-                                color: 'white',
-                                align: 'start',
-                                padding: 10,
-                                font: {
-                                    weight: 'bold',
-                                    size: 16
-                                }
-                            }
-                        },
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                    }
-                }
-            ;
-
-            // render init block
-            const myChart = new Chart(
-                document.getElementById('myChart'),
-                config
-            );
-
-            //doughnut chart
-            // setup
-            const data1 = {
-                labels: ["Alone", "Couple", "With friend", "Group of friends", "Family", "Colleagues (work/college/school)"],
-                datasets: [{
-                    label: 'Travelled with..',
-                    data: [{% for travelled in travel_list %} '{{ travelled }}', {% endfor %}],
-                    backgroundColor: [
-                        '#3cd4cc',
-                        '#d44a56',
-                        '#83c34c',
-                        '#2596be',
-                        '#e07474',
-                        '#feec1e',
-                        '#4ac1f7',
-                        '#3D264B'
-                    ],
-                    borderWidth: 0.5
-                }]
-            };
-
-            // config
-            const config1 = {
-                type: 'doughnut',
-                data: data1,
-                options: {
-                    plugins: {
-                        legend: {
-                            position: 'right'
-                        },
-                        title: {
-                            display: true,
-                            text: 'TRAVELED WITH...',
-                            color: 'white',
-                            align: 'start',
-                            padding: 10,
-                            font: {
-                                weight: 'bold',
-                                size: 16
-                            },
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            };
-
-            // render init block
-            const myChart1 = new Chart(
-                document.getElementById('myChart1'),
-                config1
-            );
-
-            //pie chart
-            // setup
-            const data2 = {
-                labels: ["Hotel", "Hostel", "Camping", "Apartments", "RV", "Friends/family", "Hospitality exchange services", "Other"],
-                datasets: [{
-                    label: 'ACCOMMODATION PREFERENCES',
-                    data: [
-                        {% for accommodation in accommodation_list %} '{{ accommodation }}', {% endfor %}],
-                    backgroundColor: [
-                        '#c42c44',
-                        '#b03a41',
-                        '#f45058',
-                        '#ad5056',
-                        '#E54951',
-                        '#ec848c',
-                        '#F48187',
-                        '#EFB2B6'
-
-                    ],
-                    borderWidth: 0.5
-                }]
-            };
-
-            // config
-            const config2 = {
-                type: 'bar',
-                data: data2,
-                options: {
-                    skipNull: true,
-                    indexAxis: 'y',
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        title: {
-                            display: true,
-                            text: 'ACCOMMODATION PREFERENCES',
-                            color: '#3d3d3d',
-                            align: 'center',
-                            padding: 10,
-                            font: {
-                                weight: 'bold',
-                                size: 16
-                            },
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            };
-
-            // render init block
-            const myChart2 = new Chart(
-                document.getElementById('myChart2'),
-                config2
-            );
-
-            // Instantly assign Chart.js version
-            const chartVersion = document.getElementById('chartVersion');
-            chartVersion.innerText = Chart.version;
-        </script>
-
-
-        <!-- average trip cost -->
-        <div class="col-12 mb-6">
-            <div class="card border-light shadow-sm">
-                <div class="card-header">
-                    <div class="container4">
-                        <div class="average-cost">
-                            <svg fill="#ffffff" width="70px" height="70px" viewBox="0 0 32 32"
-                                 xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
-
-                                <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-
-                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-
-                                <g id="SVGRepo_iconCarrier">
-                                    <path d="M31,7H1A1,1,0,0,0,0,8V24a1,1,0,0,0,1,1H31a1,1,0,0,0,1-1V8A1,1,0,0,0,31,7ZM25.09,23H6.91A6,6,0,0,0,2,18.09V13.91A6,6,0,0,0,6.91,9H25.09A6,6,0,0,0,30,13.91v4.18A6,6,0,0,0,25.09,23ZM30,11.86A4,4,0,0,1,27.14,9H30ZM4.86,9A4,4,0,0,1,2,11.86V9ZM2,20.14A4,4,0,0,1,4.86,23H2ZM27.14,23A4,4,0,0,1,30,20.14V23Z"/>
-                                    <path d="M7.51.71a1,1,0,0,0-.76-.1,1,1,0,0,0-.61.46l-2,3.43a1,1,0,0,0,1.74,1L7.38,2.94l5.07,2.93a1,1,0,0,0,1-1.74Z"/>
-                                    <path d="M24.49,31.29a1,1,0,0,0,.5.14.78.78,0,0,0,.26,0,1,1,0,0,0,.61-.46l2-3.43a1,1,0,1,0-1.74-1l-1.48,2.56-5.07-2.93a1,1,0,0,0-1,1.74Z"/>
-                                    <path d="M16,10a6,6,0,1,0,6,6A6,6,0,0,0,16,10Zm0,10a4,4,0,1,1,4-4A4,4,0,0,1,16,20Z"/>
-                                </g>
-
-                            </svg>
-                            <div class="text-avg-cost">
-                                <span>average trip cost</span>
-                                <div class="num-avg">{{ rounded_avg_cost }}€
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-    {% endif %}
 
     <style>
         .body {
             justify-content: center;
             align-items: center;
-
-            display: flex;
-            min-height: 100vh;
         }
 
-        #map {
-            width: 100%;
-            height: 300px;
-        }
-
-        .cities {
-            display: flex;
-            align-items: center;
-        }
-
-        .cities-text {
-            display: flex;
-            flex-direction: column;
+        .red-bar {
             justify-content: center;
-            margin-left: 10px;
         }
 
-        .cities-text-h3 {
-            position: relative;
-            color: #d44a56;
-            font-size: 2.5rem;
-            font-weight: 1000;
-            line-height: 1;
-        }
-
-        .account-heading {
-            font-size: 18px;
-            color: #e02c3c;
-            text-transform: uppercase;
-            font-family: Verdana;
-        }
-
-        .my-card {
-            background-color: #d44a56;
-        }
-
-        .my-title {
-            color: white;
-            text-align: center;
-        }
-
-        .my-info {
-            color: black;
-            margin-bottom: 0.5rem;
-            text-align: left;
-        }
-
-        .my-label {
-            color: black;
-            display: inline-block;
-            width: 5rem;
-            text-align: right;
-        }
-
-        .my-value {
-            color: white;
-            text-align: left;
-        }
-
-        .my-value.text-left {
-            text-align: left;
-        }
-
-        /* Use responsive display classes to hide and show elements */
-        @media (max-width: 576px) {
-            .my-label {
-                display: none;
-            }
-        }
-
-        @media (min-width: 577px) {
-            .my-info {
-                font-size: 0.9rem;
-            }
-        }
-
-        .container1 {
-            position: relative;
-            display: block;
+        .container {
+            display: inline;
             justify-content: left;
-            height: 40vh;
-        }
-
-        .container2 {
-            position: relative;
-            display: grid;
-            justify-content: left;
-            height: 40vh;
-        }
-
-        .text-description {
-            color: #d44a56;
-            font-weight: bold;
-            text-align: start;
-            position: relative;
-        }
-
-        .text-description small {
-            color: black;
-            text-align: start;
-            font-weight: normal;
-            position: relative;
+            align-items: flex-start;
         }
 
         .progress-bar {
+            align-content: center;
             position: relative;
-            width: 250px;
+            border-radius: 10px;
+            width: 240px;
             height: 280px;
-            float: left;
+
         }
 
         .progress-bar svg {
-            position: relative;
-            width: 250px;
-            height: 250px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
-        .progress-bar svg circle {
+        .progress-bar circle {
             fill: #2596be;
             stroke-width: 18px;
             stroke: #d44a56;
@@ -641,8 +41,6 @@
             stroke-dashoffset: 0;
             stroke-linecap: round;
             animation: fillin 2s linear forwards;
-            display: block;
-            transform: translate(35px, 35px);
         }
 
         @keyframes fillin {
@@ -652,255 +50,638 @@
         }
 
         .text {
-            position: absolute;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            height: 30vh;
             flex-direction: column;
+            position: absolute;
             color: #d44a56;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             font-size: 2.5rem;
             font-weight: 500;
             line-height: 1;
-            width: 100%;
-            height: 100%;
         }
 
         .text span {
-            position: relative;
             font-size: 1rem;
             font-weight: 500;
             color: #1b1b1b;
         }
 
         .text-num {
-            position: relative;
+            position: absolute;
             color: #d44a56;
             font-size: 2.5rem;
-            font-weight: 1000;
+            font-weight: 500;
             line-height: 1;
             text-align: start;
-            float: right;
-            left: 0.2em;
         }
 
         .text-num span {
             font-size: 1rem;
             font-weight: 500;
             color: #1b1b1b;
-            text-transform: uppercase;
-            text-align: start;
+
         }
 
         .text-trips {
-            position: relative;
+            position: absolute;
+            left: 60px;
+            color: #d44a56;
+            font-size: 2.5rem;
+            font-weight: 500;
+            line-height: 1;
             text-align: start;
-            float: right;
         }
 
         .text-trips span {
             font-size: 1rem;
             font-weight: 500;
             color: #1b1b1b;
-            text-transform: uppercase;
+
         }
 
-        .days-html {
+        .text-description {
             color: #d44a56;
-            font-size: 2.5rem;
-            font-weight: 1000;
-        }
-
-        .days2-html {
-            color: #d44a56;
-            font-size: 1rem;
-            font-weight: 900;
-            display: inline;
-        }
-
-        .days2-html span {
-            font-size: 0.8rem;
-        }
-
-        .time-trip {
+            font-weight: bold;
+            text-align: end;
             position: relative;
-            float: left;
+            top: 0;
         }
-
-        .number-trip {
-            position: relative;
-            float: left;
-        }
-
-        .chartCard {
-            width: 100vw;
-            height: calc(70vh - 30px);
-            background: #3d3d3d;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .chartCard2 {
-            width: 100vw;
-            height: calc(70vh - 30px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .chartBox {
-            width: 400px;
-            padding: 20px;
-        }
-
-        .chartBox2 {
-            width: 800px;
-            padding: 20px;
-        }
-
-
-        .container3 {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #3d3d3d;
-        }
-
-        .duration-trip {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 10em;
-        }
-
-        .text-duration {
-            position: relative;
-            text-align: start;
-            float: right;
-        }
-
-        .text-duration span {
-            font-size: 1rem;
-            font-weight: 500;
-            color: white;
-            text-transform: uppercase;
-        }
-
-        .reason-trip {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-left: 40px;
-        }
-
-        .text-reason {
-            position: relative;
-            text-align: start;
-            margin-left: 20px;
-        }
-
-        .text-reason span {
-            font-size: 1rem;
-            font-weight: 500;
-            color: white;
-            text-transform: uppercase;
-        }
-
-        .reason-html p {
-            margin-top: 0;
-            margin-bottom: 5px;
-        }
-
-        .reason-html i {
-            margin-right: 10px;
-            vertical-align: middle;
-            color: #d44a56;
-            font-size: 1.5rem;
-        }
-
-
-        .container4 {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 15em;
-            background-image: url("https://images.unsplash.com/photo-1502920514313-52581002a659?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1167&q=80");
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-
-        .container4::before {
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(212, 74, 86, 0.9);
-        }
-
-        .average-cost {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .text-avg-cost {
-            position: relative;
-            text-align: start;
-            float: right;
-        }
-
-        .text-avg-cost span {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #3d3d3d;
-            text-transform: uppercase;
-        }
-
-        .num-avg {
-            color: white;
-            font-size: 2.5rem;
-            font-weight: 1000;
-        }
-
-        .avatar {
-            width: 80px; /* set the width to a fixed value */
-            height: 80px; /* set the height to a fixed value */
-            object-fit: cover; /* crop the image to fit the size */
-            border-radius: 50%; /* make the image rounded */
-        }
-
-        .buttons a {
-            display: block;
-            margin-bottom: 10px;
-            width: 150px;
-        }
-
-        .add-travel-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 200px;
-            background-color: #f5f5f5;
-            border-radius: 8px;
-            padding: 16px;
-        }
-
-        .add-travel-btn {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            padding: 8px 16px;
-            margin-top: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .add-travel-btn:hover {
-            background-color: #0062cc;
-        }
-
 
     </style>
+
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'script.js' %}"></script>
+
+    <div id="map" style="width: 100%; height: 420px"></div>
+
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1Ijoia2Vrc2tuIiwiYSI6ImNsYmo5M3o0czEwdWIzcHEzOG1oZTZ4enUifQ.fxi2SRHRvtqBeUyPlEjc4A';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11'
+        });
+    </script>
+
+    <div id="map" style="width: 100%; height: 300px"></div>
+
+    <div class="row justify-content-md-center">
+        <div class="col-12 mb-4">
+            <div class="card bg-yellow-alt shadow-sm">
+                <div
+                        class="row card-header d-flex flex-row align-items-center flex-0 justify-content-center">
+                    <div class="d-block col-sm-3 media-body align-items-center">
+                        <img
+                                src="{{ user.myprofile.image.url }}"
+                                class="avatar rounded-circle shadow mb-4"
+                                style="width: 100px"/>
+                        <br/>
+                        <b
+                                class="account-heading text-center"
+                                style="
+              font-size: 18px;
+              color: #e02c3c;
+              text-transform: uppercase;
+              font-family: Verdana;"
+                        >{{ user.last_name }} <br/>{{ user.first_name }}</b>
+                        <p class="text-secondary">Crna Gora</p>
+                    </div>
+                    <div class="col-sm-3">
+                        <h3>{{ cities_count }} CITIES</h3>
+                    </div>
+                    <div class="col-sm-3">
+                        <h3>{{ countries_count }} COUNTRIES</h3>
+                    </div>
+                    <div class="col-sm-3">
+                        <p>ADD PLACES</p>
+                        <p>FRIENDS</p>
+                        <p>MY TRIPS</p>
+                        <p>PASSPORT</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEXT TRIPS -->
+
+                    <h2 class="h5 text-center">MY NEXT TRIPS</h2>
+                    {% for obj in objs %}
+                        <div class="col-12 col-sm-6 col-xl-4 mb-4">
+                            <div class="card border-light shadow-lg" style="background-color: #d44a56">
+                                <div class="card-body">
+                                    <div class="row d-block d-xl-flex align-items-center">
+                                        <div
+                                                class="col-12 col-xl-5 text-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center"
+                                        >
+                                            <div
+                                                    class="icon icon-shape icon-md icon-shape-blue rounded mr-4 mr-sm-0"
+                                            >
+                                                <span class="fas fa-chart-line"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-xl-7 px-xl-0">
+                                            <div class="d-none d-sm-block">
+                                                <h2 style="color: white" class="h5 text-uppercase">
+                                                    {{ obj.to_where }}
+                                                </h2>
+                                            </div>
+                                            <small style="color: black"
+                                            >from:
+                                                <span style="color: white" class="icon icon-small"
+                                                ><span class="-fas fa-globeeurope"></span
+                                                >{{ obj.from_where }}</span
+                                                ></small
+                                            >
+                                            <br/>
+                                            <small style="color: black"
+                                            >on date:
+                                                <span style="color: white" class="icon icon-small"
+                                                ><span class="-fas fa-globeeurope"></span
+                                                >{{ obj.when_traveled }}</span
+                                                ></small
+                                            >
+                                            <br/>
+                                            <small style="color: black"
+                                            >by:
+                                                <span style="color: white" class="icon icon-small"
+                                                ><span class="-fas fa-globeeurope"></span
+                                                >{{ obj.transport_type }}</span
+                                                ></small
+                                            >
+                                            <br/>
+                                            <small style="color: black"
+                                            >with:
+                                                <span style="color: white" class="icon icon-small"
+                                                ><span class="-fas fa-globeeurope"></span
+                                                >{{ obj.with_whom }}</span
+                                                ></small
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    <div class="row">
+                        <div class="col-12 col-xl-8 mb-4">
+                            <div class="row">
+                                <div class="col-12 mb-4">
+
+                                    <div class="card bg-yellow-alt shadow-sm">
+
+                                        <div class="row card-header d-flex flex-row align-items-center flex-0 justify-content-center">
+                                            <div class="d-block col-sm-3 media-body align-items-center">
+                                                <img src="{{ user.myprofile.image.url }}"
+                                                     class="avatar rounded-circle shadow mb-4" style="width: 100px">
+                                                <br>
+                                                <b class="account-heading text-center"
+                                                   style="font-size: 18px ;color:#e02c3c;text-transform: uppercase; font-family: Verdana">{{ user.last_name }}
+                                                    <br>{{ user.first_name }}</b>
+                                                <p class="text-secondary">Crna Gora</p>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <h3>{{ cities_count }} CITIES</h3>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <h3>{{ countries_count }} COUNTRIES</h3>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <p>ADD PLACES</p>
+                                                <p>FRIENDS</p>
+                                                <p>MY TRIPS</p>
+                                                <p>PASSPORT</p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <!-- NEXT TRIPS -->
+
+                                <h2 class="h5 text-center">MY NEXT TRIPS</h2>
+                                {% for obj in objs %}
+                                    <div class="col-12 col-sm-6 col-xl-4 mb-4">
+
+                                    <div class="card border-light shadow-lg" style="background-color: #d44a56">
+                                    <div class="card-body">
+                                    <div class="row d-block d-xl-flex align-items-center">
+                                        <div class="col-12 col-xl-5 text-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                                            <div class="icon icon-shape icon-md icon-shape-blue rounded mr-4 mr-sm-0">
+                                                <span class="fas fa-chart-line"></span></div>
+                                        </div>
+                                        <div class="col-12 col-xl-7 px-xl-0">
+
+                                            <div class="d-none d-sm-block">
+                                                <h2 style="color: white"
+                                                    class="h5 text-uppercase">{{ obj.to_where }}</h2>
+                                            </div>
+                                            <small style="color: black">from: <span style="color: white;"
+                                                                                    class="icon icon-small"><span
+                                                    class="-fas fa-globeeurope"></span>{{ obj.from_where }}</span></small>
+                                            <br>
+                                            <small style="color: black">on date: <span style="color: white;"
+                                                                                       class="icon icon-small"><span
+                                                    class="-fas fa-globeeurope"></span>{{ obj.when_traveled }}</span></small>
+                                            <br>
+                                            <small style="color: black">by: <span style="color: white;"
+                                                                                  class="icon icon-small"><span
+                                                    class="-fas fa-globeeurope"></span>{{ obj.transport_type }}</span></small>
+                                            <br>
+                                            <small style="color: black">with: <span style="color: white;"
+                                                                                    class="icon icon-small"><span
+                                                    class="-fas fa-globeeurope"></span>{{ obj.with_whom }}</span></small>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="card border-light shadow-sm">
+                                        <div class="card-header">
+                                            <div class="row align-items-center">
+                                                <div class="col">
+                                                    <h2 class="h5">Page visits</h2>
+                                                </div>
+                                                <div class="col text-right">
+                                                    <a href="#" class="btn btn-sm btn-secondary">See all</a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                {% endfor %}
+
+
+                                <!-- PERCENTAGE AND TRIPS-->
+
+
+                                <div class="row">
+                                    <div class="col-6 mb-4">
+                                        <div class="card border-light shadow-sm">
+                                            <div class="card-header">
+                                                <div class="row align-items-left">
+                                                    <div class="col">
+                                                        <div class="container">
+                                                            <div class="progress-bar">
+                                                                <svg width="180px" height="280px">
+                                                                    <circle cx="90" cy="90" r="80"></circle>
+                                                                </svg>
+                                                                <div class="text">
+                                                                    <div id="num-html">{{ countries_percent }}%</div>
+                                                                    <span>of world explored</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="text-description">
+                                                    <p>{{ user.first_name }} has been to: {{ objs_2.to_where }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 mb-4">
+                                        <div class="card border-light shadow-sm">
+                                            <div class="card-header">
+                                                <div class="row align-items-right">
+                                                    <div class="col">
+                                                        <div class="container">
+                                                            <div class="number-trip">
+                                                                <svg width="80px" height="80px" viewBox="0 0 64 64"
+                                                                     xmlns="http://www.w3.org/2000/svg"
+                                                                     xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                     aria-hidden="true" role="img"
+                                                                     class="iconify iconify--emojione-monotone"
+                                                                     preserveAspectRatio="xMidYMid meet" fill="#2596be"
+                                                                     stroke="#2596be" stroke-width="1.28">
+                                                                    <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                                                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                                       stroke-linejoin="round"/>
+                                                                    <g id="SVGRepo_iconCarrier">
+                                                                        <path d="M32 2C15.432 2 2 15.432 2 32s13.432 30 30 30s30-13.432 30-30S48.568 2 32 2M18 16.723L22.619 15H26v14h-3.945V17.908H22l-3.33 1.271l-.67-2.456M23.207 49c-1.832 0-3.377-.459-4.207-.959l.676-2.375c.586.291 1.941.832 3.291.832c1.719 0 2.592-.789 2.592-1.811c0-1.334-1.395-1.939-2.855-1.939h-1.35v-2.271h1.287c1.109-.02 2.523-.414 2.523-1.561c0-.813-.695-1.416-2.09-1.416c-1.154 0-2.375.479-2.963.813l-.674-2.293c.85-.52 2.549-1.02 4.377-1.02c3.027 0 4.707 1.521 4.707 3.373c0 1.439-.85 2.564-2.594 3.148v.039c1.702.294 3.073 1.522 3.073 3.294C29 47.248 26.801 49 23.207 49M35.5 27.053l1.824-1.611c3.08-2.689 4.578-4.236 4.619-5.846c0-1.123-.693-2.014-2.32-2.014c-1.215 0-2.277.594-3.018 1.146l-.93-2.309c1.063-.785 2.711-1.42 4.619-1.42c3.189 0 4.947 1.82 4.947 4.32c0 2.309-1.715 4.152-3.754 5.932l-1.301 1.057v.043H45.5V29h-10v-1.947M46 45.662h-1.832V49h-3.393v-3.338H34v-2.133L39.789 35h4.379v8.205H46v2.457"
+                                                                              fill="#f7f7f7"/>
+                                                                        <path d="M39.389 40.107l-2.047 3.057v.041h3.434v-3.098c0-.844.047-1.703.117-2.609h-.092c-.494.906-.895 1.725-1.412 2.609"
+                                                                              fill="#f7f7f7"/>
+                                                                    </g>
+                                                                </svg>
+                                                                <div class="text-num">
+                                                                    <span>number of trips</span>
+                                                                    <div id="num-html">{{ countries_percent }}%</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="time-trip">
+                                                                <svg width="85px" height="85px" viewBox="0 0 24 24"
+                                                                     fill="none" xmlns="http://www.w3.org/2000/svg"
+                                                                     stroke="#2596be">
+                                                                    <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                                                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                                       stroke-linejoin="round"/>
+                                                                    <g id="SVGRepo_iconCarrier">
+                                                                        <path d="M16 15.2V16.8875L16.9 17.9M15 2.5V6.5M9 2.5V6.5M9 11.5H3.51733M3.51733 11.5C3.50563 11.8208 3.5 12.154 3.5 12.5C3.5 17.4094 4.64094 19.7517 8 20.6041M3.51733 11.5C3.7256 5.79277 5.84596 4 12 4C17.3679 4 19.6668 5.36399 20.3048 9.5M20.5 17C20.5 19.4853 18.4853 21.5 16 21.5C13.5147 21.5 11.5 19.4853 11.5 17C11.5 14.5147 13.5147 12.5 16 12.5C18.4853 12.5 20.5 14.5147 20.5 17Z"
+                                                                              stroke="#2596be" stroke-width="0.6"
+                                                                              stroke-linecap="round"
+                                                                              stroke-linejoin="round"/>
+                                                                    </g>
+                                                                </svg>
+                                                                <div class="text-trips">
+                                                                    <span>total time on travel</span>
+                                                                    <div id="num-html">{{ countries_percent }}%</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-6 mb-4">
+                                        <div class="card border-light shadow-sm">
+                                            <div class="card-header border-bottom border-light d-flex justify-content-between">
+                                                <h2 class="h5 mb-0">Team members</h2>
+                                                <a href="#" class="btn btn-sm btn-secondary">See all</a>
+                                            </div>
+                                            <div class="card-body">
+                                                <ul class="list-group list-group-flush list my--3">
+                                                    <li class="list-group-item px-0">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-auto">
+                                                                <!-- Avatar -->
+                                                                <a href="#" class="avatar">
+                                                                    <img class="rounded-circle" style="width: 10vh"
+                                                                         alt="Image placeholder"
+                                                                         src="{% static "photos/skec.png" %}">
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-auto ml--2">
+                                                                <h4 class="h6 mb-0">
+                                                                    <a href="#">Christopher Wood</a>
+                                                                </h4>
+                                                                <span class="text-success">●</span>
+                                                                <small>Online</small>
+                                                            </div>
+                                                            <div class="col text-right">
+                                                                <a href="#" class="btn btn-sm btn-tertiary"><i
+                                                                        class="fas fa-calendar-check mr-1"></i>
+                                                                    Invite</a>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-group-item px-0">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-auto">
+                                                                <!-- Avatar -->
+                                                                <a href="#" class="user-avatar">
+                                                                    <img class="rounded-circle" style="width: 10vh"
+                                                                         alt="Image placeholder"
+                                                                         src="{% static "photos/skec.png" %}">
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-auto ml--2">
+                                                                <h4 class="h6 mb-0">
+                                                                    <a href="#">Jose Leos</a>
+                                                                </h4>
+                                                                <span class="text-warning">●</span>
+                                                                <small>In a meeting</small>
+                                                            </div>
+                                                            <div class="col text-right">
+                                                                <a href="#" class="btn btn-sm btn-tertiary"><i
+                                                                        class="fas fa-comment mr-1"></i> Message</a>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-group-item px-0">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-auto">
+                                                                <!-- Avatar -->
+                                                                <a href="#" class="user-avatar">
+                                                                    <img class="rounded-circle" style="width: 10vh"
+                                                                         alt="Image placeholder"
+                                                                         src="{% static "photos/skec.png" %}">
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-auto ml--2">
+                                                                <h4 class="h6 mb-0">
+                                                                    <a href="#">Bonnie Green</a>
+                                                                </h4>
+                                                                <span class="text-danger">●</span>
+                                                                <small>Offline</small>
+                                                            </div>
+                                                            <div class="col text-right">
+                                                                <a href="#" class="btn btn-sm btn-tertiary"><i
+                                                                        class="fas fa-calendar-check mr-1"></i>
+                                                                    Invite</a>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-group-item px-0">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-auto">
+                                                                <!-- Avatar -->
+                                                                <a href="#" class="user-avatar">
+                                                                    <img class="rounded-circle" style="width: 10vh"
+                                                                         alt="Image placeholder"
+                                                                         src="{% static "photos/skec.png" %}">
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-auto ml--2">
+                                                                <h4 class="h6 mb-0">
+                                                                    <a href="#">Neil Sims</a>
+                                                                </h4>
+                                                                <span class="text-success">●</span>
+                                                                <small>Online</small>
+                                                            </div>
+                                                            <div class="col text-right">
+                                                                <a href="#" class="btn btn-sm btn-tertiary"><i
+                                                                        class="fas fa-comment mr-1"></i> Message</a>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-6 mb-4">
+                                        <div class="card border-light shadow-sm">
+                                            <div class="card-header border-bottom border-light">
+                                                <h2 class="h5 mb-0">Progress track</h2>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row align-items-center mb-4">
+                                                    <div class="col-auto">
+                                                        <span class="icon icon-md text-purple"><span
+                                                                class="fab fa-bootstrap"></span></span>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="progress-wrapper">
+                                                            <div class="progress-info">
+                                                                <div class="h6 mb-0">Rocket - SaaS Template</div>
+                                                                <div class="small font-weight-bold text-dark">
+                                                                    <span>34 %</span></div>
+                                                            </div>
+                                                            <div class="progress mb-0">
+                                                                <div class="progress-bar bg-purple" role="progressbar"
+                                                                     aria-valuenow="34" aria-valuemin="0"
+                                                                     aria-valuemax="100" style="width: 34%;"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row align-items-center mb-4">
+                                                    <div class="col-auto">
+                                                        <span class="icon icon-md text-danger"><span
+                                                                class="fab fa-angular"></span></span>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="progress-wrapper">
+                                                            <div class="progress-info">
+                                                                <div class="h6 mb-0">Pixel - Design System</div>
+                                                                <div class="small font-weight-bold text-dark">
+                                                                    <span>60 %</span></div>
+                                                            </div>
+                                                            <div class="progress mb-0">
+                                                                <div class="progress-bar bg-danger" role="progressbar"
+                                                                     aria-valuenow="60" aria-valuemin="0"
+                                                                     aria-valuemax="100" style="width: 60%;"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row align-items-center mb-4">
+                                                    <div class="col-auto">
+                                                        <span class="icon icon-md text-success"><span
+                                                                class="fab fa-vuejs"></span></span>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="progress-wrapper">
+                                                            <div class="progress-info">
+                                                                <div class="h6 mb-0">Spaces - Listings Template</div>
+                                                                <div class="small font-weight-bold text-dark">
+                                                                    <span>45 %</span></div>
+                                                            </div>
+                                                            <div class="progress mb-0">
+                                                                <div class="progress-bar bg-tertiary" role="progressbar"
+                                                                     aria-valuenow="45" aria-valuemin="0"
+                                                                     aria-valuemax="100" style="width: 45%;"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row align-items-center mb-4">
+                                                    <div class="col-auto">
+                                                        <span class="icon icon-md text-info"><span
+                                                                class="fab fa-react"></span></span>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="progress-wrapper">
+                                                            <div class="progress-info">
+                                                                <div class="h6 mb-0">Stellar - Dashboard</div>
+                                                                <div class="small font-weight-bold text-dark">
+                                                                    <span>35 %</span></div>
+                                                            </div>
+                                                            <div class="progress mb-0">
+                                                                <div class="progress-bar bg-info" role="progressbar"
+                                                                     aria-valuenow="35" aria-valuemin="0"
+                                                                     aria-valuemax="100" style="width: 35%;"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row align-items-center">
+                                                    <div class="col-auto">
+                                                        <span class="icon icon-md text-purple"><span
+                                                                class="fab fa-bootstrap"></span></span>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="progress-wrapper">
+                                                            <div class="progress-info">
+                                                                <div class="h6 mb-0">Volt - Dashboard</div>
+                                                                <div class="small font-weight-bold text-dark">
+                                                                    <span>34 %</span></div>
+                                                            </div>
+                                                            <div class="progress mb-0">
+                                                                <div class="progress-bar bg-purple" role="progressbar"
+                                                                     aria-valuenow="34" aria-valuemin="0"
+                                                                     aria-valuemax="100" style="width: 34%;"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="table-responsive">
+                                        <table class="table align-items-center table-flush">
+                                            <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col">Page name</th>
+                                                <th scope="col">Page Views</th>
+                                                <th scope="col">Page Value</th>
+                                                <th scope="col">Bounce rate</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <th scope="row">/demo/admin/index.html</th>
+                                                <td>3,225</td>
+                                                <td>$20</td>
+                                                <td>
+                                                    <span class="fas fa-arrow-up text-danger mr-3"></span>
+                                                    42,55%
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">/demo/admin/forms.html</th>
+                                                <td>2,987</td>
+                                                <td>0</td>
+                                                <td>
+                                                    <span class="fas fa-arrow-down text-success mr-3"></span>
+                                                    43,52%
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">/demo/admin/util.html</th>
+                                                <td>2,844</td>
+                                                <td>294</td>
+                                                <td>
+                                                    <span class="fas fa-arrow-down text-success mr-3"></span>
+                                                    32,35%
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">/demo/admin/validation.html</th>
+                                                <td>2,050</td>
+                                                <td>$147</td>
+                                                <td>
+                                                    <span class="fas fa-arrow-up text-danger mr-3"></span>
+                                                    50,87%
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">/demo/admin/modals.html</th>
+                                                <td>1,483</td>
+                                                <td>$19</td>
+                                                <td>
+                                                    <span class="fas fa-arrow-down text-success mr-3"></span>
+                                                    32,24%
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

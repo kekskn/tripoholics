@@ -29,6 +29,7 @@
   "dependencies": {
     "@emoji-mart/data": "^1.0.6",
     "@emoji-mart/react": "^1.0.1",
+    "@mapbox/mapbox-gl-language": "^1.0.1",
     "@reduxjs/toolkit": "^1.9.3",
     "@types/prop-types": "^15.7.5",
     "@types/react": "^18.0.25",
@@ -47,6 +48,8 @@
     "react-router-dom": "^6.8.1",
     "redux": "^4.2.1",
     "redux-saga": "^1.2.2",
-    "ts-loader": "^9.4.1"
+    "styled-components": "^5.3.8",
+    "ts-loader": "^9.4.1",
+    "visibilityjs": "^2.0.2"
   }
 }

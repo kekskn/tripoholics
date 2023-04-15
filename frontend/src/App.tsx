@@ -22,7 +22,10 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/my_messages" element={<Chat />} />
           <Route path="/my_messages/:dialogId" element={<Chat />} />
-          {/* <Route path="/members/myprofile" element={<Map />} /> */}
+          <Route
+            path="/my_messages/new_dialog/:newDialogId"
+            element={<Chat />}
+          />
         </Routes>
       </div>
     </div>

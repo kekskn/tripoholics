@@ -1,5 +1,5 @@
 .map-container {
-  height: 400px;
+  height: 420px;
 }
 
 .sidebar {
@@ -15,14 +15,9 @@
   border-radius: 4px;
 }
 
-.marker {
-  width: 30px;
-  height: 30px;
-  background-color: red;
-}
-
 .mapbox__popup-wrapper {
   max-width: 350px !important;
+  z-index: 99;
   .mapboxgl-popup-content {
     padding: 0;
     box-shadow: none;

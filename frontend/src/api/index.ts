@@ -27,6 +27,20 @@ export const getDialogById = async (dialogId) => {
   return await res.json();
 };
 
+export const postCreateNewDialog = async (body) => {
+  return await axios
+    .post(`http://127.0.0.1:8000/api/dialogs/`, body)
+    .then((res) => res.data)
+    .catch((err) => ({ err }));
+};
+
+export const getEmptyDialogById = async (dialogId) => {
+  const res = await fetch(
+    `http://localhost:8000/api/dialogs/?emptyDialog_id=${dialogId}`
+  );
+  return await res.json();
+};
+
 export const sendMessage = async (body) => {
   return await axios
     .post(`http://127.0.0.1:8000/api/messages/`, body)

@@ -3,7 +3,7 @@ import json
 from django.contrib.auth import get_user_model
 
 from asgiref.sync import async_to_sync
-from channels.generic.websocket import WebsocketConsumer
+from channels.generic.websocket import WebsocketConsumer, AsyncWebsocketConsumer
 
 from django.utils import timezone
 
@@ -55,3 +55,40 @@ class ChatConsumer(WebsocketConsumer):
 
         # Send message to WebSocket
         self.send(text_data=json.dumps({"message_content": message_content, "author_id": author_id, "sent_date": timezone.now().isoformat()}))
+
+
+
+class OnlineStatusConsumer(AsyncWebsocketConsumer):
+    async def connect(self):
+        user_id = self.scope['url_route']['kwargs']['user_id']
+        group_name = f'online_status_{user_id}'
+
+        await self.channel_layer.group_add(
+            group_name,
+            self.channel_name
+        )
+
+        await self.accept()
+
+    async def disconnect(self, close_code):
+        user_id = self.scope['url_route']['kwargs']['user_id']
+        group_name = f'online_status_{user_id}'
+
+        await self.channel_layer.group_discard(
+            group_name,
+            self.channel_name
+        )
+
+    async def status_update(self, event):
+        print('status_update: ', event)
+        user_id = event["user_id"]
+        is_online = event["is_online"]
+        last_online_at = event["last_online_at"]
+
+
+        # Send message to WebSocket
+        await self.send(text_data=json.dumps({
+            "user_id": user_id, 
+            "is_online": is_online,
+            'last_online_at': last_online_at
+        }))
