@@ -23,6 +23,9 @@ import ContentLoader from "react-content-loader";
 import { usePosition } from "src/components/hooks/usePosition";
 import EmptyChat from "./EmptyChat/EmptyChat";
 
+import { formatDistance, parseISO } from "date-fns";
+import ru from "date-fns/esm/locale/ru/index.js";
+
 export default function MessagesBlock({ dialogId, isNewDialog }) {
   const [inputBlockHeight, setInputBlockHeight] = useState("");
   const [messages, setMessages] = useState([]);
@@ -31,6 +34,14 @@ export default function MessagesBlock({ dialogId, isNewDialog }) {
   const user = useSelector((state: RootState) => state.user);
   const currentDialog = useSelector(
     (state: RootState) => state.chat.currentDialog
+  );
+
+  const [lastOnlineAt, setLastOnlineAt] = useState(
+    // `${formatDistance(parseISO(currentDialog.last_online_at), new Date(), {
+    //   addSuffix: true,
+    //   locale: ru,
+    // })}`
+    ""
   );
 
   useEffect(() => {
@@ -125,10 +136,22 @@ export default function MessagesBlock({ dialogId, isNewDialog }) {
     console.log("messagesBlock");
     if (dialogId && !isNewDialog) dispatch(getCurrentDialog(dialogId));
     if (isNewDialog) dispatch(getCurrentEmptyDialog(dialogId));
-    // dispatch(setCurrentDialogById(dialogId));
-    // dispatch(fetchMessages(dialogId));
   }, [dialogId, isNewDialog]);
 
+  useEffect(() => {
+    if (currentDialog.last_online_at)
+      // const interval = setInterval(() => {
+      setLastOnlineAt(
+        `${formatDistance(parseISO(currentDialog.last_online_at), new Date(), {
+          addSuffix: true,
+          locale: ru,
+        })}`
+      );
+    // }, 1000);
+    // return () => {
+    //   clearInterval(interval);
+    // };
+  }, [currentDialog.last_online_at]);
   const position = usePosition();
 
   console.log("POSITION", position);
@@ -177,6 +200,17 @@ export default function MessagesBlock({ dialogId, isNewDialog }) {
     });
   }
 
+  // const lastOnlineAt = () => {
+  //   return `Был онлайн ${formatDistance(
+  //     parseISO(currentDialog.last_online_at),
+  //     new Date(),
+  //     {
+  //       addSuffix: true,
+  //       locale: ru,
+  //     }
+  //   )}`;
+  // };
+
   return (
     <div className="chat__main-block">
       <div className="chat__messages-block-header">
@@ -185,14 +219,16 @@ export default function MessagesBlock({ dialogId, isNewDialog }) {
             <Avatar
               width={40}
               height={40}
-              isOnline={false}
+              isOnline={currentDialog.is_online}
               letter={currentDialog.companion[0]}
             />
             <div className="chat__interlocutor-info">
               <div className="chat__interlocutor-fullname">
                 {currentDialog.companion}
               </div>
-              <div className="chat__interlocutor-isonline">Онлайн</div>
+              <div className="chat__interlocutor-isonline">
+                {currentDialog.is_online ? "Онлайн" : "Оффлайн"}
+              </div>
             </div>
           </div>
         ) : (

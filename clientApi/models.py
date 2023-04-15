@@ -48,9 +48,3 @@ class Message(models.Model):
 
 class CurrentUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-
-    def is_online(self):
-        last_seen = cache.get(f'last-seen-{self.user.id}')
-        if last_seen is not None and timezone.now() < last_seen + timezone.timedelta(seconds=300):
-            return True
-        return False

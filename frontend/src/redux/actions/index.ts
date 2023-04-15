@@ -19,6 +19,7 @@ export const {
   fetchNewDialog,
   openNewDialog,
   setRealDialogFromEmptyDialog,
+  changeDialogInterlocutorStatus,
 } = chatSlice.actions;
 
 export const onLoad = createAction(ON_LOAD);

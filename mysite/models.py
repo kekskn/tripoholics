@@ -4,10 +4,20 @@ from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django_countries.fields import CountryField
+from django.utils import timezone
+from django.core.cache import cache
 
+
+class MyUser(models.Model):
+    # user_id = models.AutoField(primary_key=True)
+    first_name = models.CharField(max_length=25)
+    last_name = models.CharField(max_length=25)
+    email = models.EmailField('User Email')
 
 class MyProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    is_online = models.BooleanField(default=False)
+    last_online_at = models.DateTimeField(null=True, default=timezone.now)
     profile_image = models.ImageField(null=True, blank=True, upload_to="profile_pics/")
     country = models.CharField(max_length=50, default='Country')
     friends = models.ManyToManyField("self", blank=True, symmetrical=False)

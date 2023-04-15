@@ -123,8 +123,8 @@
   .avatar.online::before {
     content: "";
     position: absolute;
-    top: 37px;
-    right: 3px;
+    top: 75%;
+    right: 3%;
     width: 10px;
     height: 10px;
     border-radius: 50%;
@@ -217,7 +217,7 @@
       position: relative; }
       .chat__dialogs-search-input-wrapper::before {
         content: "";
-        background-image: url(66833716b76294eb33ca.svg);
+        background-image: url(d1bba74ccb37ad405794.svg);
         width: 18px;
         height: 18px;
         position: absolute;
@@ -369,7 +369,7 @@
       position: relative; }
       .message-item.my .message-item__main-block::before {
         content: "";
-        background-image: url(98494df1311cea02ab8f.svg);
+        background-image: url(459cc9716e247e42e2cc.svg);
         background-repeat: no-repeat;
         background-size: cover;
         width: 14px;
@@ -381,7 +381,7 @@
       margin-right: 14px; }
   .message-item.my.read .message-item__main-block::before {
     content: "";
-    background-image: url(6cbc5664f015f0d77517.svg);
+    background-image: url(182d11f3ceed8e6de4e4.svg);
     background-repeat: no-repeat;
     background-size: cover;
     width: 20px;
@@ -418,13 +418,15 @@
     font-family: "Nunito";
     font-weight: 300;
     margin-top: 15px;
-    font-size: 20px; }
+    font-size: 20px;
+    white-space: pre-wrap;
+    text-align: center; }
 
 /*!**********************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/components/Map/Map.scss ***!
   \**********************************************************************************************************************/
 .map-container {
-  height: 400px; }
+  height: 420px; }
 
 .sidebar {
   background-color: rgba(35, 55, 75, 0.9);
@@ -438,13 +440,9 @@
   margin: 12px;
   border-radius: 4px; }
 
-.marker {
-  width: 30px;
-  height: 30px;
-  background-color: red; }
-
 .mapbox__popup-wrapper {
-  max-width: 350px !important; }
+  max-width: 350px !important;
+  z-index: 99; }
   .mapbox__popup-wrapper .mapboxgl-popup-content {
     padding: 0;
     box-shadow: none;

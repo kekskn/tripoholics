@@ -88,20 +88,36 @@ export function* handleCurrentDialog({ payload }) {
     if (!currentUser.id) yield call(handleUserInfo);
     yield put(fetchDialog());
     const user = yield select(({ user }) => user);
-    const { first_user_fio, second_user_fio, first_user_id, second_user_id } =
-      yield call(getDialogById, payload);
+    const {
+      dialog_id,
+      interlocutor_fio,
+      interlocutor_id,
+      is_online,
+      last_online_at,
+    } = yield call(getDialogById, payload);
 
-    let companion, companion_id;
-    if (first_user_fio === `${user.name} ${user.surname}`) {
-      companion = second_user_fio;
-    } else {
-      companion = first_user_fio;
-    }
+    // let companion, companion_id;
+    // if (first_user_fio === `${user.name} ${user.surname}`) {
+    //   companion = second_user_fio;
+    // } else {
+    //   companion = first_user_fio;
+    // }
 
-    if (user.id === first_user_id) companion_id = second_user_id;
-    else companion_id = first_user_id;
+    // if (user.id === first_user_id) companion_id = second_user_id;
+    // else companion_id = first_user_id;
 
-    yield put(setCurrentDialog({ companion, companion_id, dialogId: payload }));
+    // const dialog = yield select(({ chat }) =>
+    //   chat.dialogs.find((d) => d.interlocutor_id === companion_id)
+    // );
+    yield put(
+      setCurrentDialog({
+        companion: interlocutor_fio,
+        companion_id: interlocutor_id,
+        dialogId: dialog_id,
+        is_online,
+        last_online_at,
+      })
+    );
     const messages = yield call(getDialogMessages, payload);
 
     yield put(setMessages(messages));
