@@ -9,120 +9,124 @@
             href="{% static 'photos/Tripoholics-icon.png' %}"
             type="image/png"
     />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
             rel="stylesheet"
     />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.min.js"
+            integrity="sha512-v3ygConQmvH0QehvQa6gSvTE2VdBZ6wkLOlmK7Mcy2mZ0ZF9saNbbk19QeaoTHdWIEiTlWmrwAL4hS8ElnGFbA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
         body {
             position: relative;
         }
     </style>
-    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <link rel="stylesheet" href="{% static 'style.css' %}"/>
 
     <!-- Maps -->
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet'/>
 
 </head>
 
 <!-- Navbar -->
-        {% if user.is_authenticated %}
-<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="50">
-<nav class="navbar navbar-expand-sm navbar-light bg-light ">
+{% if user.is_authenticated %}
+    <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="50">
+    <nav class="navbar navbar-expand-sm navbar-light bg-light ">
     <div class="container-fluid">
-        <img src="{% static 'photos/Tripoholics.png' %}" height="50" width="50" />
-        <a class="navbar-brand font-monospace fs-3">Tripoholics.com</a>
-        <button
-                class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#mynavbar"
-        >
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="mynavbar">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link fs-5" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link fs-5" href="/">About Us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link fs-5" href="{% url 'myprofile' %}">My profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link fs-5" href="{% url 'add_travel_page' %}">Add travel</a>
-                </li>
-            </ul>
+    <img src="{% static 'photos/Tripoholics.png' %}" height="50" width="50"/>
+    <a class="navbar-brand font-monospace fs-3">Tripoholics.com</a>
+    <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mynavbar"
+    >
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mynavbar">
+    <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+            <a class="nav-link fs-5" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link fs-5" href="/">About Us</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link fs-5" href="{% url 'myprofile' %}">My profile</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link fs-5" href="{% url 'add_travel_page' %}">Add travel</a>
+        </li>
+    </ul>
 
-            <form class="d-flex ms-auto">
+    <form class="d-flex ms-auto">
 
-                    <a
-                            class="btn btn-danger m-lg-1"
-                            href="{% url 'logout' %}"
-                            type="button"
-                    >Logout</a
-                    >
+    <a
+            class="btn btn-danger m-lg-1"
+            href="{% url 'logout' %}"
+            type="button"
+    >Logout</a
+    >
 
-                {% else %}
-
-
-            <nav class="navbar navbar-expand-sm navbar-light bg-light ">
-            <div class="container-fluid">
-            <img src="{% static 'photos/Tripoholics.png' %}" height="50" width="50" />
-            <a class="navbar-brand font-monospace fs-3">Tripoholics.com</a>
-            <button
-                    class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#mynavbar"
-            >
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="mynavbar">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link fs-5" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link fs-5" href="/">About Us</a>
-                </li>
-
-            </ul>
-
-            <form class="d-flex ms-auto">
+{% else %}
 
 
+    <nav class="navbar navbar-expand-sm navbar-light bg-light ">
+    <div class="container-fluid">
+    <img src="{% static 'photos/Tripoholics.png' %}" height="50" width="50"/>
+    <a class="navbar-brand font-monospace fs-3">Tripoholics.com</a>
+    <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mynavbar"
+    >
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mynavbar">
+    <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+            <a class="nav-link fs-5" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link fs-5" href="/">About Us</a>
+        </li>
 
-                    <a
-                            class="btn btn-danger m-lg-1"
-                            href="{% url 'login' %}"
-                            type="button"
-                    >Login</a
-                    >
-                    <a
-                            class="btn btn-danger m-lg-1"
-                            href="{% url 'register' %}"
-                            type="button"
-                    >Register</a
-                    >
+    </ul>
 
-                    <a
-                            class="btn btn-danger m-lg-1"
-                            href="{% url 'messages' %}"
-                            type="button"
-                    >Messages</a
-                    >
+    <form class="d-flex ms-auto">
 
-                {% endif %}
-            </form>
-        </div>
-    </div>
+
+
+    <a
+            class="btn btn-danger m-lg-1"
+            href="{% url 'login' %}"
+            type="button"
+    >Login</a
+    >
+    <a
+            class="btn btn-danger m-lg-1"
+            href="{% url 'register' %}"
+            type="button"
+    >Register</a
+    >
+
+    <a
+            class="btn btn-danger m-lg-1"
+            href="{% url 'messages' %}"
+            type="button"
+    >Messages</a
+    >
+
+{% endif %}
+</form>
+</div>
+</div>
 </nav>
 {% if messages %} {% for message in messages %}
 
@@ -142,92 +146,18 @@
 
 <div id="app"></div>
 
-<footer class="bg-light text-center text-lg-start " style="bottom: 0; width: 100%">
+<footer class="bg-light text-center text-lg-start " style="bottom: 0; width: 100%; position: relative">
     <!-- Copyright -->
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-        © 2022 Copyright:
+        © 2023 Copyright:
         <a class="text-dark" href="/static">Tripoholics.com</a>
     </div>
     <!-- Copyright -->
 </footer>
 
-    {{ room_name|json_script:"room-name" }}
+{{ room_name|json_script:"room-name" }}
 
-    <script>
-      // window.currentUser = {{ user }};
-      // const roomName = JSON.parse(
-      //   document.getElementById("room-name").textContent
-      // );
-
-      // const chatSocket = new WebSocket(
-      //   "ws://" + window.location.host + "/ws/my_messages/" + roomName + "/"
-      // );
-
-      // chatSocket.onmessage = function (e) {
-      //   const data = JSON.parse(e.data);
-      //   // document.querySelector("#chat-log").value += data.message + "\n";
-      //   console.log("NEW MESSAGE: ", data.message);
-      // };
-
-      // chatSocket.onclose = function (e) {
-      //   console.error("Chat socket closed unexpectedly");
-      // };
-
-      // // document.querySelector("#chat-message-input").focus();
-      // // document.querySelector("#chat-message-input").onkeyup = function (e) {
-      // //   if (e.keyCode === 13) {
-      // //     // enter, return
-      // //     document.querySelector("#chat-message-submit").click();
-      // //   }
-      // // };
-
-      // document.querySelector(".message-input-block__send").onclick =
-      //   function () {
-      //     console.log("clicked send");
-      //     const messageInputDom = document.querySelector(".message-input");
-      //     const message = messageInputDom.value;
-      //     chatSocket.send(
-      //       JSON.stringify({
-      //         message: message,
-      //       })
-      //     );
-      //     messageInputDom.value = "";
-      //   };
-
-        // document.onblur = async function () {
-        //     const userId = document.querySelector('#user-id').innerHTML
-
-        //     console.log('СКРЫТО')
-        //     if (userId)
-        //         await fetch("http://127.0.0.1:8000/api/update_status/", {
-        //             method: "POST",
-        //             headers: {
-        //                 "Content-Type": "application/json",
-        //             },
-        //             body: JSON.stringify({
-        //                 user_id: userId,
-        //                 is_online: false,
-        //             }),
-        //         })}
-        // document.onfocus = async function () {
-        //     const userId = document.querySelector('#user-id').innerHTML
-
-        //     console.log('ОТКРЫТО')
-        //     if (userId)
-        //         await fetch("http://127.0.0.1:8000/api/update_status/", {
-        //             method: "POST",
-        //             headers: {
-        //                 "Content-Type": "application/json",
-        //             },
-        //             body: JSON.stringify({
-        //                 user_id: userId,
-        //                 is_online: true,
-        //             }),
-        //         })}
-        
-    </script>
     {{ username|json_script:"user-name" }}
-    {{ user.id|json_script:"user-id" }}
     <script src="{% static 'main.bundle.js' %}"></script>
   </body>
 </html>

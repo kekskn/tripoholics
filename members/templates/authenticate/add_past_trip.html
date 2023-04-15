@@ -19,10 +19,9 @@
     {% endif %}
 
 
-
     <div class="shadow p-4 mb-5 bg-body rounded text-center container">
         <h1>Here you can add your past trips</h1>
-        <br />
+        <br/>
 
         <form action="{% url 'add_past_trip' %}" method="POST">
             {% csrf_token %}
@@ -59,7 +58,7 @@
                 </div>
             </div>
 
-            <input type="submit" value="Submit" class="btn btn-danger btn-lg" />
+            <input type="submit" value="Submit" class="btn btn-danger btn-lg"/>
         </form>
     </div>
 

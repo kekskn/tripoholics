@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="title">Friends</h1>
+        <ul class="friends-list">
+            {% for friend in friends %}
+                <li class="friend-item">
+                    <div class="friend-info">
+                        {% if friend.following.user.myprofile.profile_image %}
+                            <img src="{{ friend.following.user.myprofile.profile_image.url }}" alt="Profile Picture"
+                                 class="avatar">
+                        {% else %}
+                            <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
+                            <lord-icon
+                                    src="https://cdn.lordicon.com/dxjqoygy.json"
+                                    trigger="hover"
+                                    colors="primary:#121331,secondary:#121331"
+                                    style="width:90px;height:90px">
+                            </lord-icon>
+                        {% endif %}
+
+                        <h2 class="username">
+                            <a href="{% url 'profile_detail' friend.following.user.id %}">
+                                {{ friend.following.user.first_name }} {{ friend.following.user.last_name }}
+                                <span> @{{ friend.following.user.username }}</span>
+                            </a>
+                        </h2>
+
+                        {% if friend.following.user.myprofile != request.friend.following.user.myprofile %}
+                            <div class="follow-btn">
+                                <form action="{% url 'unfollow' profile_pk=friend.following.pk %}"
+                                      method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" class="unfollow-btn">Unfollow</button>
+                                </form>
+                            </div>
+                        {% endif %}
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .friends-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .friend-item {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            padding: 10px;
+        }
+
+        .friend-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .username {
+            margin: 0;
+        }
+
+        .username span {
+            text-transform: lowercase;
+            font-size: 12pt;
+        }
+
+        .follow-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .follow-btn button {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .follow-btn .follow-btn:hover {
+            background-color: #d44a56;
+            color: #fff;
+        }
+
+        .follow-btn .unfollow-btn:hover {
+            background-color: #666666;
+            color: #fff;
+        }
+
+        .avatar {
+            width: 80px; /* set the width to a fixed value */
+            height: 80px; /* set the height to a fixed value */
+            object-fit: cover; /* crop the image to fit the size */
+            border-radius: 50%; /* make the image rounded */
+        }
+    </style>
+
+
+    <!--
+
+    <h1>{{ request.user.username }}'s Profile</h1>
+    {% if friends %}
+        <h2>Friends:</h2>
+        <ul>
+            {% for friend in friends %}
+                {% if friend %}
+                    <li>{{ friend.following.user.username }}
+                        <form action="{% url 'unfollow' profile_pk=friend.following.pk %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit">Unfollow</button>
+                        </form>
+                    </li>
+                {% endif %}
+            {% empty %}
+                <li>You are not following anyone yet.</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+
+-->
+
+
+{% endblock %}
