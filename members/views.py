@@ -10,8 +10,9 @@ from django.urls import reverse
 from pymongo import collection
 from members.forms import RegisterUserForm, AddFutureTravelForm, AddPastTravelForm, ProfilePicForm
 from django.views.generic import View
-from mysite.models import AddFutureTravel, AddPastTravel
+from mysite.models import AddFutureTravel, AddPastTravel, MyProfile, Follow
 from django.db.models import Sum, Count, Q, Avg
+
 from mysite.models import MyProfile
 
 
@@ -69,20 +70,34 @@ def register_user(request):
 
     return render(request, 'authenticate/register.html', {'user_form': user_form, 'profile_form': profile_form})
 
-def myprofile(request):
+@login_required
+def update_user(request):
+    if request.method == 'POST':
+        user_form = RegisterUserForm(request.POST, instance=request.user)
+        profile_form = ProfilePicForm(request.POST, request.FILES, instance=request.user.myprofile)
 
-    countries_count = AddPastTravel.objects.all().count()
-    cities_count = AddPastTravel.objects.all().count()
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            login(request, request.user)
 
-    data = {"countries_count": countries_count,
-            "cities_count": cities_count}
-    p = AddFutureTravel.objects.all()
-    data["objs"] = p
+            messages.success(request, 'Your profile was successfully updated!')
+            return redirect('myprofile')
+        else:
+            messages.error(request, 'Please correct the errors below.')
+    else:
+        user_form = RegisterUserForm(instance=request.user)
+        profile_form = ProfilePicForm(instance=request.user.myprofile)
+
+    context = {
+        'user_form': user_form,
+        'profile_form': profile_form
+    }
+
+    return render(request, 'authenticate/update_user.html', context)
 
 
-
-    return render(request, 'authenticate/myprofile.html', data)
-
+@login_required
 def add_travel_page(request, *args, **kwargs):
     return render(request, 'authenticate/add_travel_page.html')
 
