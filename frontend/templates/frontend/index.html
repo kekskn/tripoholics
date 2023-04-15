@@ -1,39 +1,40 @@
 {% extends "./base.html" %} {% block content %} {% load static %}
 
     <!-- Background image -->
-    
-    
 
-    <div id="section1" >
-        <div class="bg-image" style="background-image: url('static/photos/back1.jpg'); height: 65vh; background-repeat: no-repeat; background-position: center; background-size: cover ">
-                    <div class="mask" style="background-color: rgba(255, 255, 255, 0.6); height: 65vh; width: 100%">
-                        <div class="d-flex justify-content-center align-items-center h-100">
-                            <p style="font-size: 25pt; " class="col-sm-4 text-secondary" align="center"><b>
-                                Make a unique travel diary and find a travel companion for your
-                                craziest adventure!
-                            </b>
-                            </p>
 
-                            <div>
-                                <a
-                                        type="button"
-                                        class="btn btn-danger btn-lg"
-                                        href="{% url 'register' %}"
-                                        data-bs-toggle="tooltip"
-                                        title="Make your account now!"
-                                >Register Now
-                                </a>
 
-                                </div>
-                                
-                            </div>
-                        </div>
+    <div id="section1">
+        <div class="bg-image"
+             style="background-image: url('static/photos/back1.jpg'); height: 65vh; background-repeat: no-repeat; background-position: center; background-size: cover ">
+            <div class="mask" style="background-color: rgba(255, 255, 255, 0.6); height: 65vh; width: 100%">
+                <div class="d-flex justify-content-center align-items-center h-100">
+                    <p style="font-size: 25pt; " class="col-sm-4 text-secondary" align="center"><b>
+                        Make a unique travel diary and find a travel companion for your
+                        craziest adventure!
+                    </b>
+                    </p>
+
+                    <div>
+                        <a
+                                type="button"
+                                class="btn btn-danger btn-lg"
+                                href="{% url 'register' %}"
+                                data-bs-toggle="tooltip"
+                                title="Make your account now!"
+                        >Register Now
+                        </a>
+
                     </div>
+
                 </div>
             </div>
         </div>
+    </div>
+    </div>
+    </div>
 
-    
+
 
     <!-- Background image -->
 
@@ -49,13 +50,13 @@
     <div class="clearfix">
         <img src="{% static "photos/tablet2.png" %}" class="col-md-6 float-md-end mb-3
   ms-md-3" alt="...">
-        <br />
-        <br />
+        <br/>
+        <br/>
 
         <div class="text-center text-secondary offset-2">
             <h4>FIND A TRAVEL COMPANION OR SEEK AN ADVICE</h4>
-            <br />
-            <br />
+            <br/>
+            <br/>
             <h6>
                 If you want to find travelers around you while traveling or to find a
                 travel companion for your next adventure, tripoholics.com is the perfect
@@ -68,55 +69,113 @@
         </div>
     </div>
 
-    <!--
+
     <div class="container">
-        <div class="align-items-start">
-            <div class="col-sm-4 text-center text-secondary ">
-                <h4>FIND A TRAVEL COMPANION OR SEEK AN ADVICE</h4>
-                <p>If you want to find travelers around you while traveling or to find a travel companion for your next adventure, tripoholics.com is the perfect place for that!</p>
-                <p>Post your travel plans or search other travel plans. Find perfect match and explore the World together!</p>
+        <h2 class="container-title"></h2>
+        <div class="elements">
+            <div class="feature col">
+                <div class="feature-photo">
+                    <img src="{% static "photos/travel-girls2.png" %}" class="girls"/>
+                </div>
+                <div class="feature-content">
+                    <h3 class="feature-title">Discover new destinations</h3>
+                    <p class="feature-p">Explore undiscovered places around the world with recommendations from fellow
+                        travelers.</p>
+                </div>
+            </div>
+            <div class="feature col">
+                <div class="feature-photo order-md-2">
+                    <img src="{% static "photos/talk-girls2.png" %}" class="girls"/>
+                </div>
+                <div class="feature-content order-md-1">
+                    <h3 class="feature-title">Build your network</h3>
+                    <p class="feature-p">Meet like-minded travelers, share your experiences and connect with new friends
+                        around the globe.</p>
+                </div>
+            </div>
+            <div class="feature col">
+                <div class="feature-photo">
+                    <img src="{% static "photos/data-growth.png" %}" class="girls"/>
+                </div>
+                <div class="feature-content">
+                    <h3 class="feature-title">Analyze Your Travel Data</h3>
+                    <p class="feature-p">View travel statistics, including the number of countries visited, travel
+                        preferences and time spent on the road. Join us today and start exploring the world!</p>
+                </div>
             </div>
         </div>
-        <div class="col-sm-4 align-items-end">
-            <link rel="stylesheet" href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/dist/mdb5/standard/core.min.css">
-                    <div
-                        class="bg-image hover-overlay ripple shadow-1-strong rounded"
-                        data-mdb-ripple-color="light"
-                    >
-                        <img src="static/node_modules/photos/tablet2.png" class="img-fluid">
-                            <a href="">
-                                <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
-                            </a>
-
-        </div>
     </div>
-    -->
-
-    <div class="container p-5 my-5 border">
-        <h1>Nesto 1</h1>
-        <p>This container has a border and some extra padding and margins.</p>
-    </div>
-
-    <div id="section2" class="container p-5 my-5 bg-dark text-white">
-        <h1>Nesto 2</h1>
-        <p>
-            This container has a dark background color and a white text, and some extra
-            padding and margins.
-        </p>
-    </div>
-
-    <div class="container p-5 my-5 bg-primary text-white">
-        <h1>Nesto 3</h1>
-        <p>
-            This container has a blue background color and a white text, and some extra
-            padding and margins.
-        </p>
-    </div>
-
 
     <div id="main">
         <div id="app"></div>
     </div>
+
+    <style>
+        .container {
+        }
+
+        .container-title {
+            border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
+            padding-bottom: 0.5rem !important;
+        }
+
+        .elements {
+            display: flex;
+            flex-wrap: wrap;
+
+            --bs-gutter-x: 1.5rem;
+            --bs-gutter-y: 1.5rem;
+            margin-top: calc(-1 * var(--bs-gutter-y));
+            margin-right: calc(-.5 * var(--bs-gutter-x));
+            margin-left: calc(-.5 * var(--bs-gutter-x));
+            width: 100%;
+            padding-right: calc(var(--bs-gutter-x) * .5);
+            padding-left: calc(var(--bs-gutter-x) * .5);
+        }
+
+        .feature {
+            flex-basis: 100%;
+            display: flex;
+            padding: 1rem;
+        }
+
+        .feature-photo {
+            flex-basis: 50%;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        @media (min-width: 768px) {
+            .feature-photo.order-md-2 {
+                justify-content: flex-end;
+            }
+
+            .feature-content.order-md-1 {
+                margin-right: 1rem;
+            }
+        }
+
+        .feature-content {
+            flex-basis: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .feature-title {
+            font-size: 2.25rem;
+            line-height: 2.5rem;
+            font-weight: 600;
+            color: #d44a56;
+        }
+
+        .feature-p {
+            font-size: 1.5rem;
+            line-height: 2.5rem;
+            font-weight: 400;
+        }
+    </style>
+
 
 {% endblock %}
 

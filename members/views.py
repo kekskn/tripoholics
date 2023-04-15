@@ -1,15 +1,16 @@
 import profile
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect, HttpResponse, Http404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.urls import reverse
 from pymongo import collection
 from members.forms import RegisterUserForm, AddFutureTravelForm, AddPastTravelForm, ProfilePicForm
 from django.views.generic import View
-from mysite.models import AddFutureTravel, AddPastTravel, MyProfile
+from mysite.models import AddFutureTravel, AddPastTravel, MyProfile, Follow
 from django.db.models import Sum, Count, Q, Avg
 
 
@@ -180,44 +181,27 @@ def myprofile(request):
     countries_names = list(set([travel.to_where for travel in AddPastTravel.objects.filter(user=request.user)]))
     countries_percent = round((countries_count / 195) * 100, 1)
     stroke_percent = 505 - 505 * countries_percent / 100
-    days_total = AddPastTravel.objects.filter(user=request.user).aggregate(Sum('how_long_traveled'))[
-        'how_long_traveled__sum']
-    if days_total is not None:
-        months_on_travel = days_total // 30
-    else:
-        months_on_travel = 0  # or any other default value
 
-    if months_on_travel and days_total is not None:
-        weeks_on_travel = (days_total - months_on_travel * 30) // 7
-    else:
-        weeks_on_travel = 0  # or any other default value
-
-    if months_on_travel and days_total and weeks_on_travel is not None:
-        days_on_travel = (days_total - months_on_travel * 30 - weeks_on_travel * 7)
-    else:
-        days_on_travel = 0  # or any other default value
+    days_total_result = AddPastTravel.objects.filter(user=request.user).aggregate(Sum('how_long_traveled'))
+    days_total = days_total_result['how_long_traveled__sum'] or 0
+    months_on_travel, remainder = divmod(days_total, 30)
+    weeks_on_travel, days_on_travel = divmod(remainder, 7)
 
     # transport preferences
-    plane_percent = int(AddPastTravel.objects.filter(transport_type='Plane', user=request.user).count())
-    train_percent = int(AddPastTravel.objects.filter(transport_type='Train', user=request.user).count())
-    bus_percent = int(AddPastTravel.objects.filter(transport_type='Bus', user=request.user).count())
-    car_percent = int(AddPastTravel.objects.filter(transport_type='Car', user=request.user).count())
-    bike_percent = int(AddPastTravel.objects.filter(transport_type='Bike', user=request.user).count())
-    hitchhike_percent = int(AddPastTravel.objects.filter(transport_type='Hitchhike', user=request.user).count())
-    ship_percent = int(AddPastTravel.objects.filter(transport_type='Ship', user=request.user).count())
-    other_percent = int(AddPastTravel.objects.filter(transport_type='Other', user=request.user).count())
-    transport_list = [plane_percent, train_percent, bus_percent, car_percent, bike_percent, hitchhike_percent,
-                      ship_percent, other_percent]
-    # traveled with
-    alone_percent = int(AddPastTravel.objects.filter(with_whom='Alone', user=request.user).count())
-    couple_percent = int(AddPastTravel.objects.filter(with_whom='Couple', user=request.user).count())
-    friend_percent = int(AddPastTravel.objects.filter(with_whom='With friend', user=request.user).count())
-    group_percent = int(AddPastTravel.objects.filter(with_whom='Group of friends', user=request.user).count())
-    family_percent = int(AddPastTravel.objects.filter(with_whom='Family', user=request.user).count())
-    colleague_percent = int(
-        AddPastTravel.objects.filter(with_whom='Colleagues (work/college/school)', user=request.user).count())
-    travel_list = [alone_percent, couple_percent, friend_percent, group_percent, family_percent, colleague_percent]
+    transport_types = ['Plane', 'Train', 'Bus', 'Car', 'Bike', 'Hitchhike', 'Ship', 'Other']
+    transport_dict = {}
+    for trans_type in transport_types:
+        transport_dict[trans_type] = AddPastTravel.objects.filter(transport_type=trans_type, user=request.user).count()
 
+    transport_list = [int(transport_dict[trans_type]) for trans_type in
+                      transport_types]
+
+    # traveled with
+    travel_list = list(AddPastTravel.objects.filter(user=request.user)
+                       .values('with_whom')
+                       .annotate(with_whom_count=Count('with_whom'))
+                       .order_by('with_whom')
+                       .values_list('with_whom_count', flat=True))
     # average trip
     average_trip = AddPastTravel.objects.filter(user=request.user).aggregate(Avg('how_long_traveled'))[
         'how_long_traveled__avg']
@@ -227,18 +211,14 @@ def myprofile(request):
         rounded_average = 0  # or any other default value
 
     # accommodation preferences
-    hotel_percent = int(AddPastTravel.objects.filter(accommodation='Hotel', user=request.user).count())
-    hostel_percent = int(AddPastTravel.objects.filter(accommodation='Hostel', user=request.user).count())
-    camping_percent = int(AddPastTravel.objects.filter(accommodation='Camping', user=request.user).count())
-    apartments_percent = int(AddPastTravel.objects.filter(accommodation='Apartments', user=request.user).count())
-    RV_percent = int(AddPastTravel.objects.filter(accommodation='RV', user=request.user).count())
-    friends_percent = int(AddPastTravel.objects.filter(accommodation='Friends/family', user=request.user).count())
-    HES_percent = int(
-        AddPastTravel.objects.filter(accommodation='Hospitality exchange services', user=request.user).count())
-    otherAP_percent = int(AddPastTravel.objects.filter(accommodation='Other', user=request.user).count())
-    accommodation_list = [hotel_percent, hostel_percent, camping_percent, apartments_percent, RV_percent,
-                          friends_percent,
-                          HES_percent, otherAP_percent]
+    accommodations = ['Hotel', 'Hostel', 'Camping', 'Apartments', 'RV', 'Friends/family',
+                      'Hospitality exchange services', 'Other']
+    accommodation_dict = {}
+    for accom_type in accommodations:
+        accommodation_dict[accom_type] = AddPastTravel.objects.filter(accommodation=accom_type,
+                                                                      user=request.user).count()
+    accommodation_list = [int(accommodation_dict[accom_type]) for accom_type in
+                          accommodations]
 
     # calculate average trip cost
     past_travels = AddPastTravel.objects.filter(user=request.user).exclude(money_spent="")
@@ -248,6 +228,26 @@ def myprofile(request):
         rounded_avg_cost = round(average_cost, 1)
     else:
         rounded_avg_cost = 0  # or any other default value
+
+    # reasons of travel
+    top_reasons = AddPastTravel.objects.values('reason').annotate(count=Count('id')).order_by('-count')[:3]
+
+    font_sizes = ['2.5rem', '2rem', '1rem']
+
+    result = []
+
+    for i, r in enumerate(top_reasons):
+        result.append({
+            'reason': r['reason'],
+            'count': r['count'],
+            'size': font_sizes[i],
+        })
+
+    # top_reasons = AddPastTravel.objects.values('reason').annotate(count=Count('id')).order_by('-count')[:3]
+
+    user = request.user
+    friends = [following.following for following in request.user.myprofile.following.all()]
+
     # profile list
     profiles = MyProfile.objects.exclude(user=request.user)
     data = {"countries_count": countries_count,
@@ -266,8 +266,172 @@ def myprofile(request):
             "trip_count": trip_count,
             "accommodation_list": accommodation_list,
             "rounded_avg_cost": rounded_avg_cost,
+            "top_reasons": result,
+            'user': user,
+            'friends': friends,
             }
     p = AddFutureTravel.objects.filter(user=request.user).all()
     data["objs"] = p
 
     return render(request, 'authenticate/myprofile.html', data)
+
+
+@login_required
+def user_list(request):
+    users = User.objects.exclude(id=request.user.id)
+    query = request.GET.get('q')
+    if query:
+        users = users.filter(username__icontains=query)
+    my_profile = request.user.myprofile
+    friends = my_profile.friends.all()
+    following_profiles = [follow.following for follow in my_profile.following.all()]
+    following_usernames = [profile.user.username for profile in following_profiles]
+    context = {'users': users, 'friends': friends, 'following_profiles': following_profiles,
+               'following_usernames': following_usernames}
+    return render(request, 'authenticate/user_list.html', context)
+
+
+@login_required
+def follow(request, pk):
+    following_profile = MyProfile.objects.get(pk=pk)
+    follow, created = Follow.objects.get_or_create(follower=request.user.myprofile, following=following_profile)
+    if not created:
+        follow.delete()
+    return HttpResponseRedirect(reverse('user_list'))
+
+
+@login_required
+def unfollow(request, profile_pk):
+    # check whether the request is coming from my_profile or user_list
+    referring_url = request.META.get('HTTP_REFERER')
+    print("referring URL:", referring_url)
+    try:
+        if referring_url == 'http://127.0.0.1:8000/members/users/':
+            print('unfollowing from user_list')
+            # unfollowing from user_list
+            following_profile = MyProfile.objects.get(pk=profile_pk)
+            follow = Follow.objects.get(follower=request.user.myprofile, following=following_profile)
+        else:
+            # unfollowing from my_profile
+            print('unfollowing from my_friends')
+            following_profile = MyProfile.objects.get(pk=profile_pk)
+            follow = Follow.objects.get(follower=request.user.myprofile, following=following_profile)
+        print("Follow object:", follow)
+        follow.delete()
+    except Follow.DoesNotExist:
+        raise Http404("Follow does not exist")
+    if referring_url == 'http://127.0.0.1:8000/members/users/':
+        return HttpResponseRedirect(reverse('user_list'))
+    else:
+        return HttpResponseRedirect(reverse('my_friends'))
+
+
+@login_required
+def my_friends(request):
+    try:
+        my_profile = request.user.myprofile
+        friends = my_profile.following.all()
+        print(friends)
+    except MyProfile.DoesNotExist:
+        friends = []
+    return render(request, 'authenticate/my_friends.html', {'friends': friends})
+
+
+@login_required
+def profile_detail(request, user_id):
+    profile = MyProfile.objects.get(user=user_id)
+
+    travel_objects = AddPastTravel.objects.filter(user=user_id)
+    unique_countries = set(obj.to_where for obj in travel_objects)
+    countries_count = len(unique_countries)
+    trip_count = AddPastTravel.objects.filter(user=user_id).count()
+    # countries_count = AddPastTravel.objects.filter(user=request.user).values('to_where').count()
+    cities_count = len(unique_countries)
+    countries_names = list(set([travel.to_where for travel in AddPastTravel.objects.filter(user=user_id)]))
+    countries_percent = round((countries_count / 195) * 100, 1)
+    stroke_percent = 505 - 505 * countries_percent / 100
+
+    days_total_result = AddPastTravel.objects.filter(user=user_id).aggregate(Sum('how_long_traveled'))
+    days_total = days_total_result['how_long_traveled__sum'] or 0
+    months_on_travel, remainder = divmod(days_total, 30)
+    weeks_on_travel, days_on_travel = divmod(remainder, 7)
+
+    # transport preferences
+    transport_types = ['Plane', 'Train', 'Bus', 'Car', 'Bike', 'Hitchhike', 'Ship', 'Other']
+    transport_dict = {}
+    for trans_type in transport_types:
+        transport_dict[trans_type] = AddPastTravel.objects.filter(transport_type=trans_type, user=user_id).count()
+
+    transport_list = [int(transport_dict[trans_type]) for trans_type in
+                      transport_types]
+
+    # traveled with
+    travel_list = list(AddPastTravel.objects.filter(user=user_id)
+                       .values('with_whom')
+                       .annotate(with_whom_count=Count('with_whom'))
+                       .order_by('with_whom')
+                       .values_list('with_whom_count', flat=True))
+    # average trip
+    average_trip = AddPastTravel.objects.filter(user=user_id).aggregate(Avg('how_long_traveled'))[
+        'how_long_traveled__avg']
+    if average_trip is not None:
+        rounded_average = round(average_trip, 1)
+    else:
+        rounded_average = 0  # or any other default value
+
+    # accommodation preferences
+    accommodations = ['Hotel', 'Hostel', 'Camping', 'Apartments', 'RV', 'Friends/family',
+                      'Hospitality exchange services', 'Other']
+    accommodation_dict = {}
+    for accom_type in accommodations:
+        accommodation_dict[accom_type] = AddPastTravel.objects.filter(accommodation=accom_type,
+                                                                      user=user_id).count()
+    accommodation_list = [int(accommodation_dict[accom_type]) for accom_type in
+                          accommodations]
+
+    # calculate average trip cost
+    past_travels = AddPastTravel.objects.filter(user=user_id).exclude(money_spent="")
+    money_spent_values = [map_money_spent(travel.money_spent) for travel in past_travels]
+    if money_spent_values:
+        average_cost = sum(money_spent_values) / len(money_spent_values)
+        rounded_avg_cost = round(average_cost, 1)
+    else:
+        rounded_avg_cost = 0  # or any other default value
+
+    # reasons of travel
+    top_reasons = AddPastTravel.objects.values('reason').annotate(count=Count('id')).order_by('-count')[:3]
+    font_sizes = ['2.5rem', '2rem', '1rem']
+
+    result = [{'reason': r['reason'], 'count': r['count'], 'size': fs} for r, fs in zip(top_reasons, font_sizes)]
+
+    # top_reasons = AddPastTravel.objects.values('reason').annotate(count=Count('id')).order_by('-count')[:3]
+
+    user = request.user
+    friends = [following.following for following in request.user.myprofile.following.all()]
+
+    # profile list
+    profiles = MyProfile.objects.exclude(user=user_id)
+    data = {"countries_count": countries_count,
+            "cities_count": cities_count,
+            "countries_percent": countries_percent,
+            "stroke_percent": stroke_percent,
+            "countries_names": countries_names,
+            "months_on_travel": months_on_travel,
+            "days_on_travel": days_on_travel,
+            "days_total": days_total,
+            "weeks_on_travel": weeks_on_travel,
+            "transport_list": transport_list,
+            "travel_list": travel_list,
+            "rounded_average": rounded_average,
+            "profile": profile,
+            "trip_count": trip_count,
+            "accommodation_list": accommodation_list,
+            "rounded_avg_cost": rounded_avg_cost,
+            "top_reasons": result,
+            'user': user,
+            'friends': friends,
+            }
+    p = AddFutureTravel.objects.filter(user=user_id).all()
+    data["objs"] = p
+
+    return render(request, 'authenticate/profile_detail.html', data)

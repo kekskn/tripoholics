@@ -18,9 +18,4 @@ html, body {
     display: flex;
 }
 
-.bg-image {
-    background-image: url('static/photos/back1.jpg');
-    height: 100%;
-    display: flex;
-    justify-content: space-around;
-}
+
