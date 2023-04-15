@@ -9,26 +9,23 @@ import MessagesBlock from "./MessagesBlock/MessagesBlock";
 import EmptyChat from "./MessagesBlock/EmptyChat/EmptyChat";
 import { onLoad, setUserInfo } from "../../redux/actions";
 
+import { hidden } from "visibilityjs";
+
 export default function Chat() {
-  const { dialogId } = useParams();
-  // const [messages, setMessages] = useState([]);
-  // const dispatch = useDispatch();
-  // console.log("roomName: ", roomName);
+  const { dialogId, newDialogId } = useParams();
 
-  // async function getMessages() {
-  //   await axios
-  //     .get("http://127.0.0.1:8000/api/messages?dialogId=1")
-  //     .then((data) => {
-  //       console.log("data:", data);
-  //       setMessages(data.data);
-  //     });
-  // }
-
-  console.log("dialogID: ", dialogId);
+  console.log("dialogID: ", dialogId, newDialogId);
   return (
     <div className="chat">
       <DialogsList />
-      {dialogId ? <MessagesBlock dialogId={dialogId} /> : <EmptyChat />}
+      {dialogId || newDialogId ? (
+        <MessagesBlock
+          dialogId={dialogId ? dialogId : newDialogId}
+          isNewDialog={!!newDialogId}
+        />
+      ) : (
+        <EmptyChat isNewDialog={false} />
+      )}
     </div>
   );
 }

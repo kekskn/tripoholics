@@ -13,7 +13,9 @@ import {
   getCurrentUser,
   getDialogById,
   getDialogMessages,
+  getEmptyDialogById,
   getUserDialogs,
+  postCreateNewDialog,
   sendMessage,
 } from "../../api";
 
@@ -26,8 +28,12 @@ import {
   setDialogs,
   setMessages,
   getCurrentDialog,
+  getCurrentEmptyDialog,
   fetchDialog,
   onLoad,
+  createNewDialog,
+  fetchNewDialog,
+  openNewDialog,
 } from "../actions";
 import { GET_CURRENT_DIALOG, ON_LOAD } from "../constants";
 
@@ -80,34 +86,94 @@ export function* handleCurrentDialog({ payload }) {
   try {
     const currentUser = yield select((state) => state.user);
     if (!currentUser.id) yield call(handleUserInfo);
-    // yield take(ON_LOAD);
     yield put(fetchDialog());
     const user = yield select(({ user }) => user);
-    // const { first_user_fio, second_user_fio, dialog_id } = yield call(
-    //   getDialogById,
-    //   payload
+    const {
+      dialog_id,
+      interlocutor_fio,
+      interlocutor_id,
+      is_online,
+      last_online_at,
+    } = yield call(getDialogById, payload);
+
+    // let companion, companion_id;
+    // if (first_user_fio === `${user.name} ${user.surname}`) {
+    //   companion = second_user_fio;
+    // } else {
+    //   companion = first_user_fio;
+    // }
+
+    // if (user.id === first_user_id) companion_id = second_user_id;
+    // else companion_id = first_user_id;
+
+    // const dialog = yield select(({ chat }) =>
+    //   chat.dialogs.find((d) => d.interlocutor_id === companion_id)
     // );
-
-    // yield all([])
-    const { first_user_fio, second_user_fio, dialog_id } = yield call(
-      getDialogById,
-      payload
+    yield put(
+      setCurrentDialog({
+        companion: interlocutor_fio,
+        companion_id: interlocutor_id,
+        dialogId: dialog_id,
+        is_online,
+        last_online_at,
+      })
     );
-
-    let companion;
-    if (first_user_fio === `${user.name} ${user.surname}`) {
-      companion = second_user_fio;
-    } else {
-      companion = first_user_fio;
-    }
-
-    yield put(setCurrentDialog({ companion, dialogId: payload }));
     const messages = yield call(getDialogMessages, payload);
 
-    // yield fork(fetchMessages(dialog_id));
     yield put(setMessages(messages));
   } catch {
     throw new Error("Error while getting current dialog");
+  }
+}
+
+export function* handleCurrentEmptyDialog({ payload }) {
+  try {
+    const currentUser = yield select((state) => state.user);
+    if (!currentUser.id) yield call(handleUserInfo);
+    yield put(fetchDialog());
+    const { interlocutor, interlocutor_id } = yield call(
+      getEmptyDialogById,
+      payload
+    );
+
+    yield put(
+      setCurrentDialog({
+        companion: interlocutor,
+        companion_id: interlocutor_id,
+        dialogId: payload,
+      })
+    );
+    yield put(setMessages([]));
+  } catch {
+    throw new Error("Error while getting current dialog");
+  }
+}
+
+export function* handleCreateNewDialog(action) {
+  try {
+    yield put(fetchNewDialog());
+    const { success, dialogId, err } = yield call(
+      postCreateNewDialog,
+      action.payload
+    );
+    console.log("res new dialog: ", success, err);
+
+    yield put(openNewDialog());
+
+    if (success) {
+      console.log("res success");
+      window.open(`http://localhost:8000/my_messages/new_dialog/${dialogId}`);
+    } else if (err.response.data.error === "Real dialog already exists") {
+      window.open(
+        `http://localhost:8000/my_messages/${err.response.data.dialogId}`
+      );
+    } else if (err.response.data.error === "Empty dialog already exists") {
+      window.open(
+        `http://localhost:8000/my_messages/new_dialog/${err.response.data.dialogId}`
+      );
+    }
+  } catch (err) {
+    throw new Error(`Error while creating new dialog: ${err}`);
   }
 }
 
@@ -116,4 +182,6 @@ export default function* rootSaga() {
   // yield takeLatest(fetchDialog, fetchDialogMessages);
   yield takeLatest(sendNewMessage, onSendNewMessage);
   yield takeLatest(getCurrentDialog, handleCurrentDialog);
+  yield takeLatest(getCurrentEmptyDialog, handleCurrentEmptyDialog);
+  yield takeLatest(createNewDialog, handleCreateNewDialog);
 }

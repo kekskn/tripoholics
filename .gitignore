@@ -18,7 +18,8 @@ db.sqlite3
 db.sqlite3-journal
 
 # JS bundles
+frontend/static/*.bundle.js
 *.bundle.js
 
 # CSS bundles
-frontend/static/style.css
+frontend/static/*.css

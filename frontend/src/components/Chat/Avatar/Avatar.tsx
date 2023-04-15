@@ -2,7 +2,6 @@ import React from "react";
 import cn from "classnames";
 
 import letterToNumber from "./helpers/letterToNumber";
-// import avatar from "../../../../static/photos/avatar.jpg";
 import "./Avatar.scss";
 
 type Props = {

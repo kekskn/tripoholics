@@ -68,6 +68,13 @@ DJANGO_ICONS = {
     },
 }
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': (BASE_DIR / 'cache'),
+    }
+}
+
 GOOGLE_MAPS_API_KEY = 'AIzaSyASeX7oUtGfcpiO0Uo5qYKzJ8gzbaGdkZc'
 
 MIDDLEWARE = [
@@ -80,6 +87,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'clientApi.system.middleware.ActiveUserMiddleware',
+    'utils.middlewares.isOnlineMiddleware.ActiveUserMiddleware'
 ]
 
 ROOT_URLCONF = 'tripoholics.urls'

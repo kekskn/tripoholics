@@ -30,6 +30,7 @@ urlpatterns = [
     # chat ================================== 
     # path("chat/", include("chat.urls")),
     path("my_messages/", include("chat.urls")),
+    path("my_messages/new_dialog", include("chat.urls")),
 
     path('api/', include('clientApi.urls'))
 ]
