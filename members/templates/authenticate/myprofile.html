@@ -1,309 +1,35 @@
 {% extends "frontend/base.html" %} {% load static %} {% block content %}
 
-
-    <style>
-        .body {
-            justify-content: center;
-            align-items: center;
-
-            display: flex;
-            min-height: 100vh;
-        }
-
-        .container1 {
-            position: relative;
-            display: block;
-            justify-content: left;
-            height: 40vh;
-        }
-
-        .container2 {
-            position: relative;
-            display: grid;
-            justify-content: left;
-            height: 40vh;
-        }
-
-        .text-description {
-            color: #d44a56;
-            font-weight: bold;
-            text-align: start;
-            position: relative;
-        }
-
-        .text-description small {
-            color: black;
-            text-align: start;
-            font-weight: normal;
-            position: relative;
-        }
-
-        .progress-bar {
-            position: relative;
-            width: 250px;
-            height: 280px;
-            float: left;
-        }
-
-        .progress-bar svg {
-            position: relative;
-            width: 250px;
-            height: 250px;
-        }
-
-        .progress-bar svg circle {
-            fill: #2596be;
-            stroke-width: 18px;
-            stroke: #d44a56;
-            stroke-dasharray: 505;
-            stroke-dashoffset: 0;
-            stroke-linecap: round;
-            animation: fillin 2s linear forwards;
-            display: block;
-            transform: translate(35px, 35px);
-        }
-
-        @keyframes fillin {
-            100% {
-                stroke-dashoffset: {{ stroke_percent }};
-            }
-        }
-
-        .text {
-            position: absolute;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            color: #d44a56;
-            font-size: 2.5rem;
-            font-weight: 500;
-            line-height: 1;
-            width: 100%;
-            height: 100%;
-        }
-
-        .text span {
-            position: relative;
-            font-size: 1rem;
-            font-weight: 500;
-            color: #1b1b1b;
-        }
-
-        .text-num {
-            position: relative;
-            color: #d44a56;
-            font-size: 2.5rem;
-            font-weight: 1000;
-            line-height: 1;
-            text-align: start;
-            float: right;
-            left: 0.2em;
-        }
-
-        .text-num span {
-            font-size: 1rem;
-            font-weight: 500;
-            color: #1b1b1b;
-            text-transform: uppercase;
-            text-align: start;
-        }
-
-        .text-trips {
-            position: relative;
-            text-align: start;
-            float: right;
-        }
-
-        .text-trips span {
-            font-size: 1rem;
-            font-weight: 500;
-            color: #1b1b1b;
-            text-transform: uppercase;
-        }
-
-        .days-html {
-            color: #d44a56;
-            font-size: 2.5rem;
-            font-weight: 1000;
-        }
-
-        .days2-html {
-            color: #d44a56;
-            font-size: 1rem;
-            font-weight: 900;
-            display: inline;
-        }
-
-        .days2-html span {
-            font-size: 0.8rem;
-        }
-
-        .time-trip {
-            position: relative;
-            float: left;
-        }
-
-        .number-trip {
-            position: relative;
-            float: left;
-        }
-
-        .chartCard {
-            width: 100vw;
-            height: calc(70vh - 30px);
-            background: #3d3d3d;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .chartCard2 {
-            width: 100vw;
-            height: calc(70vh - 30px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .chartBox {
-            width: 400px;
-            padding: 20px;
-        }
-
-        .chartBox2 {
-            width: 800px;
-            padding: 20px;
-        }
-
-
-        .container3 {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #3d3d3d;
-        }
-
-        .duration-trip {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .text-duration {
-            position: relative;
-            text-align: start;
-            float: right;
-        }
-
-        .text-duration span {
-            font-size: 1rem;
-            font-weight: 500;
-            color: white;
-            text-transform: uppercase;
-        }
-
-        .reason-trip {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .text-reason {
-            position: relative;
-            text-align: start;
-            float: right;
-        }
-
-        .text-reason span {
-            font-size: 1rem;
-            font-weight: 500;
-            color: white;
-            text-transform: uppercase;
-        }
-
-        .container4 {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #e44c5c;
-            height: 15em;
-        }
-
-        .average-cost {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .text-avg-cost {
-            position: relative;
-            text-align: start;
-            float: right;
-        }
-
-        .text-avg-cost span {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #3d3d3d;
-            text-transform: uppercase;
-        }
-
-        .num-avg {
-            color: white;
-            font-size: 2.5rem;
-            font-weight: 1000;
-        }
-
-        .avatar {
-            width: 80px; /* set the width to a fixed value */
-            height: 80px; /* set the height to a fixed value */
-            object-fit: cover; /* crop the image to fit the size */
-            border-radius: 50%; /* make the image rounded */
-        }
-
-    </style>
-
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script src="{% static 'script.js' %}"></script>
 
-    <div id="map" style="width:100%;height:300px"></div>
+    <div id="map"></div>
     <script>
         mapboxgl.accessToken = 'pk.eyJ1Ijoia2Vrc2tuIiwiYSI6ImNsYmo5M3o0czEwdWIzcHEzOG1oZTZ4enUifQ.fxi2SRHRvtqBeUyPlEjc4A';
         var map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/streets-v11'
         });
+
     </script>
 
 
     <div class="row justify-content-md-center">
         <div class="col-12 mb-4">
             <div class="card bg-yellow-alt shadow-sm">
-                <div
-                        class="row card-header d-flex flex-row align-items-center flex-0 justify-content-center">
-                    <div class="d-block col-sm-3 media-body align-items-center">
-
+                <div class="row card-header d-flex flex-row align-items-center flex-0 justify-content-center">
+                    <div class='d-block col-sm-3 media-body align-items-center'>
                         {% if profile.profile_image %}
-                            <img src="{{ profile.profile_image.url }}" alt="Profile Picture"
-                                 class="avatar rounded-circle shadow mb-4">
+                            <img src='{{ profile.profile_image.url }}' alt='Profile Picture' class='avatar'>
                         {% else %}
-                            <img src="{% static 'media/profile_pics/1_1.jpg' %}" alt="Default Profile Picture"
-                                 class="img-fluid">
+                            <img src='{% static "../media/profile_pics/default-profile-photo.jpg" %}'
+                                 alt='Default Profile Picture' class='avatar'>
                         {% endif %}
-
-                        <b
-                                class="account-heading text-center"
-                                style="
-              font-size: 18px;
-              color: #e02c3c;
-              text-transform: uppercase;
-              font-family: Verdana;"
-                        >{{ user.last_name }} <br/>{{ user.first_name }}</b>
-                        <p class="text-secondary">{{ profile.country }}</p>
+                        <b class='account-heading text-center'>{{ user.last_name }} <br>{{ user.first_name }}</b>
+                        <p class='text-secondary'>{{ profile.country }}</p>
                     </div>
-                    <div class="col-sm-3" style="display: flex; align-items: center;">
+                    <div class="cities col-sm-3">
                         <svg fill="#2596be" width="80px" height="80px" version="1.1" id="Capa_1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                              viewBox="0 0 511 511" xml:space="preserve">
@@ -319,12 +45,12 @@
                                 <path d="M255.5,359c1.97,0,3.91-0.8,5.3-2.2c1.4-1.39,2.2-3.33,2.2-5.3c0-1.97-0.8-3.91-2.2-5.3c-1.39-1.4-3.32-2.2-5.3-2.2 s-3.91,0.8-5.3,2.2c-1.4,1.39-2.2,3.33-2.2,5.3c0,1.97,0.8,3.91,2.2,5.3C251.59,358.2,253.53,359,255.5,359z"/> </g> </g>
 
                         </svg>
-                        <div style="display: flex; flex-direction: column; justify-content: center; margin-left: 10px;">
-                            <h3 style="position: relative; color: #d44a56; font-size: 2.5rem; font-weight: 1000; line-height: 1;">{{ cities_count }}</h3>
+                        <div class="cities-text">
+                            <h3 class="cities-text-h3">{{ cities_count }}</h3>
                             <h3 style="display: block;">CITIES</h3>
                         </div>
                     </div>
-                    <div class="col-sm-3" style="display: flex; align-items: center;">
+                    <div class="cities col-sm-3">
                         <svg width="80px" height="80px" viewBox="0 0 64 64" version="1.1"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                              xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" fill="#2596be">
@@ -354,8 +80,8 @@
                             </g>
 
                         </svg>
-                        <div style="display: flex; flex-direction: column; justify-content: center; margin-left: 10px;">
-                            <h3 style="position: relative; color: #d44a56; font-size: 2.5rem; font-weight: 1000; line-height: 1;">{{ countries_count }}</h3>
+                        <div class="cities-text">
+                            <h3 class="cities-text-h3">{{ countries_count }}</h3>
                             <h3 style="display: block;">COUNTRIES</h3>
                         </div>
                     </div>
@@ -365,62 +91,50 @@
                                 {{ profile.user.username }}
                             {% endfor %}
                         {% endif %}
-
-                        <a href="{% url 'update_user' %}" class="btn btn-outline-secondary">Update Profile</a>
+                        <div class="buttons">
+                            <a href="{% url 'update_user' %}" class="btn btn-outline-secondary">Update Profile</a>
+                            <a href="{% url 'user_list' %}" class="btn btn-outline-secondary">List of users</a>
+                            <a href="{% url 'my_friends' %}" class="btn btn-outline-secondary">My friends</a>
+                        </div>
 
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
 
-        <!-- NEXT TRIPS -->
+    <!-- NEXT TRIPS -->
 
-        <h2 class="h5 text-center">MY NEXT TRIPS</h2>
+    <h2 class="h5 text-center">MY NEXT TRIPS</h2>
+    <div class="row justify-content-center">
         {% for obj in objs %}
             <div class="col-12 col-sm-6 col-xl-4 mb-4">
-                <div class="card border-light shadow-lg" style="background-color: #d44a56">
+                <div class="card border-light shadow-lg my-card d-flex flex-column justify-content-center align-items-center">
                     <div class="card-body">
-                        <div class="row d-block d-xl-flex align-items-center">
-                            <div class="col-12 col-xl-5 text-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-                            </div>
-                            <div class="col-12 col-xl-7 px-xl-0">
-                                <div class="d-none d-sm-block">
-                                    <h2 style="color: white" class="h5 text-uppercase">
-                                        {{ obj.to_where.name }}
-                                    </h2>
-                                </div>
-                                <small style="color: black">from:
-                                    <span style="color: white" class="icon icon-small">
-                                        {{ obj.from_where.name }}
-                                    </span>
-                                </small>
-                                <br/>
-                                <small style="color: black">on date:
-                                    <span style="color: white" class="icon icon-small">
-                                        {{ obj.when_traveled }}
-                                    </span>
-                                </small>
-                                <br/>
-                                <small style="color: black">by:
-                                    <span style="color: white" class="icon icon-small">
-                                        {{ obj.transport_type }}
-                                    </span>
-                                </small>
-                                <br/>
-                                <small style="color: black">with:
-                                    <span style="color: white" class="icon icon-small">
-                                        {{ obj.with_whom }}</span>
-                                </small>
-                            </div>
-                        </div>
+                        <h2 class="h5 text-uppercase my-title">{{ obj.to_where.name }}</h2>
+                        <p class="my-info"><span class="my-label">from:</span> <span
+                                class="my-value text-left">{{ obj.from_where.name }}</span></p>
+                        <p class="my-info"><span class="my-label">on date:</span> <span
+                                class="my-value">{{ obj.when_traveled }}</span></p>
+                        <p class="my-info"><span class="my-label">by:</span> <span
+                                class="my-value">{{ obj.transport_type }}</span></p>
+                        <p class="my-info"><span class="my-label">with:</span> <span
+                                class="my-value">{{ obj.with_whom }}</span></p>
                     </div>
                 </div>
             </div>
         {% endfor %}
+    </div>
 
-        <!-- PERCENTAGE AND TRIPS-->
 
+    <!-- PERCENTAGE AND TRIPS-->
+    {% if not countries_names %}
+        <div class="add-travel-container">
+            <p>Add your first trip to see your calculated data here</p>
+            <button class="add-travel-btn">Add Travel</button>
+        </div>
+    {% else %}
         <div class="row">
             <div class="col-6 mb-4">
                 <div class="card border-light shadow-sm">
@@ -524,56 +238,49 @@
         </div>
 
         <!-- trip duration -->
-        <div class="col-12 mb-6">
-            <div class="card border-light shadow-sm">
-                <div class="card-header">
-                    <div class="row align-items-right">
-                        <div class="container3">
-                            <div class="duration-trip">
-                                <svg width="85px" height="85px" viewBox="0 0 24 24"
-                                     fill="none" xmlns="http://www.w3.org/2000/svg"
-                                     stroke="#2596be">
-                                    <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
-                                       stroke-linejoin="round"/>
-                                    <g id="SVGRepo_iconCarrier">
-                                        <path d="M16 15.2V16.8875L16.9 17.9M15 2.5V6.5M9 2.5V6.5M9 11.5H3.51733M3.51733 11.5C3.50563 11.8208 3.5 12.154 3.5 12.5C3.5 17.4094 4.64094 19.7517 8 20.6041M3.51733 11.5C3.7256 5.79277 5.84596 4 12 4C17.3679 4 19.6668 5.36399 20.3048 9.5M20.5 17C20.5 19.4853 18.4853 21.5 16 21.5C13.5147 21.5 11.5 19.4853 11.5 17C11.5 14.5147 13.5147 12.5 16 12.5C18.4853 12.5 20.5 14.5147 20.5 17Z"
-                                              stroke="#2596be" stroke-width="0.6"
-                                              stroke-linecap="round"
-                                              stroke-linejoin="round"/>
-                                    </g>
-                                </svg>
-                                <div class="text-duration">
-                                    <span>average trip duration</span>
-                                    <div class="days-html">{{ rounded_average }}
-                                        <span>days</span></div>
-                                </div>
-                            </div>
-                            <div class="reason-trip">
-                                <svg width="85px" height="85px" viewBox="0 0 24 24"
-                                     fill="none" xmlns="http://www.w3.org/2000/svg"
-                                     stroke="#2596be">
-                                    <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
-                                       stroke-linejoin="round"/>
-                                    <g id="SVGRepo_iconCarrier">
-                                        <path d="M16 15.2V16.8875L16.9 17.9M15 2.5V6.5M9 2.5V6.5M9 11.5H3.51733M3.51733 11.5C3.50563 11.8208 3.5 12.154 3.5 12.5C3.5 17.4094 4.64094 19.7517 8 20.6041M3.51733 11.5C3.7256 5.79277 5.84596 4 12 4C17.3679 4 19.6668 5.36399 20.3048 9.5M20.5 17C20.5 19.4853 18.4853 21.5 16 21.5C13.5147 21.5 11.5 19.4853 11.5 17C11.5 14.5147 13.5147 12.5 16 12.5C18.4853 12.5 20.5 14.5147 20.5 17Z"
-                                              stroke="#2596be" stroke-width="0.6"
-                                              stroke-linecap="round"
-                                              stroke-linejoin="round"/>
-                                    </g>
-                                </svg>
-                                <div class="text-reason">
-                                    <span>reason of travels</span>
-                                    <div class="days-html">{{ days_total }}
-                                        <span>days</span></div>
 
+        <div class="col-12 mb-6">
+            <div class="card ">
+                <div class="row align-items-right">
+                    <div class="container3">
+                        <div class="duration-trip">
+                            <svg width="85px" height="85px" viewBox="0 0 24 24"
+                                 fill="none" xmlns="http://www.w3.org/2000/svg"
+                                 stroke="#2596be">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                   stroke-linejoin="round"/>
+                                <g id="SVGRepo_iconCarrier">
+                                    <path d="M16 15.2V16.8875L16.9 17.9M15 2.5V6.5M9 2.5V6.5M9 11.5H3.51733M3.51733 11.5C3.50563 11.8208 3.5 12.154 3.5 12.5C3.5 17.4094 4.64094 19.7517 8 20.6041M3.51733 11.5C3.7256 5.79277 5.84596 4 12 4C17.3679 4 19.6668 5.36399 20.3048 9.5M20.5 17C20.5 19.4853 18.4853 21.5 16 21.5C13.5147 21.5 11.5 19.4853 11.5 17C11.5 14.5147 13.5147 12.5 16 12.5C18.4853 12.5 20.5 14.5147 20.5 17Z"
+                                          stroke="#2596be" stroke-width="0.6"
+                                          stroke-linecap="round"
+                                          stroke-linejoin="round"/>
+                                </g>
+                            </svg>
+                            <div class="text-duration">
+                                <span>average trip duration</span>
+                                <div class="days-html">{{ rounded_average }}
+                                    <span>days</span></div>
+                            </div>
+                        </div>
+                        <div class="reason-trip">
+                            <div class="text-reason">
+                                <span>Top 3 reasons for travel</span>
+                                <div class="reason-html">
+                                    {% for reason in top_reasons %}
+                                        <p style="color: #d44a56;font-weight: 1000 ;font-size: {{ reason.size }};">
+                                            <i class="fas fa-circle"></i>
+                                            {{ reason.reason }}
+                                        </p>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
+        </div>
         </div>
 
         <!-- ACCOMMODATION PREFERENCE -->
@@ -768,7 +475,6 @@
         <div class="col-12 mb-6">
             <div class="card border-light shadow-sm">
                 <div class="card-header">
-
                     <div class="container4">
                         <div class="average-cost">
                             <svg fill="#ffffff" width="70px" height="70px" viewBox="0 0 32 32"
@@ -799,16 +505,402 @@
         </div>
 
 
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
+    {% endif %}
 
+    <style>
+        .body {
+            justify-content: center;
+            align-items: center;
+
+            display: flex;
+            min-height: 100vh;
+        }
+
+        #map {
+            width: 100%;
+            height: 300px;
+        }
+
+        .cities {
+            display: flex;
+            align-items: center;
+        }
+
+        .cities-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-left: 10px;
+        }
+
+        .cities-text-h3 {
+            position: relative;
+            color: #d44a56;
+            font-size: 2.5rem;
+            font-weight: 1000;
+            line-height: 1;
+        }
+
+        .account-heading {
+            font-size: 18px;
+            color: #e02c3c;
+            text-transform: uppercase;
+            font-family: Verdana;
+        }
+
+        .my-card {
+            background-color: #d44a56;
+        }
+
+        .my-title {
+            color: white;
+            text-align: center;
+        }
+
+        .my-info {
+            color: black;
+            margin-bottom: 0.5rem;
+            text-align: left;
+        }
+
+        .my-label {
+            color: black;
+            display: inline-block;
+            width: 5rem;
+            text-align: right;
+        }
+
+        .my-value {
+            color: white;
+            text-align: left;
+        }
+
+        .my-value.text-left {
+            text-align: left;
+        }
+
+        /* Use responsive display classes to hide and show elements */
+        @media (max-width: 576px) {
+            .my-label {
+                display: none;
+            }
+        }
+
+        @media (min-width: 577px) {
+            .my-info {
+                font-size: 0.9rem;
+            }
+        }
+
+        .container1 {
+            position: relative;
+            display: block;
+            justify-content: left;
+            height: 40vh;
+        }
+
+        .container2 {
+            position: relative;
+            display: grid;
+            justify-content: left;
+            height: 40vh;
+        }
+
+        .text-description {
+            color: #d44a56;
+            font-weight: bold;
+            text-align: start;
+            position: relative;
+        }
+
+        .text-description small {
+            color: black;
+            text-align: start;
+            font-weight: normal;
+            position: relative;
+        }
+
+        .progress-bar {
+            position: relative;
+            width: 250px;
+            height: 280px;
+            float: left;
+        }
+
+        .progress-bar svg {
+            position: relative;
+            width: 250px;
+            height: 250px;
+        }
+
+        .progress-bar svg circle {
+            fill: #2596be;
+            stroke-width: 18px;
+            stroke: #d44a56;
+            stroke-dasharray: 505;
+            stroke-dashoffset: 0;
+            stroke-linecap: round;
+            animation: fillin 2s linear forwards;
+            display: block;
+            transform: translate(35px, 35px);
+        }
+
+        @keyframes fillin {
+            100% {
+                stroke-dashoffset: {{ stroke_percent }};
+            }
+        }
+
+        .text {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: #d44a56;
+            font-size: 2.5rem;
+            font-weight: 500;
+            line-height: 1;
+            width: 100%;
+            height: 100%;
+        }
+
+        .text span {
+            position: relative;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #1b1b1b;
+        }
+
+        .text-num {
+            position: relative;
+            color: #d44a56;
+            font-size: 2.5rem;
+            font-weight: 1000;
+            line-height: 1;
+            text-align: start;
+            float: right;
+            left: 0.2em;
+        }
+
+        .text-num span {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #1b1b1b;
+            text-transform: uppercase;
+            text-align: start;
+        }
+
+        .text-trips {
+            position: relative;
+            text-align: start;
+            float: right;
+        }
+
+        .text-trips span {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #1b1b1b;
+            text-transform: uppercase;
+        }
+
+        .days-html {
+            color: #d44a56;
+            font-size: 2.5rem;
+            font-weight: 1000;
+        }
+
+        .days2-html {
+            color: #d44a56;
+            font-size: 1rem;
+            font-weight: 900;
+            display: inline;
+        }
+
+        .days2-html span {
+            font-size: 0.8rem;
+        }
+
+        .time-trip {
+            position: relative;
+            float: left;
+        }
+
+        .number-trip {
+            position: relative;
+            float: left;
+        }
+
+        .chartCard {
+            width: 100vw;
+            height: calc(70vh - 30px);
+            background: #3d3d3d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chartCard2 {
+            width: 100vw;
+            height: calc(70vh - 30px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chartBox {
+            width: 400px;
+            padding: 20px;
+        }
+
+        .chartBox2 {
+            width: 800px;
+            padding: 20px;
+        }
+
+
+        .container3 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #3d3d3d;
+        }
+
+        .duration-trip {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10em;
+        }
+
+        .text-duration {
+            position: relative;
+            text-align: start;
+            float: right;
+        }
+
+        .text-duration span {
+            font-size: 1rem;
+            font-weight: 500;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .reason-trip {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 40px;
+        }
+
+        .text-reason {
+            position: relative;
+            text-align: start;
+            margin-left: 20px;
+        }
+
+        .text-reason span {
+            font-size: 1rem;
+            font-weight: 500;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .reason-html p {
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+
+        .reason-html i {
+            margin-right: 10px;
+            vertical-align: middle;
+            color: #d44a56;
+            font-size: 1.5rem;
+        }
+
+
+        .container4 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 15em;
+            background-image: url("https://images.unsplash.com/photo-1502920514313-52581002a659?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1167&q=80");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .container4::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(212, 74, 86, 0.9);
+        }
+
+        .average-cost {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .text-avg-cost {
+            position: relative;
+            text-align: start;
+            float: right;
+        }
+
+        .text-avg-cost span {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #3d3d3d;
+            text-transform: uppercase;
+        }
+
+        .num-avg {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 1000;
+        }
+
+        .avatar {
+            width: 80px; /* set the width to a fixed value */
+            height: 80px; /* set the height to a fixed value */
+            object-fit: cover; /* crop the image to fit the size */
+            border-radius: 50%; /* make the image rounded */
+        }
+
+        .buttons a {
+            display: block;
+            margin-bottom: 10px;
+            width: 150px;
+        }
+
+        .add-travel-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 200px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .add-travel-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            margin-top: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-travel-btn:hover {
+            background-color: #0062cc;
+        }
+
+
+    </style>
 {% endblock %}

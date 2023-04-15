@@ -10,9 +10,14 @@ class MyProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_image = models.ImageField(null=True, blank=True, upload_to="profile_pics/")
     country = models.CharField(max_length=50, default='Country')
+    friends = models.ManyToManyField("self", blank=True, symmetrical=False)
 
     def __str__(self):
         return f'{self.user.first_name} Profile'
+
+    @property
+    def following(self):
+        return MyProfile.objects.filter(followers__follower=self)
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
@@ -22,6 +27,15 @@ class MyProfile(models.Model):
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, **kwargs):
         instance.myprofile.save()
+
+
+class Follow(models.Model):
+    follower = models.ForeignKey(MyProfile, related_name='following', on_delete=models.CASCADE)
+    following = models.ForeignKey(MyProfile, related_name='followers', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('follower', 'following')
 
 
 TRANSPORT = (
