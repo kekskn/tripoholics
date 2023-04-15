@@ -2,7 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
-
+from django.utils import timezone
+from django.core.cache import cache
 
 
 class MyUser(models.Model):
@@ -13,6 +14,9 @@ class MyUser(models.Model):
 
 class MyProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    is_online = models.BooleanField(default=False)
+    last_online_at = models.DateTimeField(null=True, default=timezone.now)
+
     # bio = models.TextField()
     # image = models.ImageField(default='default.jpg', upload_to='profile_pics')
 

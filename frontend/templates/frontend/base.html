@@ -193,8 +193,41 @@
       //     );
       //     messageInputDom.value = "";
       //   };
+
+        // document.onblur = async function () {
+        //     const userId = document.querySelector('#user-id').innerHTML
+
+        //     console.log('СКРЫТО')
+        //     if (userId)
+        //         await fetch("http://127.0.0.1:8000/api/update_status/", {
+        //             method: "POST",
+        //             headers: {
+        //                 "Content-Type": "application/json",
+        //             },
+        //             body: JSON.stringify({
+        //                 user_id: userId,
+        //                 is_online: false,
+        //             }),
+        //         })}
+        // document.onfocus = async function () {
+        //     const userId = document.querySelector('#user-id').innerHTML
+
+        //     console.log('ОТКРЫТО')
+        //     if (userId)
+        //         await fetch("http://127.0.0.1:8000/api/update_status/", {
+        //             method: "POST",
+        //             headers: {
+        //                 "Content-Type": "application/json",
+        //             },
+        //             body: JSON.stringify({
+        //                 user_id: userId,
+        //                 is_online: true,
+        //             }),
+        //         })}
+        
     </script>
     {{ username|json_script:"user-name" }}
+    {{ user.id|json_script:"user-id" }}
     <script src="{% static 'main.bundle.js' %}"></script>
   </body>
 </html>

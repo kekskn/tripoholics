@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from clientApi.models import Message, Dialog, CurrentUser, EmptyDialog
-
+from clientApi.models import Message, Dialog, EmptyDialog, CurrentUser
+from mysite.models import MyProfile
 
 class DialogsSerializer(serializers.ModelSerializer):
     class Meta:
@@ -25,3 +25,16 @@ class CurrentUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'first_name', 'last_name')
+
+class ProfileSerializer(serializers.ModelSerializer):
+    is_online = serializers.SerializerMethodField()
+    class Meta:
+        model = User
+        fields = ('id', 'first_name', 'last_name', 'is_online')
+
+    def get_is_online(self, obj):
+        # try:
+        profile = MyProfile.objects.get(user=obj)
+        return profile.is_online()
+        # except Profile.DoesNotExist:
+        #     return False

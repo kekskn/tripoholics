@@ -50,6 +50,7 @@
     "redux": "^4.2.1",
     "redux-saga": "^1.2.2",
     "styled-components": "^5.3.8",
-    "ts-loader": "^9.4.1"
+    "ts-loader": "^9.4.1",
+    "visibilityjs": "^2.0.2"
   }
 }

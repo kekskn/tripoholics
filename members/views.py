@@ -6,6 +6,7 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from members.forms import RegisterUserForm, AddFutureTravelForm, AddPastTravelForm
 from django.views.generic import View
 from mysite.models import AddFutureTravel, AddPastTravel
+from mysite.models import MyProfile
 
 
 def index(request, *args, **kwargs):
