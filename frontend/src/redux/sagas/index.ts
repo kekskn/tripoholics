@@ -8,6 +8,7 @@ import {
   call,
   fork,
   select,
+  spawn,
 } from "redux-saga/effects";
 import {
   getCurrentUser,
@@ -15,6 +16,7 @@ import {
   getDialogMessages,
   getEmptyDialogById,
   getUserDialogs,
+  getUserPopupInfo,
   postCreateNewDialog,
   sendMessage,
 } from "../../api";
@@ -34,6 +36,8 @@ import {
   createNewDialog,
   fetchNewDialog,
   openNewDialog,
+  fetchUserPopupInfo,
+  setUserPopupInfo,
 } from "../actions";
 import { GET_CURRENT_DIALOG, ON_LOAD } from "../constants";
 
@@ -45,15 +49,13 @@ export function* handleUserInfo() {
     const userInfo = yield call(getCurrentUser);
     yield put(setUserInfo(userInfo));
 
-    yield call(handleUserDialogs, userInfo.id);
-    console.log("after handleUserInfo");
-    // yield call(fetchDialogInfoById);
+    yield call(handleUserDialogs);
   } catch (error) {
     throw new Error(`Error while getting current user info: ${error}`);
   }
 }
 
-export function* handleUserDialogs(userId: number) {
+export function* handleUserDialogs() {
   try {
     /**
      * получаем диалоги текущего юзера и сохраняем их в стор
@@ -177,6 +179,18 @@ export function* handleCreateNewDialog(action) {
   }
 }
 
+export function* handleGetUserPopupInfo(action) {
+  try {
+    const id = action.payload;
+    const res = yield getUserPopupInfo(id);
+
+    yield put(setUserPopupInfo({ ...res, id }));
+    console.log("response: ", res);
+  } catch (err) {
+    throw new Error(`Error while fetching user_popup info: ${err}`);
+  }
+}
+
 export default function* rootSaga() {
   yield takeLatest(ON_LOAD, handleUserInfo);
   // yield takeLatest(fetchDialog, fetchDialogMessages);
@@ -184,4 +198,5 @@ export default function* rootSaga() {
   yield takeLatest(getCurrentDialog, handleCurrentDialog);
   yield takeLatest(getCurrentEmptyDialog, handleCurrentEmptyDialog);
   yield takeLatest(createNewDialog, handleCreateNewDialog);
+  yield takeLatest(fetchUserPopupInfo, handleGetUserPopupInfo);
 }

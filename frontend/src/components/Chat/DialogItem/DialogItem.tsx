@@ -17,6 +17,7 @@ export default function DialogItem({
   isEmptyDialog,
   isOnline,
   lastMessage,
+  avatar,
 }) {
   const userId = useSelector((state: RootState) => state.user.id);
   const [isActiveDialog, setIsActiveDialog] = useState(false);
@@ -49,6 +50,7 @@ export default function DialogItem({
             width={48}
             isOnline={isOnline}
             letter={companion[0]}
+            img={avatar}
           />
         </div>
         <div className="dialog-item__info-wrapper">

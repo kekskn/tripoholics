@@ -33,6 +33,7 @@ CSRF_TRUSTED_ORIGINS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'pycountry',
     'daphne',
     'django.contrib.admin',
     'django.contrib.auth',

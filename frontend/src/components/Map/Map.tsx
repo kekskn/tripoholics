@@ -13,8 +13,9 @@ import redMarker from "../../../static/photos/icons/red-marker.png";
 import blueMarker from "../../../static/photos/icons/blue-marker.png";
 
 import { popupOffsets } from "./helpers/popupOffset";
-import { Provider } from "react-redux";
+import { Provider, useDispatch } from "react-redux";
 import store from "src/redux/store";
+import { fetchUserPopupInfo } from "src/redux/actions";
 
 mapboxgl.accessToken =
   "pk.eyJ1Ijoia2Vrc2tuIiwiYSI6ImNsYmo5M3o0czEwdWIzcHEzOG1oZTZ4enUifQ.fxi2SRHRvtqBeUyPlEjc4A";
@@ -24,6 +25,8 @@ function Map() {
   console.log("POSS:", lat, lng);
   const mapContainer = useRef(null);
   const map = useRef(null);
+
+  const dispatch = useDispatch();
 
   //   const mar = useRef(Marker);
 
@@ -83,7 +86,7 @@ function Map() {
         const popupNode = document.createElement("div");
         ReactDOM.render(
           <Provider store={store}>
-            <Popup />
+            <Popup userId={12} />
           </Provider>,
           popupNode
         );
@@ -114,6 +117,8 @@ function Map() {
           .addTo(map.current);
 
         popup.on("open", () => {
+          console.log("opened popup");
+          dispatch(fetchUserPopupInfo(12));
           const { lng, lat } = popup.getLngLat();
           map.current.flyTo({
             center: [lng, lat],

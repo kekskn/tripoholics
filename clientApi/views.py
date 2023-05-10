@@ -12,9 +12,11 @@ from .models import Message
 from rest_framework import status
 from clientApi.models import Message, Dialog, CurrentUser, EmptyDialog
 from django.contrib.auth.models import User
-from clientApi.serializers import MessagesSerializer, DialogsSerializer, ProfileSerializer, EmptyDialogsSerializer, CurrentUserSerializer
+from clientApi.serializers import MessagesSerializer, DialogsSerializer, ProfileSerializer, EmptyDialogsSerializer, CurrentUserSerializer, AddPastTravelSerializer
+from mysite.models import AddPastTravel
 
 from django.db.models import Q
+import pycountry
 
 # Create your views here.
 
@@ -207,12 +209,19 @@ class DialogView(APIView):
                 interlocutor = realDialog.second_user_fio()
                 interlocutor_id = realDialog.second_user_id.id
                 is_online = MyProfile.objects.get(user=realDialog.second_user_id).is_online
+                if MyProfile.objects.get(user=realDialog.second_user_id).profile_image:
+                    avatar = MyProfile.objects.get(user=realDialog.second_user_id).profile_image.url
+                else:
+                    avatar = ''
+
             else:
                 interlocutor = realDialog.first_user_fio()
                 interlocutor_id = realDialog.first_user_id.id
                 is_online = MyProfile.objects.get(user=realDialog.first_user_id).is_online
-
-
+                if MyProfile.objects.get(user=realDialog.first_user_id).profile_image:
+                    avatar = MyProfile.objects.get(user=realDialog.first_user_id).profile_image.url
+                else:
+                    avatar = ''
              # добавляем информацию о диалоге в список
             response_data.append({
                 'dialog_id': realDialog.dialog_id,
@@ -220,6 +229,7 @@ class DialogView(APIView):
                 'interlocutor_id': interlocutor_id,
                 'is_online': is_online,
                 'last_message': self.get_latest_message(latest_message),
+                'avatar': avatar,
             })
 
         for emptyDialog in emptyDialogs:
@@ -229,6 +239,7 @@ class DialogView(APIView):
                 'interlocutor': emptyDialog.interlocutor(),
                 'interlocutor_id': emptyDialog.interlocutor_id.id,
                 'is_online': MyProfile.objects.get(user=emptyDialog.interlocutor_id).is_online,
+                'avatar': MyProfile.objects.get(user=emptyDialog.interlocutor_id).profile_image if MyProfile.objects.get(user=emptyDialog.interlocutor_id).profile_image else '',
                 'isEmptyDialog': True
             })
 
@@ -238,6 +249,7 @@ class DialogView(APIView):
 
 class CurrentUserView(APIView):
     def get(self, request):
+        print('CurrentUserView', request.user)
         user_serializer = CurrentUserSerializer(request.user)
         return JsonResponse(user_serializer.data, safe=False)
 
@@ -257,3 +269,36 @@ class UserStatusView(APIView):
             return Response({'status': 'ok'})
 
         return Response({'status': 'error'})
+
+class UserPopupInfoView(APIView):
+    def get(self, request):
+        user_id = request.GET.get('user_id')
+        print('UserPopupInfoView', user_id)
+        data = AddPastTravel.objects.filter(user_id=user_id).latest('when_traveled')
+        serializer = AddPastTravelSerializer(data)
+        
+        # Получить объект страны по коду
+        country = pycountry.countries.get(alpha_2=serializer.data['from_where'])
+
+        travel_objects = AddPastTravel.objects.filter(user_id=user_id)
+        unique_countries = set(obj.to_where for obj in travel_objects)
+
+        user = User.objects.get(id=user_id)
+
+        # ПОПРАВИТЬ
+        unique_cities = set(obj.to_where for obj in travel_objects)
+        countries_count = len(unique_countries)
+        cities_count = len(unique_cities)
+
+        return_data = {
+            'user_name': user.first_name,
+            'user_surname': user.last_name,
+            'user_email': user.email,
+            'from': country.name,
+            'transport': serializer.data['transport_type'],
+            'people': serializer.data['with_whom'],
+            'cities_count': cities_count,
+            'countries_count': countries_count,
+        }
+        return Response(return_data)
+

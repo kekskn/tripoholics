@@ -52,6 +52,7 @@ export default function DialogsList() {
                   isEmptyDialog={d.isEmptyDialog}
                   isOnline={d.is_online}
                   lastMessage={d.last_message}
+                  avatar={d.avatar}
                 />
               );
             })

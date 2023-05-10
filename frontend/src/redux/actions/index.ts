@@ -7,9 +7,11 @@ import {
   CREATE_NEW_DIALOG,
 } from "../constants";
 import chatSlice from "../reducers/chat";
+import mapSlice from "../reducers/map";
 import userSlice from "../reducers/user";
 
 export const { setUserInfo } = userSlice.actions;
+export const { fetchUserPopupInfo, setUserPopupInfo } = mapSlice.actions;
 export const {
   setDialogs,
   setCurrentDialog,
