@@ -3,6 +3,11 @@ from django.contrib.auth.models import User
 from clientApi.models import Message, Dialog, EmptyDialog, CurrentUser
 from mysite.models import MyProfile
 
+from django_countries.serializers import CountryFieldMixin
+from rest_framework import serializers
+
+from mysite.models import AddPastTravel
+
 class DialogsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Dialog
@@ -38,3 +43,8 @@ class ProfileSerializer(serializers.ModelSerializer):
         return profile.is_online()
         # except Profile.DoesNotExist:
         #     return False
+
+class AddPastTravelSerializer(CountryFieldMixin, serializers.ModelSerializer):
+    class Meta:
+        model = AddPastTravel
+        fields = '__all__'

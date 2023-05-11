@@ -525,6 +525,16 @@
   border: 1px solid #464646;
   border-radius: 5px; }
 
+.map__popup-info {
+  padding: 7px 10px 7px 10px; }
+
+.info-icon {
+  display: flex;
+  align-items: end; }
+  .info-icon img {
+    max-width: 25px;
+    margin-right: 15px; }
+
 /*!****************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/styles/style.scss ***!
   \****************************************************************************************************************/

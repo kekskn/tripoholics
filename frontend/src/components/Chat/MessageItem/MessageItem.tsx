@@ -7,16 +7,27 @@ import MessageText from "./MessageText";
 
 import "./MessageItem.scss";
 
+interface IMessageItem {
+  isMy: boolean;
+  isOnline: boolean;
+  isRead: boolean;
+  text: string;
+  author: string;
+  date: string;
+  isWithAvatar: boolean;
+  isFirst: boolean;
+}
+
 export default function MessageItem({
   isMy,
   isOnline,
-  text,
   isRead,
+  text,
   author,
   date,
   isWithAvatar,
   isFirst,
-}) {
+}: IMessageItem) {
   return (
     <div
       className={cn("message-item", { my: isMy, isWithAvatar: isWithAvatar, first: isFirst })}
@@ -28,7 +39,6 @@ export default function MessageItem({
             width={40}
             isOnline={isOnline}
             letter={author[0]}
-            // letter="Р"
           />
         </div>
       )}
@@ -37,7 +47,6 @@ export default function MessageItem({
           {text}
           <div className="message-item__date">
             {format(parseISO(date), "HH:mm")}
-            {/* 12:36 */}
           </div>
         </div>
       </div>

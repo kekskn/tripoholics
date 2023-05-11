@@ -10,6 +10,7 @@ type Props = {
   isOnline: boolean;
   letter: string;
   isSquare?: boolean;
+  img?: string;
 };
 
 export default function Avatar({
@@ -18,6 +19,7 @@ export default function Avatar({
   isOnline,
   letter,
   isSquare,
+  img,
 }: Props) {
   return (
     <div
@@ -27,9 +29,13 @@ export default function Avatar({
         width: `${width}px`,
         backgroundColor: `hsl(${letterToNumber[letter]}, 60%, 25%)`,
         borderRadius: `${isSquare ? "0" : "50%"}`,
+        backgroundImage: `url(${img})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
     >
-      {letter}
+      {!img && letter}
     </div>
   );
 }

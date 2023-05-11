@@ -20,6 +20,13 @@ export const getDialogMessages = async (dialogId) => {
   return await res.json();
 };
 
+export const getUserPopupInfo = async (userId) => {
+  const res = await fetch(
+    `http://localhost:8000/api/user_popup_info/?user_id=${userId}`
+  );
+  return await res.json();
+};
+
 export const getDialogById = async (dialogId) => {
   const res = await fetch(
     `http://localhost:8000/api/dialogs/?dialog_id=${dialogId}`
