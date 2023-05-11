@@ -49,7 +49,7 @@ export function* handleUserInfo() {
     const userInfo = yield call(getCurrentUser);
     yield put(setUserInfo(userInfo));
 
-    yield call(handleUserDialogs);
+    yield spawn(handleUserDialogs);
   } catch (error) {
     throw new Error(`Error while getting current user info: ${error}`);
   }

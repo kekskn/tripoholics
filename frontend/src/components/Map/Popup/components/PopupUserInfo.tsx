@@ -33,7 +33,14 @@ export default function PopupUserInfo({ userId }) {
     <>
       <div className="map__popup-left-block">
         <div className="map__popup-avatar">
-          <Avatar width={90} height={90} isOnline={false} letter="Q" isSquare />
+          <Avatar
+            width={90}
+            height={90}
+            isOnline={false}
+            letter={currentUser?.user_name[0]}
+            isSquare
+            img={currentUser?.avatar}
+          />
         </div>
         <div className="map__popup-descr">
           <div className="map__popup-descr-item descr-countries">

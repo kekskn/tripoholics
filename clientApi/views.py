@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
+from django.contrib.auth.decorators import login_required
+
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -284,6 +286,10 @@ class UserPopupInfoView(APIView):
         unique_countries = set(obj.to_where for obj in travel_objects)
 
         user = User.objects.get(id=user_id)
+        if MyProfile.objects.get(user=user_id).profile_image:
+            avatar = MyProfile.objects.get(user=user_id).profile_image.url
+        else:
+            avatar = ''
 
         # ПОПРАВИТЬ
         unique_cities = set(obj.to_where for obj in travel_objects)
@@ -291,6 +297,7 @@ class UserPopupInfoView(APIView):
         cities_count = len(unique_cities)
 
         return_data = {
+            'avatar': avatar,
             'user_name': user.first_name,
             'user_surname': user.last_name,
             'user_email': user.email,

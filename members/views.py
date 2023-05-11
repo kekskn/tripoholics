@@ -173,6 +173,7 @@ def myprofile(request):
     profile = MyProfile.objects.get(user=request.user.id)
 
     travel_objects = AddPastTravel.objects.filter(user=request.user)
+    print('myprofile', request.user)
     unique_countries = set(obj.to_where for obj in travel_objects)
     countries_count = len(unique_countries)
     trip_count = AddPastTravel.objects.filter(user=request.user).count()
